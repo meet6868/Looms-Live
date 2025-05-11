@@ -1,0 +1,113 @@
+2025-05-04 11:24:55,573 - LoomLive - INFO - Application started
+2025-05-04 11:24:55,573 - LoomLive - INFO - Initializing local database
+2025-05-04 11:24:55,619 - LoomLive - DEBUG - Set value: admin_connected=0
+2025-05-04 11:24:55,624 - LoomLive - DEBUG - Set value: client_connected=0
+2025-05-04 11:24:55,634 - LoomLive - DEBUG - Set value: vm_running=0
+2025-05-04 11:24:55,634 - LoomLive - INFO - Local database initialized successfully
+2025-05-04 11:24:55,638 - LoomLive - INFO - Returning user detected, checking configurations
+2025-05-04 11:24:55,638 - LoomLive - INFO - Configuration complete, showing main page
+2025-05-04 11:24:56,348 - LoomLive - INFO - Starting status checker thread
+2025-05-04 11:24:56,369 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-05-04 11:24:57,277 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":58,"company_name":"Maitri","client_email":"ghelanimeet2002@gmail.com","client_url":"https://b
+2025-05-04 11:24:57,277 - LoomLive - INFO - Successfully connected to admin database
+2025-05-04 11:24:57,281 - LoomLive - INFO - Admin credentials saved to local database
+2025-05-04 11:24:57,559 - LoomLive - INFO - Client configuration saved successfully to local database
+2025-05-04 11:24:57,574 - LoomLive - DEBUG - Set value: client_email=ghelanimeet2002@gmail.com
+2025-05-04 11:24:57,575 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-05-04 11:24:57,723 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[{"id":6585,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url"
+2025-05-04 11:24:57,723 - LoomLive - INFO - Successfully connected to client database
+2025-05-04 11:24:58,093 - LoomLive - INFO - Successfully cleared client_config table
+2025-05-04 11:24:58,243 - LoomLive - INFO - Successfully set new client configuration
+2025-05-04 11:24:58,253 - LoomLive - DEBUG - Set value: company_name=Maitri_Textiles
+2025-05-04 11:24:58,253 - LoomLive - INFO - Successfully synced company data to local database
+2025-05-04 11:24:58,253 - LoomLive - INFO - Admin DB connection: True
+2025-05-04 11:24:58,253 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-05-04 11:24:58,383 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[{"id":6586,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url"
+2025-05-04 11:24:58,383 - LoomLive - INFO - Successfully connected to client database
+2025-05-04 11:24:58,383 - LoomLive - INFO - Client DB connection: True
+2025-05-04 11:24:58,383 - LoomLive - INFO - Emitting status data: {'admin_connected': True, 'client_connected': True, 'system_status': 'online', 'timestamp': '2025-05-04 11:24:58'}
+2025-05-04 11:25:01,347 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-05-04 11:25:01,508 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":58,"company_name":"Maitri","client_email":"ghelanimeet2002@gmail.com","client_url":"https://b
+2025-05-04 11:25:01,508 - LoomLive - INFO - Successfully connected to admin database
+2025-05-04 11:25:01,515 - LoomLive - INFO - Admin credentials saved to local database
+2025-05-04 11:25:01,779 - LoomLive - INFO - Client configuration saved successfully to local database
+2025-05-04 11:25:01,791 - LoomLive - DEBUG - Set value: client_email=ghelanimeet2002@gmail.com
+2025-05-04 11:25:01,791 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-05-04 11:25:01,961 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[{"id":6586,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url"
+2025-05-04 11:25:01,961 - LoomLive - INFO - Successfully connected to client database
+2025-05-04 11:25:02,198 - LoomLive - INFO - Successfully cleared client_config table
+2025-05-04 11:25:02,326 - LoomLive - INFO - Successfully set new client configuration
+2025-05-04 11:25:02,333 - LoomLive - DEBUG - Set value: company_name=Maitri_Textiles
+2025-05-04 11:25:02,333 - LoomLive - INFO - Successfully synced company data to local database
+2025-05-04 11:25:02,333 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-05-04 11:25:02,537 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[{"id":6587,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url"
+2025-05-04 11:25:02,549 - LoomLive - INFO - Successfully connected to client database
+2025-05-04 11:25:02,549 - LoomLive - DEBUG - Set value: admin_connected=1
+2025-05-04 11:25:02,559 - LoomLive - DEBUG - Set value: client_connected=1
+2025-05-04 11:25:02,559 - LoomLive - INFO - Admin connected: True update to local database
+2025-05-04 11:25:02,559 - LoomLive - INFO - Client connected: True update to local database
+2025-05-04 11:25:02,564 - LoomLive - INFO - Checking if VM is running...
+2025-05-04 11:25:03,726 - LoomLive - INFO - VM running status: False
+2025-05-04 11:25:03,731 - LoomLive - DEBUG - Set value: vm_running=0
+2025-05-04 11:25:03,731 - LoomLive - INFO - VM not running, starting in background...
+2025-05-04 11:25:03,731 - LoomLive - INFO - Started VM background thread
+2025-05-04 11:25:03,741 - LoomLive - DEBUG - Set value: license_active=1
+2025-05-04 11:25:03,741 - LoomLive - INFO - Updated license_active in local database: 1
+2025-05-04 11:25:03,751 - LoomLive - DEBUG - Set value: days_remaining=355
+2025-05-04 11:25:03,751 - LoomLive - INFO - Updated days_remaining in local database: 355
+2025-05-04 11:25:03,757 - LoomLive - DEBUG - Set value: last_checked=2025-05-04 11:25:03
+2025-05-04 11:25:03,757 - LoomLive - INFO - Updated last_checked in local database: 2025-05-04 11:25:03
+2025-05-04 11:25:03,757 - LoomLive - DEBUG - Setting key 'admin_connected' to '1' in Supabase
+2025-05-04 11:25:03,852 - LoomLive - INFO - VMware is not running, starting it...
+2025-05-04 11:25:03,948 - LoomLive - INFO - Started VMware from E:\Program Files (x86)\VMware\VMware Workstation\vmware.exe
+2025-05-04 11:25:03,999 - LoomLive - INFO - Successfully set key in Client Db
+2025-05-04 11:25:03,999 - LoomLive - INFO - Update admin_connected to client database
+2025-05-04 11:25:04,011 - LoomLive - DEBUG - Setting key 'client_connected' to '1' in Supabase
+2025-05-04 11:25:04,170 - LoomLive - INFO - Successfully set key in Client Db
+2025-05-04 11:25:04,173 - LoomLive - INFO - Update client_connected to client database
+2025-05-04 11:25:04,173 - LoomLive - DEBUG - Setting key 'vm_running' to '0' in Supabase
+2025-05-04 11:25:04,282 - LoomLive - INFO - Successfully set key in Client Db
+2025-05-04 11:25:04,282 - LoomLive - INFO - Update vm_running to client database
+2025-05-04 11:25:04,282 - LoomLive - DEBUG - Setting key 'vm_ip' to '192.168.2.103' in Supabase
+2025-05-04 11:25:04,467 - LoomLive - INFO - Successfully set key in Client Db
+2025-05-04 11:25:04,472 - LoomLive - INFO - Update vm_ip to client database
+2025-05-04 11:25:04,474 - LoomLive - DEBUG - Setting key 'license_active' to '1' in Supabase
+2025-05-04 11:25:04,601 - LoomLive - INFO - Successfully set key in Client Db
+2025-05-04 11:25:04,601 - LoomLive - INFO - Update license_active to client database
+2025-05-04 11:25:04,611 - LoomLive - DEBUG - Setting key 'last_checked' to '2025-05-04 11:25:03' in Supabase
+2025-05-04 11:25:04,792 - LoomLive - INFO - Successfully set key in Client Db
+2025-05-04 11:25:04,802 - LoomLive - INFO - Update last_checked to client database
+2025-05-04 11:25:04,802 - LoomLive - DEBUG - Setting key 'configuration_complete' to 'true' in Supabase
+2025-05-04 11:25:04,913 - LoomLive - INFO - Successfully set key in Client Db
+2025-05-04 11:25:04,913 - LoomLive - INFO - Update configuration_complete to client database
+2025-05-04 11:25:04,922 - LoomLive - DEBUG - Setting key 'company_name' to 'Maitri_Textiles' in Supabase
+2025-05-04 11:25:05,283 - LoomLive - INFO - Successfully set key in Client Db
+2025-05-04 11:25:05,283 - LoomLive - INFO - Update company_name to client database
+2025-05-04 11:25:05,283 - LoomLive - DEBUG - Setting key 'admin_url' to 'https://nzbcqpnpislqczidqswx.supabase.co' in Supabase
+2025-05-04 11:25:05,808 - LoomLive - INFO - Successfully set key in Client Db
+2025-05-04 11:25:05,808 - LoomLive - INFO - Update admin_url to client database
+2025-05-04 11:25:05,808 - LoomLive - DEBUG - Setting key 'admin_key' to 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56YmNxcG5waXNscWN6aWRxc3d4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUxNDYwNTMsImV4cCI6MjA2MDcyMjA1M30.8K-QH8T6yM8SjjexEHuS0NBhaGDopGBaQ5ITPrJonaw' in Supabase
+2025-05-04 11:25:06,014 - LoomLive - INFO - Successfully set key in Client Db
+2025-05-04 11:25:06,014 - LoomLive - INFO - Update admin_key to client database
+2025-05-04 11:25:06,443 - LoomLive - INFO - VM not running, waiting...
+2025-05-04 11:25:07,038 - LoomLive - INFO - Core monitoring started
+2025-05-04 11:25:07,444 - LoomLive - INFO - Client service cleanup completed
+2025-05-04 11:25:08,982 - LoomLive - INFO - Starting VM with command: E:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe -T ws start E:\MCGS\Material\BaiduNetdiskDownload\昆仑通态联网-客户\McgsWeb_Ubuntu18.04_虚拟机_20240509\青岛红旗_VM-Ubuntu18.04_McgsWeb\Ubuntu18.04\Ubuntu18.04.vmx
+2025-05-04 11:25:15,099 - LoomLive - INFO - VM start output: 
+2025-05-04 11:25:15,150 - LoomLive - INFO - Attempting to get IP (try 1/5)...
+2025-05-04 11:25:15,162 - LoomLive - INFO - Started VM IP retrieval thread
+2025-05-04 11:25:28,394 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-05-04 11:25:28,591 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":58,"company_name":"Maitri","client_email":"ghelanimeet2002@gmail.com","client_url":"https://b
+2025-05-04 11:25:28,592 - LoomLive - INFO - Successfully connected to admin database
+2025-05-04 11:25:28,597 - LoomLive - INFO - Admin credentials saved to local database
+2025-05-04 11:25:28,993 - LoomLive - INFO - Client configuration saved successfully to local database
+2025-05-04 11:25:29,076 - LoomLive - DEBUG - Set value: client_email=ghelanimeet2002@gmail.com
+2025-05-04 11:25:29,113 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-05-04 11:25:29,283 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[{"id":6587,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url"
+2025-05-04 11:25:29,284 - LoomLive - INFO - Successfully connected to client database
+2025-05-04 11:25:29,460 - LoomLive - INFO - Successfully cleared client_config table
+2025-05-04 11:25:29,609 - LoomLive - INFO - Successfully set new client configuration
+2025-05-04 11:25:29,614 - LoomLive - DEBUG - Set value: company_name=Maitri_Textiles
+2025-05-04 11:25:29,614 - LoomLive - INFO - Successfully synced company data to local database
+2025-05-04 11:25:29,615 - LoomLive - INFO - Admin DB connection: True
+2025-05-04 11:25:29,615 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co

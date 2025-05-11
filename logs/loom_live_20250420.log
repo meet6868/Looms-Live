@@ -1,0 +1,207 @@
+2025-04-20 21:17:53,747 - LoomLive - INFO - Application started
+2025-04-20 21:17:53,747 - LoomLive - INFO - Initializing local database
+2025-04-20 21:17:53,778 - LoomLive - INFO - Local database initialized successfully
+2025-04-20 21:17:53,782 - LoomLive - INFO - First time launch detected, showing welcome page
+2025-04-20 21:17:59,855 - LoomLive - DEBUG - Set value: first_time_launch=false
+2025-04-20 21:17:59,855 - LoomLive - INFO - Switching to configure page
+2025-04-20 22:22:17,881 - LoomLive - ERROR - Failed to connect to admin database: 404
+2025-04-20 22:22:27,284 - LoomLive - ERROR - Failed to connect to admin database: 404
+2025-04-20 22:22:51,788 - LoomLive - ERROR - Failed to connect to admin database: 404
+2025-04-20 22:25:03,659 - LoomLive - INFO - Application started
+2025-04-20 22:25:03,659 - LoomLive - INFO - Initializing local database
+2025-04-20 22:25:03,659 - LoomLive - INFO - Local database initialized successfully
+2025-04-20 22:25:03,668 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-20 22:25:03,669 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-20 22:25:19,676 - LoomLive - ERROR - Unexpected error connecting to admin database: 'AdminDatabase' object has no attribute 'admin_url'
+2025-04-20 22:26:11,731 - LoomLive - INFO - Application started
+2025-04-20 22:26:11,731 - LoomLive - INFO - Initializing local database
+2025-04-20 22:26:11,731 - LoomLive - INFO - Local database initialized successfully
+2025-04-20 22:26:11,731 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-20 22:26:11,731 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-20 22:26:28,034 - LoomLive - ERROR - Unexpected error connecting to admin database: 'AdminDatabase' object has no attribute 'admin_url'
+2025-04-20 22:28:18,269 - LoomLive - INFO - Application started
+2025-04-20 22:28:18,269 - LoomLive - INFO - Initializing local database
+2025-04-20 22:28:18,269 - LoomLive - INFO - Local database initialized successfully
+2025-04-20 22:28:18,269 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-20 22:28:18,269 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-20 22:28:32,839 - LoomLive - ERROR - Unexpected error connecting to admin database: 'AdminDatabase' object has no attribute 'admin_url'
+2025-04-20 22:28:32,839 - LoomLive.ConfigurePage - INFO - Running Supabase diagnostics for admin database
+2025-04-20 22:28:32,839 - LoomLive.SupabaseDiagnostics - INFO - Testing connection to Supabase at: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 22:28:33,324 - LoomLive.SupabaseDiagnostics - INFO - Health check response: 200
+2025-04-20 22:28:33,495 - LoomLive.SupabaseDiagnostics - INFO - Tables list response: 200
+2025-04-20 22:28:33,637 - LoomLive.SupabaseDiagnostics - INFO - Companies table response: 404
+2025-04-20 22:29:31,201 - LoomLive - INFO - Application started
+2025-04-20 22:29:31,202 - LoomLive - INFO - Initializing local database
+2025-04-20 22:29:31,203 - LoomLive - INFO - Local database initialized successfully
+2025-04-20 22:29:31,204 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-20 22:29:31,205 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-20 22:29:45,318 - LoomLive - ERROR - Unexpected error connecting to admin database: 'AdminDatabase' object has no attribute 'admin_url'
+2025-04-20 22:29:45,318 - LoomLive.ConfigurePage - INFO - Running Supabase diagnostics for admin database
+2025-04-20 22:29:45,318 - LoomLive.SupabaseDiagnostics - INFO - Testing connection to Supabase at: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 22:29:45,593 - LoomLive.SupabaseDiagnostics - INFO - Health check response: 200
+2025-04-20 22:29:45,733 - LoomLive.SupabaseDiagnostics - INFO - Tables list response: 200
+2025-04-20 22:29:45,925 - LoomLive.SupabaseDiagnostics - INFO - Companies table response: 404
+2025-04-20 22:33:17,555 - LoomLive - INFO - Application started
+2025-04-20 22:33:17,555 - LoomLive - INFO - Initializing local database
+2025-04-20 22:33:17,555 - LoomLive - INFO - Local database initialized successfully
+2025-04-20 22:33:17,555 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-20 22:33:17,570 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-20 22:33:33,588 - LoomLive - ERROR - Unexpected error connecting to admin database: 'AdminDatabase' object has no attribute 'admin_url'
+2025-04-20 22:33:33,597 - LoomLive.ConfigurePage - INFO - Running Supabase diagnostics for admin database
+2025-04-20 22:33:33,597 - LoomLive.SupabaseDiagnostics - INFO - Testing connection to Supabase at: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 22:33:34,124 - LoomLive.SupabaseDiagnostics - INFO - Health check response: 200
+2025-04-20 22:33:34,276 - LoomLive.SupabaseDiagnostics - INFO - Tables list response: 200
+2025-04-20 22:33:34,493 - LoomLive.SupabaseDiagnostics - INFO - Companies table response: 404
+2025-04-20 22:33:57,437 - LoomLive - ERROR - Unexpected error connecting to admin database: 'AdminDatabase' object has no attribute 'admin_url'
+2025-04-20 22:33:57,442 - LoomLive.ConfigurePage - INFO - Running Supabase diagnostics for admin database
+2025-04-20 22:33:57,442 - LoomLive.SupabaseDiagnostics - INFO - Testing connection to Supabase at: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 22:33:57,638 - LoomLive.SupabaseDiagnostics - INFO - Health check response: 200
+2025-04-20 22:33:57,778 - LoomLive.SupabaseDiagnostics - INFO - Tables list response: 200
+2025-04-20 22:33:57,902 - LoomLive.SupabaseDiagnostics - INFO - Companies table response: 404
+2025-04-20 22:44:16,356 - LoomLive - INFO - Application started
+2025-04-20 22:44:16,356 - LoomLive - INFO - Initializing local database
+2025-04-20 22:44:16,356 - LoomLive - INFO - Local database initialized successfully
+2025-04-20 22:44:16,356 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-20 22:44:16,356 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-20 22:44:33,555 - LoomLive - ERROR - Unexpected error connecting to admin database: 'AdminDatabase' object has no attribute 'admin_url'
+2025-04-20 22:44:33,555 - LoomLive.ConfigurePage - INFO - Running Supabase diagnostics for admin database
+2025-04-20 22:44:33,555 - LoomLive.SupabaseDiagnostics - INFO - Testing connection to Supabase at: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 22:44:34,587 - LoomLive.SupabaseDiagnostics - INFO - Health check response: 200
+2025-04-20 22:44:34,956 - LoomLive.SupabaseDiagnostics - INFO - Tables list response: 200
+2025-04-20 22:44:35,226 - LoomLive.SupabaseDiagnostics - INFO - Companies table response: 404
+2025-04-20 22:45:39,957 - LoomLive - INFO - Application started
+2025-04-20 22:45:39,957 - LoomLive - INFO - Initializing local database
+2025-04-20 22:45:39,957 - LoomLive - INFO - Local database initialized successfully
+2025-04-20 22:45:39,957 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-20 22:45:39,967 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-20 22:45:56,422 - LoomLive - ERROR - Unexpected error connecting to admin database: 'AdminDatabase' object has no attribute 'admin_url'
+2025-04-20 22:45:56,422 - LoomLive.ConfigurePage - INFO - Running Supabase diagnostics for admin database
+2025-04-20 22:45:56,422 - LoomLive.SupabaseDiagnostics - INFO - Testing connection to Supabase at: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 22:45:57,055 - LoomLive.SupabaseDiagnostics - INFO - Health check response: 200
+2025-04-20 22:45:57,627 - LoomLive.SupabaseDiagnostics - INFO - Tables list response: 200
+2025-04-20 22:45:58,562 - LoomLive.SupabaseDiagnostics - INFO - Companies table response: 200
+2025-04-20 22:48:43,314 - LoomLive - INFO - Application started
+2025-04-20 22:48:43,314 - LoomLive - INFO - Initializing local database
+2025-04-20 22:48:43,314 - LoomLive - INFO - Local database initialized successfully
+2025-04-20 22:48:43,314 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-20 22:48:43,314 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-20 22:48:58,836 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 22:49:00,309 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[]
+2025-04-20 22:49:00,309 - LoomLive - INFO - Successfully connected to admin database
+2025-04-20 22:49:07,039 - LoomLive - INFO - Admin configuration saved successfully
+2025-04-20 22:50:35,105 - LoomLive - ERROR - Failed to connect to client database: 404
+2025-04-20 22:51:56,118 - LoomLive - INFO - Application started
+2025-04-20 22:51:56,118 - LoomLive - INFO - Initializing local database
+2025-04-20 22:51:56,120 - LoomLive - INFO - Local database initialized successfully
+2025-04-20 22:51:56,122 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-20 22:51:56,123 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-20 22:52:11,715 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 22:52:12,511 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[]
+2025-04-20 22:52:12,512 - LoomLive - INFO - Successfully connected to admin database
+2025-04-20 22:52:12,525 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-20 22:52:16,152 - LoomLive - INFO - Admin configuration saved successfully
+2025-04-20 22:52:47,108 - LoomLive - ERROR - Failed to connect to client database: 404
+2025-04-20 22:56:06,846 - LoomLive - INFO - Application started
+2025-04-20 22:56:06,849 - LoomLive - INFO - Initializing local database
+2025-04-20 22:56:06,849 - LoomLive - INFO - Local database initialized successfully
+2025-04-20 22:56:06,849 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-20 22:56:06,849 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-20 22:56:20,461 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 22:56:20,944 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[]
+2025-04-20 22:56:20,944 - LoomLive - INFO - Successfully connected to admin database
+2025-04-20 22:56:20,958 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-20 22:56:23,686 - LoomLive - INFO - Admin configuration saved successfully
+2025-04-20 22:57:10,392 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 22:57:10,868 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-20 22:57:10,869 - LoomLive - INFO - Successfully connected to client database
+2025-04-20 22:57:58,246 - LoomLive.VMManager - INFO - Starting VM: E:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe start E:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe nogui
+2025-04-20 22:57:58,783 - LoomLive.VMManager - ERROR - Failed to start VM: Command '['E:\\Program Files (x86)\\VMware\\VMware Workstation\\vmrun.exe', 'start', 'E:\\Program Files (x86)\\VMware\\VMware Workstation\\vmrun.exe', 'nogui']' returned non-zero exit status 4294967295.
+2025-04-20 22:59:41,928 - LoomLive.VMManager - INFO - Starting VM: E:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe start E:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe nogui
+2025-04-20 22:59:42,499 - LoomLive.VMManager - ERROR - Failed to start VM: Command '['E:\\Program Files (x86)\\VMware\\VMware Workstation\\vmrun.exe', 'start', 'E:\\Program Files (x86)\\VMware\\VMware Workstation\\vmrun.exe', 'nogui']' returned non-zero exit status 4294967295.
+2025-04-20 22:59:57,038 - LoomLive - INFO - Application started
+2025-04-20 22:59:57,038 - LoomLive - INFO - Initializing local database
+2025-04-20 22:59:57,038 - LoomLive - INFO - Local database initialized successfully
+2025-04-20 22:59:57,038 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-20 22:59:57,048 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-20 23:00:11,426 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 23:00:12,152 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[]
+2025-04-20 23:00:12,152 - LoomLive - INFO - Successfully connected to admin database
+2025-04-20 23:00:12,160 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-20 23:00:15,572 - LoomLive - INFO - Admin configuration saved successfully
+2025-04-20 23:00:56,751 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 23:00:57,044 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-20 23:00:57,045 - LoomLive - INFO - Successfully connected to client database
+2025-04-20 23:01:16,056 - LoomLive.VMManager - INFO - Starting VM: E:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe start E:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe nogui
+2025-04-20 23:01:16,694 - LoomLive.VMManager - ERROR - Failed to start VM: Command '['E:\\Program Files (x86)\\VMware\\VMware Workstation\\vmrun.exe', 'start', 'E:\\Program Files (x86)\\VMware\\VMware Workstation\\vmrun.exe', 'nogui']' returned non-zero exit status 4294967295.
+2025-04-20 23:03:03,865 - LoomLive - INFO - Application started
+2025-04-20 23:03:03,865 - LoomLive - INFO - Initializing local database
+2025-04-20 23:03:03,865 - LoomLive - INFO - Local database initialized successfully
+2025-04-20 23:03:03,865 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-20 23:03:03,865 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-20 23:03:40,890 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 23:03:42,057 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[]
+2025-04-20 23:03:42,058 - LoomLive - INFO - Successfully connected to admin database
+2025-04-20 23:03:42,067 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-20 23:03:43,958 - LoomLive - INFO - Admin configuration saved successfully
+2025-04-20 23:04:53,317 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 23:04:54,024 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-20 23:04:54,024 - LoomLive - INFO - Successfully connected to client database
+2025-04-20 23:05:10,049 - LoomLive.VMManager - INFO - Starting VM: E:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe start E:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe nogui
+2025-04-20 23:05:10,758 - LoomLive.VMManager - ERROR - Failed to start VM: Command '['E:\\Program Files (x86)\\VMware\\VMware Workstation\\vmrun.exe', 'start', 'E:\\Program Files (x86)\\VMware\\VMware Workstation\\vmrun.exe', 'nogui']' returned non-zero exit status 4294967295.
+2025-04-20 23:08:07,471 - LoomLive - INFO - Application started
+2025-04-20 23:08:07,471 - LoomLive - INFO - Initializing local database
+2025-04-20 23:08:07,471 - LoomLive - INFO - Local database initialized successfully
+2025-04-20 23:08:07,477 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-20 23:08:07,477 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-20 23:08:22,397 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 23:08:24,077 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[]
+2025-04-20 23:08:24,077 - LoomLive - INFO - Successfully connected to admin database
+2025-04-20 23:08:24,094 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-20 23:08:25,457 - LoomLive - INFO - Admin configuration saved successfully
+2025-04-20 23:08:50,257 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 23:08:53,120 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-20 23:08:53,121 - LoomLive - INFO - Successfully connected to client database
+2025-04-20 23:11:25,937 - LoomLive - INFO - Application started
+2025-04-20 23:11:25,943 - LoomLive - INFO - Initializing local database
+2025-04-20 23:11:25,943 - LoomLive - INFO - Local database initialized successfully
+2025-04-20 23:11:25,943 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-20 23:11:25,943 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-20 23:11:41,687 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 23:11:42,409 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[]
+2025-04-20 23:11:42,409 - LoomLive - INFO - Successfully connected to admin database
+2025-04-20 23:11:42,415 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-20 23:11:44,656 - LoomLive - INFO - Admin configuration saved successfully
+2025-04-20 23:14:01,892 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 23:14:05,874 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-20 23:14:05,875 - LoomLive - INFO - Successfully connected to client database
+2025-04-20 23:19:55,548 - LoomLive - INFO - Application started
+2025-04-20 23:19:55,548 - LoomLive - INFO - Initializing local database
+2025-04-20 23:19:55,548 - LoomLive - INFO - Local database initialized successfully
+2025-04-20 23:19:55,558 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-20 23:19:55,562 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-20 23:20:07,475 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 23:20:08,254 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[]
+2025-04-20 23:20:08,257 - LoomLive - INFO - Successfully connected to admin database
+2025-04-20 23:20:08,264 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-20 23:20:10,508 - LoomLive - INFO - Admin configuration saved successfully
+2025-04-20 23:20:42,236 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 23:20:42,438 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-20 23:20:42,440 - LoomLive - INFO - Successfully connected to client database
+2025-04-20 23:27:23,243 - LoomLive - INFO - Application started
+2025-04-20 23:27:23,246 - LoomLive - INFO - Initializing local database
+2025-04-20 23:27:23,246 - LoomLive - INFO - Local database initialized successfully
+2025-04-20 23:27:23,246 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-20 23:27:23,246 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-20 23:27:43,265 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 23:27:44,187 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[]
+2025-04-20 23:27:44,187 - LoomLive - INFO - Successfully connected to admin database
+2025-04-20 23:27:44,202 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-20 23:27:48,128 - LoomLive - INFO - Admin configuration saved successfully
+2025-04-20 23:28:18,659 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-20 23:28:18,931 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-20 23:28:18,932 - LoomLive - INFO - Successfully connected to client database
+2025-04-20 23:33:46,816 - LoomLive - INFO - Application started
+2025-04-20 23:33:46,817 - LoomLive - INFO - Initializing local database
+2025-04-20 23:33:46,818 - LoomLive - INFO - Local database initialized successfully
+2025-04-20 23:33:46,818 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-20 23:33:46,819 - LoomLive - INFO - Configuration incomplete, showing configure page

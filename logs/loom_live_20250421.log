@@ -1,0 +1,708 @@
+2025-04-21 00:24:07,286 - LoomLive - INFO - Application started
+2025-04-21 00:24:07,287 - LoomLive - INFO - Initializing local database
+2025-04-21 00:24:07,300 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 00:24:07,302 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 00:24:07,302 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 00:35:15,895 - LoomLive - INFO - Application started
+2025-04-21 00:35:15,900 - LoomLive - INFO - Initializing local database
+2025-04-21 00:35:15,900 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 00:35:15,900 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 00:35:15,900 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 00:37:53,850 - LoomLive - INFO - Application started
+2025-04-21 00:37:53,850 - LoomLive - INFO - Initializing local database
+2025-04-21 00:37:53,850 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 00:37:53,855 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 00:37:53,855 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 00:42:46,103 - LoomLive - INFO - Application started
+2025-04-21 00:42:46,103 - LoomLive - INFO - Initializing local database
+2025-04-21 00:42:46,105 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 00:42:46,106 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 00:42:46,107 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 00:43:17,830 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 00:43:18,518 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[]
+2025-04-21 00:43:18,518 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 00:43:18,529 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-21 00:43:20,670 - LoomLive - INFO - Admin configuration saved successfully
+2025-04-21 00:43:48,902 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 00:43:49,064 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 00:43:49,065 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 00:47:35,775 - LoomLive - INFO - Application started
+2025-04-21 00:47:35,775 - LoomLive - INFO - Initializing local database
+2025-04-21 00:47:35,776 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 00:47:35,778 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 00:47:35,779 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 00:47:48,502 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 00:47:49,081 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[]
+2025-04-21 00:47:49,082 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 00:47:49,090 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-21 00:47:50,722 - LoomLive - INFO - Admin configuration saved successfully
+2025-04-21 00:48:15,003 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 00:48:15,180 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 00:48:15,181 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 00:51:09,529 - LoomLive - INFO - Checking Tesseract at: C:/Program Files/Tesseract-OCR/tesseract.exe
+2025-04-21 00:51:10,624 - LoomLive - INFO - Tesseract is available: tesseract v5.5.0.20241111
+2025-04-21 00:51:29,057 - LoomLive - INFO - Client configuration saved successfully
+2025-04-21 00:51:29,519 - LoomLive - INFO - Successfully added company: Maitri_Textiles
+2025-04-21 00:51:29,526 - LoomLive - DEBUG - Set value: configuration_complete=true
+2025-04-21 00:51:31,736 - LoomLive - INFO - Switching to main page
+2025-04-21 00:51:31,898 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 00:51:32,036 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 00:51:32,036 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 00:51:32,044 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-21 00:51:32,045 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 00:51:32,406 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 00:51:32,407 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 00:52:30,169 - LoomLive - INFO - Application started
+2025-04-21 00:52:30,171 - LoomLive - INFO - Initializing local database
+2025-04-21 00:52:30,172 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 00:52:30,172 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 00:52:30,173 - LoomLive - INFO - Configuration complete, showing main page
+2025-04-21 00:52:30,716 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 00:52:30,963 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 00:52:30,964 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 00:52:30,984 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-21 00:52:30,986 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 00:52:31,189 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 00:52:31,190 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 01:06:25,609 - LoomLive - INFO - Application started
+2025-04-21 01:06:25,610 - LoomLive - INFO - Initializing local database
+2025-04-21 01:06:25,610 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 01:06:25,611 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 01:06:25,612 - LoomLive - INFO - Configuration complete, showing main page
+2025-04-21 01:06:26,064 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 01:06:26,587 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 01:06:26,588 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 01:06:26,595 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-21 01:06:26,596 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 01:06:26,783 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 01:06:26,789 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 01:06:57,144 - LoomLive - INFO - Application started
+2025-04-21 01:06:57,144 - LoomLive - INFO - Initializing local database
+2025-04-21 01:06:57,148 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 01:06:57,150 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 01:06:57,151 - LoomLive - INFO - Configuration complete, showing main page
+2025-04-21 01:06:57,730 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 01:06:58,000 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 01:06:58,001 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 01:06:58,011 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-21 01:06:58,012 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 01:06:58,220 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 01:06:58,221 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 01:08:06,323 - LoomLive - INFO - Application started
+2025-04-21 01:08:06,324 - LoomLive - INFO - Initializing local database
+2025-04-21 01:08:06,325 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 01:08:06,326 - LoomLive - INFO - First time launch detected, showing welcome page
+2025-04-21 01:08:08,804 - LoomLive - DEBUG - Set value: first_time_launch=false
+2025-04-21 01:08:08,804 - LoomLive - INFO - Switching to configure page
+2025-04-21 01:15:31,547 - LoomLive - INFO - Application started
+2025-04-21 01:15:31,547 - LoomLive - INFO - Initializing local database
+2025-04-21 01:15:31,551 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 01:15:31,552 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 01:15:31,553 - LoomLive - INFO - Configuration complete, showing main page
+2025-04-21 01:15:32,289 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 01:15:33,671 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 01:15:33,672 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 01:15:33,680 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-21 01:15:33,681 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 01:16:03,359 - LoomLive - INFO - Application started
+2025-04-21 01:16:03,360 - LoomLive - INFO - Initializing local database
+2025-04-21 01:16:03,362 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 01:16:03,363 - LoomLive - INFO - First time launch detected, showing welcome page
+2025-04-21 01:16:05,773 - LoomLive - DEBUG - Set value: first_time_launch=false
+2025-04-21 01:16:05,773 - LoomLive - INFO - Switching to configure page
+2025-04-21 01:16:36,657 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 01:16:36,895 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 01:16:36,896 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 01:16:36,901 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-21 01:16:40,099 - LoomLive - INFO - Admin configuration saved successfully
+2025-04-21 01:17:11,646 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 01:17:11,851 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 01:17:11,851 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 01:18:05,051 - LoomLive - INFO - Checking Tesseract at: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-04-21 01:18:05,116 - LoomLive - INFO - Tesseract is available: tesseract v5.5.0.20241111
+2025-04-21 01:22:32,600 - LoomLive - INFO - Application started
+2025-04-21 01:22:32,600 - LoomLive - INFO - Initializing local database
+2025-04-21 01:22:32,602 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 01:22:32,603 - LoomLive - INFO - First time launch detected, showing welcome page
+2025-04-21 01:22:46,254 - LoomLive - DEBUG - Set value: first_time_launch=false
+2025-04-21 01:22:46,254 - LoomLive - INFO - Switching to configure page
+2025-04-21 01:22:51,628 - LoomLive - INFO - Application started
+2025-04-21 01:22:51,628 - LoomLive - INFO - Initializing local database
+2025-04-21 01:22:51,630 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 01:22:51,631 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 01:22:51,632 - LoomLive - INFO - Configuration complete, showing main page
+2025-04-21 01:22:52,107 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 01:22:52,746 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 01:22:52,747 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 01:22:52,755 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-21 01:22:52,756 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 01:22:52,909 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 01:22:52,910 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 01:23:07,143 - LoomLive - INFO - Application started
+2025-04-21 01:23:07,144 - LoomLive - INFO - Initializing local database
+2025-04-21 01:23:07,145 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 01:23:07,146 - LoomLive - INFO - First time launch detected, showing welcome page
+2025-04-21 01:24:45,149 - LoomLive - INFO - Application started
+2025-04-21 01:24:45,151 - LoomLive - INFO - Initializing local database
+2025-04-21 01:24:45,151 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 01:24:45,152 - LoomLive - INFO - First time launch detected, showing welcome page
+2025-04-21 01:26:06,864 - LoomLive - INFO - Application started
+2025-04-21 01:26:06,864 - LoomLive - INFO - Initializing local database
+2025-04-21 01:26:06,866 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 01:26:06,867 - LoomLive - INFO - First time launch detected, showing welcome page
+2025-04-21 01:26:16,008 - LoomLive - DEBUG - Set value: first_time_launch=false
+2025-04-21 01:26:16,009 - LoomLive - INFO - Switching to configure page
+2025-04-21 01:26:21,962 - LoomLive - INFO - Application started
+2025-04-21 01:26:21,963 - LoomLive - INFO - Initializing local database
+2025-04-21 01:26:21,965 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 01:26:21,966 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 01:26:21,967 - LoomLive - INFO - Configuration complete, showing main page
+2025-04-21 01:26:22,592 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 01:26:23,454 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 01:26:23,456 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 01:26:23,465 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-21 01:26:23,467 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 01:26:23,752 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 01:26:23,753 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 01:27:05,712 - LoomLive - INFO - Application started
+2025-04-21 01:27:05,712 - LoomLive - INFO - Initializing local database
+2025-04-21 01:27:05,714 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 01:27:05,714 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 01:27:05,715 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 01:27:19,886 - LoomLive - INFO - Application started
+2025-04-21 01:27:19,887 - LoomLive - INFO - Initializing local database
+2025-04-21 01:27:19,889 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 01:27:19,890 - LoomLive - INFO - First time launch detected, showing welcome page
+2025-04-21 01:28:40,149 - LoomLive - INFO - Application started
+2025-04-21 01:28:40,149 - LoomLive - INFO - Initializing local database
+2025-04-21 01:28:40,150 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 01:28:40,151 - LoomLive - INFO - First time launch detected, showing welcome page
+2025-04-21 01:28:56,923 - LoomLive - DEBUG - Set value: first_time_launch=false
+2025-04-21 01:28:56,923 - LoomLive - INFO - Switching to configure page
+2025-04-21 01:34:19,629 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 01:34:20,067 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 01:34:20,067 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 01:34:20,074 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-21 01:34:23,402 - LoomLive - INFO - Admin configuration saved successfully
+2025-04-21 01:35:30,876 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 01:35:31,039 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 01:35:31,040 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 01:36:59,063 - LoomLive - INFO - Checking Tesseract at: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-04-21 01:36:59,118 - LoomLive - INFO - Tesseract is available: tesseract v5.5.0.20241111
+2025-04-21 01:37:24,236 - LoomLive - INFO - Client configuration saved successfully
+2025-04-21 01:37:24,990 - LoomLive - INFO - Successfully added company: Maitri_Textile
+2025-04-21 01:37:24,996 - LoomLive - DEBUG - Set value: configuration_complete=true
+2025-04-21 01:37:26,898 - LoomLive - INFO - Switching to main page
+2025-04-21 01:37:27,014 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 01:37:27,313 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 01:37:27,314 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 01:37:27,322 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-21 01:37:27,323 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 01:37:27,520 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 01:37:27,521 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 12:53:41,135 - LoomLive - INFO - Application started
+2025-04-21 12:53:41,136 - LoomLive - INFO - Initializing local database
+2025-04-21 12:53:41,149 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 12:53:41,150 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 12:53:41,152 - LoomLive - INFO - Configuration complete, showing main page
+2025-04-21 12:53:43,163 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 12:53:43,908 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 12:53:43,908 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 12:53:43,917 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-21 12:53:43,919 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 12:53:44,321 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 12:53:44,322 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 12:54:14,616 - LoomLive - INFO - Application started
+2025-04-21 12:54:14,616 - LoomLive - INFO - Initializing local database
+2025-04-21 12:54:14,618 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 12:54:14,618 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 12:54:14,619 - LoomLive - INFO - Configuration complete, showing main page
+2025-04-21 12:54:15,353 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 12:54:15,575 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 12:54:15,576 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 12:54:15,584 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-21 12:54:15,585 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 12:54:15,738 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 12:54:15,740 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 12:54:32,079 - LoomLive - INFO - Application started
+2025-04-21 12:54:32,080 - LoomLive - INFO - Initializing local database
+2025-04-21 12:54:32,081 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 12:54:32,082 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 12:54:32,082 - LoomLive - INFO - Configuration complete, showing main page
+2025-04-21 12:54:32,698 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 12:54:32,899 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 12:54:32,900 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 12:54:32,910 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-21 12:54:32,912 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 12:54:33,117 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 12:54:33,117 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 12:54:41,283 - LoomLive - INFO - Application started
+2025-04-21 12:54:41,284 - LoomLive - INFO - Initializing local database
+2025-04-21 12:54:41,285 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 12:54:41,286 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 12:54:41,286 - LoomLive - INFO - Configuration complete, showing main page
+2025-04-21 12:54:41,995 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 12:54:42,164 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 12:54:42,165 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 12:54:42,173 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-21 12:54:42,174 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 12:54:42,334 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 12:54:42,334 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 13:02:33,115 - LoomLive - INFO - Application started
+2025-04-21 13:02:33,116 - LoomLive - INFO - Initializing local database
+2025-04-21 13:02:33,124 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 13:02:33,125 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 13:02:33,126 - LoomLive - INFO - Configuration complete, showing main page
+2025-04-21 13:02:33,881 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 13:02:35,152 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 13:02:35,154 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 13:02:35,159 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-21 13:02:35,160 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 13:02:35,281 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 13:02:35,282 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 13:02:55,074 - LoomLive - INFO - Application started
+2025-04-21 13:02:55,074 - LoomLive - INFO - Initializing local database
+2025-04-21 13:02:55,075 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 13:02:55,077 - LoomLive - INFO - First time launch detected, showing welcome page
+2025-04-21 13:02:59,972 - LoomLive - DEBUG - Set value: first_time_launch=false
+2025-04-21 13:02:59,972 - LoomLive - INFO - Switching to configure page
+2025-04-21 13:03:25,664 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 13:03:26,853 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 13:03:26,854 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 13:03:26,861 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-21 13:03:44,702 - LoomLive - INFO - Admin configuration saved successfully
+2025-04-21 13:05:05,998 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 13:05:06,544 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 13:05:06,545 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 13:05:55,489 - LoomLive - INFO - Checking Tesseract at: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-04-21 13:05:56,447 - LoomLive - INFO - Tesseract is available: tesseract v5.5.0.20241111
+2025-04-21 13:06:08,365 - LoomLive - ERROR - Failed to add company: 400, {"code":"PGRST204","details":null,"hint":null,"message":"Could not find the 'db_path' column of 'companies' in the schema cache"}
+2025-04-21 13:07:50,748 - LoomLive - INFO - Application started
+2025-04-21 13:07:50,749 - LoomLive - INFO - Initializing local database
+2025-04-21 13:07:50,750 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 13:07:50,751 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 13:07:50,751 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 13:08:06,796 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 13:08:07,261 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 13:08:07,264 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 13:08:07,273 - LoomLive - INFO - Admin credentials saved to local database
+2025-04-21 13:15:53,628 - LoomLive - INFO - Application started
+2025-04-21 13:15:53,628 - LoomLive - INFO - Initializing local database
+2025-04-21 13:15:53,629 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 13:15:53,630 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 13:15:53,633 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 13:16:10,287 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 13:16:10,874 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 13:16:10,874 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 13:16:10,876 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 13:16:39,886 - LoomLive - INFO - Application started
+2025-04-21 13:16:39,887 - LoomLive - INFO - Initializing local database
+2025-04-21 13:16:39,888 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 13:16:39,888 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 13:16:39,888 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 13:18:21,313 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 13:18:21,788 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 13:18:21,788 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 13:18:21,789 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 13:18:26,674 - LoomLive - INFO - Admin configuration saved successfully
+2025-04-21 13:19:09,387 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 13:19:09,565 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 13:19:09,566 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 13:19:28,378 - LoomLive - INFO - Checking Tesseract at: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-04-21 13:19:28,404 - LoomLive - INFO - Tesseract is available: tesseract v5.5.0.20241111
+2025-04-21 13:19:38,346 - LoomLive - INFO - Client configuration saved successfully
+2025-04-21 13:19:39,456 - LoomLive - INFO - Successfully added company: Maitri_textiles
+2025-04-21 13:19:39,464 - LoomLive - DEBUG - Set value: configuration_complete=true
+2025-04-21 13:19:41,002 - LoomLive - INFO - Switching to main page
+2025-04-21 13:19:41,071 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 13:19:41,315 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 13:19:41,316 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 13:19:41,317 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 13:19:41,318 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 13:19:41,565 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 13:19:41,566 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 17:33:58,826 - LoomLive - INFO - Application started
+2025-04-21 17:33:58,826 - LoomLive - INFO - Initializing local database
+2025-04-21 17:33:58,828 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 17:33:58,829 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 17:33:58,830 - LoomLive - INFO - Configuration complete, showing main page
+2025-04-21 17:33:59,754 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 17:34:00,303 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 17:34:00,304 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 17:34:00,305 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 17:34:00,305 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 17:34:00,431 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 17:34:00,432 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 18:26:46,591 - LoomLive - INFO - Application started
+2025-04-21 18:26:46,592 - LoomLive - INFO - Initializing local database
+2025-04-21 18:26:46,594 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 18:26:46,595 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 18:26:46,595 - LoomLive - INFO - Configuration complete, showing main page
+2025-04-21 18:26:48,099 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 18:26:48,614 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 18:26:48,620 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 18:26:48,620 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 18:26:48,620 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 18:26:48,779 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 18:26:48,780 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 18:27:55,931 - LoomLive - INFO - Application started
+2025-04-21 18:27:55,932 - LoomLive - INFO - Initializing local database
+2025-04-21 18:27:55,933 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 18:27:55,934 - LoomLive - INFO - First time launch detected, showing welcome page
+2025-04-21 18:28:00,796 - LoomLive - DEBUG - Set value: first_time_launch=false
+2025-04-21 18:28:00,796 - LoomLive - INFO - Switching to configure page
+2025-04-21 18:29:32,429 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 18:29:32,788 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 18:29:32,788 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 18:29:32,788 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 18:29:37,089 - LoomLive - INFO - Admin configuration saved successfully
+2025-04-21 18:30:33,534 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 18:30:33,789 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 18:30:33,790 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 18:33:22,904 - LoomLive - INFO - Checking Tesseract at: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-04-21 18:33:23,765 - LoomLive - INFO - Tesseract is available: tesseract v5.5.0.20241111
+2025-04-21 18:33:42,627 - LoomLive - INFO - Client configuration saved successfully
+2025-04-21 18:33:43,082 - LoomLive - INFO - Successfully added company: Maitri_Textil
+2025-04-21 18:33:43,087 - LoomLive - DEBUG - Set value: configuration_complete=true
+2025-04-21 18:33:44,501 - LoomLive - INFO - Switching to main page
+2025-04-21 18:33:44,560 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 18:33:44,708 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 18:33:44,709 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 18:33:44,711 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 18:33:44,712 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 18:33:44,948 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 18:33:44,949 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 21:24:53,258 - LoomLive - INFO - Application started
+2025-04-21 21:24:53,259 - LoomLive - INFO - Initializing local database
+2025-04-21 21:24:53,270 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 21:24:53,271 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 21:24:53,272 - LoomLive - INFO - Configuration complete, showing main page
+2025-04-21 21:24:54,469 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 21:24:55,314 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 21:24:55,315 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 21:24:55,316 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 21:24:55,317 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 21:24:55,538 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 21:24:55,539 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 21:25:19,350 - LoomLive - INFO - Application started
+2025-04-21 21:25:19,351 - LoomLive - INFO - Initializing local database
+2025-04-21 21:25:19,352 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 21:25:19,353 - LoomLive - INFO - First time launch detected, showing welcome page
+2025-04-21 21:25:23,614 - LoomLive - DEBUG - Set value: first_time_launch=false
+2025-04-21 21:25:23,615 - LoomLive - INFO - Switching to configure page
+2025-04-21 21:26:12,875 - LoomLive - INFO - Application started
+2025-04-21 21:26:12,876 - LoomLive - INFO - Initializing local database
+2025-04-21 21:26:12,878 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 21:26:12,879 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 21:26:12,880 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 21:27:53,837 - LoomLive - INFO - Application started
+2025-04-21 21:27:53,837 - LoomLive - INFO - Initializing local database
+2025-04-21 21:27:53,838 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 21:27:53,838 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 21:27:53,839 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 21:29:52,567 - LoomLive - INFO - Application started
+2025-04-21 21:29:52,568 - LoomLive - INFO - Initializing local database
+2025-04-21 21:29:52,569 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 21:29:52,569 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 21:29:52,570 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 21:33:23,368 - LoomLive - INFO - Application started
+2025-04-21 21:33:23,368 - LoomLive - INFO - Initializing local database
+2025-04-21 21:33:23,370 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 21:33:23,370 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 21:33:23,371 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 21:33:49,024 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 21:33:49,476 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 21:33:49,477 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 21:33:49,478 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 21:33:56,891 - LoomLive - INFO - Admin configuration saved successfully
+2025-04-21 22:04:06,111 - LoomLive - INFO - Application started
+2025-04-21 22:04:06,112 - LoomLive - INFO - Initializing local database
+2025-04-21 22:04:06,113 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 22:04:06,114 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 22:04:06,116 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 22:05:23,968 - LoomLive - INFO - Application started
+2025-04-21 22:05:23,968 - LoomLive - INFO - Initializing local database
+2025-04-21 22:05:23,968 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 22:05:23,969 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 22:05:23,969 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 22:07:19,028 - LoomLive - INFO - Application started
+2025-04-21 22:07:19,028 - LoomLive - INFO - Initializing local database
+2025-04-21 22:07:19,029 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 22:07:19,030 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 22:07:19,031 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 22:07:56,201 - LoomLive - INFO - Application started
+2025-04-21 22:07:56,202 - LoomLive - INFO - Initializing local database
+2025-04-21 22:07:56,202 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 22:07:56,203 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 22:07:56,204 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 22:08:07,158 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 22:08:07,648 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 22:08:07,648 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 22:08:07,649 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 22:09:57,866 - LoomLive - INFO - Application started
+2025-04-21 22:09:57,867 - LoomLive - INFO - Initializing local database
+2025-04-21 22:09:57,867 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 22:09:57,869 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 22:09:57,870 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 22:10:16,844 - LoomLive - INFO - Application started
+2025-04-21 22:10:16,844 - LoomLive - INFO - Initializing local database
+2025-04-21 22:10:16,845 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 22:10:16,846 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 22:10:16,846 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 22:10:38,508 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 22:10:39,049 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 22:10:39,050 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 22:10:39,051 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 22:20:19,215 - LoomLive - INFO - Application started
+2025-04-21 22:20:19,216 - LoomLive - INFO - Initializing local database
+2025-04-21 22:20:19,217 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 22:20:19,217 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 22:20:19,218 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 22:20:45,125 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 22:20:45,573 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 22:20:45,574 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 22:20:45,575 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 22:25:24,725 - LoomLive - INFO - Application started
+2025-04-21 22:25:24,725 - LoomLive - INFO - Initializing local database
+2025-04-21 22:25:24,726 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 22:25:24,727 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 22:25:24,728 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 22:25:42,836 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 22:25:43,341 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 22:25:43,341 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 22:25:43,342 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 22:28:38,411 - LoomLive - INFO - Application started
+2025-04-21 22:28:38,412 - LoomLive - INFO - Initializing local database
+2025-04-21 22:28:38,413 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 22:28:38,414 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 22:28:38,415 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 22:31:47,179 - LoomLive - INFO - Application started
+2025-04-21 22:31:47,179 - LoomLive - INFO - Initializing local database
+2025-04-21 22:31:47,180 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 22:31:47,181 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 22:31:47,181 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 22:32:00,657 - LoomLive - INFO - Application started
+2025-04-21 22:32:00,657 - LoomLive - INFO - Initializing local database
+2025-04-21 22:32:00,658 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 22:32:00,658 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 22:32:00,659 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 22:34:16,549 - LoomLive - INFO - Application started
+2025-04-21 22:34:16,549 - LoomLive - INFO - Initializing local database
+2025-04-21 22:34:16,551 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 22:34:16,551 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 22:34:16,552 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 22:37:26,965 - LoomLive - INFO - Application started
+2025-04-21 22:37:26,965 - LoomLive - INFO - Initializing local database
+2025-04-21 22:37:26,967 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 22:37:26,967 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 22:37:26,968 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 22:38:08,675 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 22:38:09,147 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 22:38:09,149 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 22:38:09,149 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 22:41:41,023 - LoomLive - INFO - Application started
+2025-04-21 22:41:41,024 - LoomLive - INFO - Initializing local database
+2025-04-21 22:41:41,025 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 22:41:41,025 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 22:41:41,026 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 22:42:14,679 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 22:42:15,394 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 22:42:15,394 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 22:42:15,396 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 22:42:22,478 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 22:42:22,760 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 22:42:22,762 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 22:42:22,763 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 22:43:05,776 - LoomLive - INFO - Application started
+2025-04-21 22:43:05,776 - LoomLive - INFO - Initializing local database
+2025-04-21 22:43:05,777 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 22:43:05,778 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 22:43:05,779 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 22:43:25,330 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 22:43:25,524 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 22:43:25,525 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 22:43:25,526 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 22:45:51,686 - LoomLive - INFO - Application started
+2025-04-21 22:45:51,686 - LoomLive - INFO - Initializing local database
+2025-04-21 22:45:51,688 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 22:45:51,689 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 22:45:51,690 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 22:46:05,659 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 22:46:06,689 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 22:46:06,690 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 22:46:06,691 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 22:47:30,067 - LoomLive - INFO - Application started
+2025-04-21 22:47:30,067 - LoomLive - INFO - Initializing local database
+2025-04-21 22:47:30,070 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 22:47:30,071 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 22:47:30,073 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 22:47:46,880 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 22:47:47,610 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 22:47:47,610 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 22:47:47,612 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 22:48:36,711 - LoomLive - INFO - Application started
+2025-04-21 22:48:36,712 - LoomLive - INFO - Initializing local database
+2025-04-21 22:48:36,712 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 22:48:36,713 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 22:48:36,714 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 22:54:01,592 - LoomLive - INFO - Application started
+2025-04-21 22:54:01,593 - LoomLive - INFO - Initializing local database
+2025-04-21 22:54:01,594 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 22:54:01,595 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 22:54:01,597 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 22:54:21,719 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 22:54:21,723 - LoomLive - ERROR - Error connecting to admin database: Invalid leading whitespace, reserved character(s), or return character(s) in header value: 'tps://nzbcqpnpislqczidqswx.supabase.co\n2025-04-21 22:43:25,524 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h\n2025-04-21 22:43:25,525 - LoomLive - INFO - Successfully connected to admin database       \n2025-04-21 22:43:25,526 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at'
+2025-04-21 22:57:02,951 - LoomLive - INFO - Application started
+2025-04-21 22:57:02,951 - LoomLive - INFO - Initializing local database
+2025-04-21 22:57:02,952 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 22:57:02,953 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 22:57:02,954 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 22:57:21,715 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 22:57:22,212 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 22:57:22,213 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 22:57:22,214 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 23:01:56,590 - LoomLive - INFO - Application started
+2025-04-21 23:01:56,591 - LoomLive - INFO - Initializing local database
+2025-04-21 23:01:56,593 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 23:01:56,594 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 23:01:56,595 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 23:02:12,607 - LoomLive - INFO - Application started
+2025-04-21 23:02:12,608 - LoomLive - INFO - Initializing local database
+2025-04-21 23:02:12,632 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 23:02:12,635 - LoomLive - INFO - First time launch detected, showing welcome page
+2025-04-21 23:02:17,649 - LoomLive - DEBUG - Set value: first_time_launch=false
+2025-04-21 23:02:17,649 - LoomLive - INFO - Switching to configure page
+2025-04-21 23:02:38,780 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:02:39,350 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 23:02:39,351 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 23:02:39,354 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 23:04:57,161 - LoomLive - INFO - Application started
+2025-04-21 23:04:57,162 - LoomLive - INFO - Initializing local database
+2025-04-21 23:04:57,163 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 23:04:57,164 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 23:04:57,166 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 23:05:11,328 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:05:11,802 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 23:05:11,803 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 23:05:11,804 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 23:14:57,663 - LoomLive - INFO - Application started
+2025-04-21 23:14:57,664 - LoomLive - INFO - Initializing local database
+2025-04-21 23:14:57,688 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 23:14:57,691 - LoomLive - INFO - First time launch detected, showing welcome page
+2025-04-21 23:15:01,574 - LoomLive - DEBUG - Set value: first_time_launch=false
+2025-04-21 23:15:01,574 - LoomLive - INFO - Switching to configure page
+2025-04-21 23:15:15,659 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:15:16,247 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 23:15:16,248 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 23:15:16,252 - LoomLive - ERROR - Error saving admin credentials to local database: Cannot add a column with non-constant default
+2025-04-21 23:26:23,627 - LoomLive - INFO - Application started
+2025-04-21 23:26:23,628 - LoomLive - INFO - Initializing local database
+2025-04-21 23:26:23,629 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 23:26:23,630 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 23:26:23,632 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 23:26:44,100 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:26:44,602 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 23:26:44,604 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 23:26:44,605 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 23:27:34,038 - LoomLive - INFO - Client URL already exists in database: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:27:44,063 - LoomLive - INFO - Client URL already exists in database: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:27:46,172 - LoomLive - INFO - Client URL already exists in database: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:27:47,066 - LoomLive - INFO - Client URL already exists in database: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:27:48,418 - LoomLive - INFO - Client URL already exists in database: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:27:49,162 - LoomLive - INFO - Client URL already exists in database: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:27:50,412 - LoomLive - INFO - Client URL already exists in database: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:27:51,019 - LoomLive - INFO - Client URL already exists in database: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:27:53,245 - LoomLive - INFO - Client URL already exists in database: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:28:06,626 - LoomLive - INFO - Client URL already exists in database: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:28:09,602 - LoomLive - INFO - Client URL already exists in database: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:28:10,476 - LoomLive - INFO - Client URL already exists in database: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:28:10,631 - LoomLive - INFO - Client URL already exists in database: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:30:29,325 - LoomLive - INFO - Application started
+2025-04-21 23:30:29,326 - LoomLive - INFO - Initializing local database
+2025-04-21 23:30:29,327 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 23:30:29,328 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 23:30:29,329 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 23:30:46,404 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:30:46,992 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 23:30:46,994 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 23:30:46,994 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 23:31:26,387 - LoomLive - INFO - Client URL already exists in database: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:31:42,348 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:31:43,543 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 23:31:43,544 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 23:35:40,306 - LoomLive - INFO - Application started
+2025-04-21 23:35:40,306 - LoomLive - INFO - Initializing local database
+2025-04-21 23:35:40,307 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 23:35:40,308 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 23:35:40,309 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 23:35:53,455 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:35:53,458 - LoomLive - ERROR - Error connecting to admin database: Invalid leading whitespace, reserved character(s), or return character(s) in header value: 'tps://nzbcqpnpislqczidqswx.supabase.co\n2025-04-21 22:43:25,524 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h\n2025-04-21 22:43:25,525 - LoomLive - INFO - Successfully connected to admin database       \n2025-04-21 22:43:25,526 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at'
+2025-04-21 23:36:04,014 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:36:04,016 - LoomLive - ERROR - Error connecting to admin database: Invalid leading whitespace, reserved character(s), or return character(s) in header value: 'tps://nzbcqpnpislqczidqswx.supabase.co\n2025-04-21 22:43:25,524 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h\n2025-04-21 22:43:25,525 - LoomLive - INFO - Successfully connected to admin database       \n2025-04-21 22:43:25,526 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at'
+2025-04-21 23:37:43,685 - LoomLive - INFO - Application started
+2025-04-21 23:37:43,686 - LoomLive - INFO - Initializing local database
+2025-04-21 23:37:43,687 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 23:37:43,689 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 23:37:43,690 - LoomLive - INFO - Configuration incomplete, showing configure page
+2025-04-21 23:38:02,527 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:38:03,752 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[{"id":1,"company_name":"Maitri_Textiles","client_email":"ghelanimeet2002@gmail.com","client_url":"h
+2025-04-21 23:38:03,753 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 23:38:03,754 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 23:39:23,859 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:39:23,988 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 23:39:23,989 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 23:40:47,668 - LoomLive - INFO - Checking Tesseract at: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-04-21 23:40:48,823 - LoomLive - INFO - Tesseract is available: tesseract v5.5.0.20241111
+2025-04-21 23:40:50,872 - LoomLive - DEBUG - Set value: configuration_complete=true
+2025-04-21 23:40:50,873 - LoomLive - INFO - Switching to main page
+2025-04-21 23:40:50,993 - LoomLive - ERROR - Admin database credentials not set
+2025-04-21 23:40:50,995 - LoomLive - ERROR - Client database credentials not set
+2025-04-21 23:42:58,874 - LoomLive - INFO - Application started
+2025-04-21 23:42:58,875 - LoomLive - INFO - Initializing local database
+2025-04-21 23:42:58,876 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 23:42:58,877 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 23:42:58,878 - LoomLive - INFO - Configuration complete, showing main page
+2025-04-21 23:42:59,477 - LoomLive - ERROR - Admin database credentials not set
+2025-04-21 23:42:59,479 - LoomLive - ERROR - Client database credentials not set
+2025-04-21 23:43:10,603 - LoomLive - INFO - Application started
+2025-04-21 23:43:10,604 - LoomLive - INFO - Initializing local database
+2025-04-21 23:43:10,626 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 23:43:10,628 - LoomLive - INFO - First time launch detected, showing welcome page
+2025-04-21 23:43:14,452 - LoomLive - DEBUG - Set value: first_time_launch=false
+2025-04-21 23:43:14,452 - LoomLive - INFO - Switching to configure page
+2025-04-21 23:43:31,987 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:43:32,617 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[]
+2025-04-21 23:43:32,618 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 23:43:32,622 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 23:44:32,397 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:44:32,566 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 23:44:32,566 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 23:44:55,071 - LoomLive - INFO - Checking Tesseract at: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-04-21 23:44:55,103 - LoomLive - INFO - Tesseract is available: tesseract v5.5.0.20241111
+2025-04-21 23:45:00,076 - LoomLive - DEBUG - Set value: configuration_complete=true
+2025-04-21 23:45:00,076 - LoomLive - INFO - Switching to main page
+2025-04-21 23:45:00,175 - LoomLive - ERROR - Admin database credentials not set
+2025-04-21 23:45:00,179 - LoomLive - ERROR - Client database credentials not set
+2025-04-21 23:53:23,690 - LoomLive - INFO - Application started
+2025-04-21 23:53:23,691 - LoomLive - INFO - Initializing local database
+2025-04-21 23:53:23,692 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 23:53:23,695 - LoomLive - INFO - Returning user detected, checking configurations
+2025-04-21 23:53:23,698 - LoomLive - INFO - Configuration complete, showing main page
+2025-04-21 23:53:24,508 - LoomLive - ERROR - Admin database credentials not set
+2025-04-21 23:53:24,509 - LoomLive - ERROR - Client database credentials not set
+2025-04-21 23:53:37,846 - LoomLive - INFO - Application started
+2025-04-21 23:53:37,847 - LoomLive - INFO - Initializing local database
+2025-04-21 23:53:37,869 - LoomLive - INFO - Local database initialized successfully
+2025-04-21 23:53:37,874 - LoomLive - INFO - First time launch detected, showing welcome page
+2025-04-21 23:53:41,630 - LoomLive - DEBUG - Set value: first_time_launch=false
+2025-04-21 23:53:41,631 - LoomLive - INFO - Switching to configure page
+2025-04-21 23:54:01,758 - LoomLive - INFO - Testing connection to admin database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:54:02,623 - LoomLive - INFO - Admin DB connection test response: Status=200, Content=[]
+2025-04-21 23:54:02,624 - LoomLive - INFO - Successfully connected to admin database
+2025-04-21 23:54:02,627 - LoomLive - ERROR - Error saving admin credentials to local database: table settings has no column named updated_at
+2025-04-21 23:55:05,024 - LoomLive - INFO - Testing connection to client database at URL: https://nzbcqpnpislqczidqswx.supabase.co
+2025-04-21 23:55:05,191 - LoomLive - INFO - Client DB connection test response: Status=200, Content=[]
+2025-04-21 23:55:05,192 - LoomLive - INFO - Successfully connected to client database
+2025-04-21 23:55:26,731 - LoomLive - INFO - Checking Tesseract at: C:\Program Files\Tesseract-OCR\tesseract.exe
+2025-04-21 23:55:26,774 - LoomLive - INFO - Tesseract is available: tesseract v5.5.0.20241111
+2025-04-21 23:56:09,963 - LoomLive - ERROR - Failed to add company: 400, {"code":"PGRST204","details":null,"hint":null,"message":"Could not find the 'ip_address' column of 'companies' in the schema cache"}

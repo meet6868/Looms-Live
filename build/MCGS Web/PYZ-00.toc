@@ -1,0 +1,1 @@
+('E:\\MCGS\\MCGS Web\\build\\MCGS Web\\PYZ-00.pyz', [])
