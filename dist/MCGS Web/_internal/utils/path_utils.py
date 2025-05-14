@@ -10,7 +10,7 @@ def get_db_path():
         # If running from source
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-    
+    # base_dir = os.path.join(os.getenv("APPDATA"), "Looms Live")
     return os.path.join(base_dir, 'loom_live.db')
 
 def get_app_root():

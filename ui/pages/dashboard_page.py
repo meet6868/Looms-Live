@@ -580,6 +580,9 @@ class DashboardPage:
                     status_flag=1
                     status_item.setText(" 🟢 ")
                     # status_item.setBackground(QBrush(QColor("#90EE90")))  # Light green
+                elif now - temp_updated < timedelta(minutes=1):
+                    status_flag=1
+                    status_item.setText(" 🟡 ")
                 else:
                     status_item.setText(" 🔴 ")
                     # status_item.setBackground(QBrush(QColor("#FFB6C1")))  # Light red

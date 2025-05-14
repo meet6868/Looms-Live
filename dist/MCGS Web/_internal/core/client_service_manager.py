@@ -90,8 +90,12 @@ class ClientServiceManager:
             
             # Initialize new driver
             self.logger.info("Starting new client service...")
-            service = Service(ChromeDriverManager().install())
-            self.client_driver = webdriver.Chrome(service=service,options=chrome_options)
+            try:
+                service = Service(ChromeDriverManager().install())
+                self.client_driver = webdriver.Chrome(service=service,options=chrome_options)
+            except: 
+                self.client_driver = webdriver.Chrome(options=chrome_options)
+                self.logger.info("CromeDrive offile-----------------")
             self.client_driver.maximize_window()
             self.client_driver.get(machine_url)
             self.client_driver.save_screenshot("page_debug.png")
