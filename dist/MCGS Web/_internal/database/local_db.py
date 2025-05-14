@@ -877,6 +877,7 @@ class LocalDatabase:
                 Pre_Efficiency, Shift,updated_at
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)"""
             now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             cursor.execute(query, (
                 data['Device_Name'], data['Loom_Num'],
                 data['Weaving_Length'], data['Cut_Length'],

@@ -160,15 +160,15 @@ class MainPage(QMainWindow):
         dashboard_page = self.page_manager.create_dashboard_page()
         reports_page = self.page_manager.create_reports_page()
         live_page = self.page_manager.create_live_page()
-        settings_page = self.page_manager.create_settings_page()
-        help_page = self.page_manager.create_help_page()
+        data_page = self.page_manager.create_data_page()
+        # help_page = self.page_manager.create_help_page()
         
         # Add pages to stacked widget
         self.stacked_widget.addWidget(dashboard_page)
         self.stacked_widget.addWidget(reports_page)
         self.stacked_widget.addWidget(live_page)
-        self.stacked_widget.addWidget(settings_page)
-        self.stacked_widget.addWidget(help_page)
+        self.stacked_widget.addWidget(data_page)
+        # self.stacked_widget.addWidget(help_page)
     
     def init_ui(self):
         """Initialize the user interface"""
@@ -270,7 +270,7 @@ class MainPage(QMainWindow):
         self.create_sidebar_button("Dashboard", "dashboard.png", 0, sidebar_layout)
         self.create_sidebar_button("Reports", "report.png", 1, sidebar_layout)
         self.create_sidebar_button("Live", "live.png", 2, sidebar_layout)
-        # self.create_sidebar_button("Settings", "setting.png", 3, sidebar_layout)
+        self.create_sidebar_button("Data", "data.png", 3, sidebar_layout)
         # self.create_sidebar_button("Help", "help.png", 4, sidebar_layout)
         
         sidebar_layout.addItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding))
