@@ -13,6 +13,7 @@ import threading
 import re
 import cv2
 
+
 class ClientServiceManager:
     def __init__(self, local_db, client_db, logger):
         self.local_db = local_db
@@ -31,7 +32,6 @@ class ClientServiceManager:
         # self.tab_views_folder = os.path.join(self.debug_folder, "tab_views")
         self.reinit_thread = None
         self.is_reinit_running = False
-
         # # Create folders if they don't exist
         # for folder in [self.debug_folder, self.tab_views_folder]:
         #     if not os.path.exists(folder):
@@ -355,6 +355,7 @@ class ClientServiceManager:
         self.start_temp_data_upload()
         self.start_machine_data_sync()
         
+        
         # Only start reinit thread if it's not already running
         if not self.reinit_thread and not self.is_reinit_running:
             self.is_reinit_running = True
@@ -369,6 +370,7 @@ class ClientServiceManager:
         self.is_extracting = False
         self.is_temp_uploading = False
         self.is_reinit_running = False
+       
         
         time.sleep(2)
         
@@ -787,3 +789,4 @@ class ClientServiceManager:
                 self.logger.error(f"Error in machine data sync loop: {str(e)}")
                 time.sleep(60)  # Wait 1 minute on error
 
+    

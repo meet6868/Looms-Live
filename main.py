@@ -14,6 +14,8 @@ from ui.main_page import MainPage
 from utils.logger import setup_logger
 from app_controller import AppController
 from utils.path_utils import get_icon_path
+import threading
+from utils.redis_manager import RedisManager
 
 class LoomLive:
     def __init__(self):
@@ -36,6 +38,11 @@ class LoomLive:
         client_url = client_config.get("client_url", "")
         client_key = client_config.get("client_key", "")
         self.client_db = ClientDatabase(client_url, client_key)
+        
+        # Initialize Redis manager
+        self.redis_manager = RedisManager(self.local_db)
+        self.redis_manager.start_upload()
+        self.logger.info("Redis upload service started")
         
         # Track active threads
         self.active_threads = []
@@ -74,6 +81,7 @@ class LoomLive:
                     self.logger
                 )
         
+
         self.current_window.show()
     
     def switch_to_configure_page(self):
@@ -105,9 +113,14 @@ class LoomLive:
         self.current_window = MainPage(self)
         self.current_window.show()
 
+    
     def cleanup(self):
         """Clean up resources before application exit"""
         self.logger.info("Cleaning up resources")
+        
+        # Stop Redis manager
+        if hasattr(self, 'redis_manager'):
+            self.redis_manager.cleanup()
         
         # Stop all active threads
         for thread in self.active_threads:
@@ -120,6 +133,9 @@ class LoomLive:
         
         if hasattr(self, 'client_db'):
             self.client_db.disconnect()
+        
+    
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -143,6 +159,8 @@ if __name__ == "__main__":
     app.aboutToQuit.connect(loom_live.cleanup)
     
     sys.exit(app.exec_())
+
+    
 from app_controller import AppController
 
 if __name__ == "__main__":
