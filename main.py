@@ -16,6 +16,7 @@ from app_controller import AppController
 from utils.path_utils import get_icon_path
 import threading
 from utils.redis_manager import RedisManager
+from datetime import datetime
 
 class LoomLive:
     def __init__(self):
@@ -39,10 +40,7 @@ class LoomLive:
         client_key = client_config.get("client_key", "")
         self.client_db = ClientDatabase(client_url, client_key)
         
-        # Initialize Redis manager
-        self.redis_manager = RedisManager(self.local_db)
-        self.redis_manager.start_upload()
-        self.logger.info("Redis upload service started")
+       
         
         # Track active threads
         self.active_threads = []
@@ -61,7 +59,25 @@ class LoomLive:
             
             if is_configured:
                 self.logger.info("Configuration complete, showing main page")
-                self.current_window = MainPage(self)
+                end_date = self.local_db.get_client_config().get("end_date")
+                current_date = datetime.now().strftime("%Y-%m-%d")
+
+                if current_date > end_date:
+                    self.logger.info("License expired, showing configure page")
+                    from PyQt5.QtWidgets import QMessageBox
+                    msg = QMessageBox()
+                    msg.setIcon(QMessageBox.Warning)
+                    msg.setText("Your license has expired!")
+                    msg.setInformativeText("Please contact support to renew your license.")
+                    msg.setWindowTitle("License Expired")
+                    msg.exec_()
+                    self.switch_to_configure_page()
+                else:
+                    self.current_window = MainPage(self)
+                    # Initialize Redis manager
+                    self.redis_manager = RedisManager(self.local_db)
+                    self.redis_manager.start_upload()
+                    self.logger.info("Redis upload service started")
             else:
                 self.logger.info("Configuration incomplete, showing configure page")
                 # Create necessary dependencies for ConfigurePage

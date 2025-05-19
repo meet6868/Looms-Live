@@ -862,7 +862,7 @@ class LocalDatabase:
             self.logger.error(f"Error storing machine data: {str(e)}")
             return False
 
-    def store_temp_data(self, data,tab_key):
+    def store_temp_data(self, data,tab_key,timestamp):
         """Store temporary machine data"""
         try:
             conn = sqlite3.connect(self.db_path)
@@ -876,8 +876,7 @@ class LocalDatabase:
                 Pre_Production_Quantity, Pre_Production_FabricLength, Pre_Speed,
                 Pre_Efficiency, Shift,updated_at
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)"""
-            now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+           
             cursor.execute(query, (
                 data['Device_Name'], data['Loom_Num'],
                 data['Weaving_Length'], data['Cut_Length'],
@@ -887,34 +886,13 @@ class LocalDatabase:
                 data['Speed'][0], data['Efficiency'][0],
                 data['Production_Quantity'][1], data['Production_FabricLength'][1],
                 data['Speed'][1], data['Efficiency'][1],
-                data['Shift'][0],now
+                data['Shift'][0],timestamp
             ))
             conn.commit()
             return True
             
         except Exception as e:
-            # print(f"Error storing temp data: {str(e)}")
-            # conn = sqlite3.connect(self.db_path)
-            # cursor = conn.cursor()
             
-            # query = """INSERT OR REPLACE INTO temp_data (
-            #     Device_Name, Loom_Num, Weaving_Length, Cut_Length,
-            #     Weaving_Forecast, Warp_Remain, Warp_Length, Warp_Forecast,
-            #     Production_Quantity, Production_FabricLength, Speed, Efficiency,
-            #     Pre_Production_Quantity, Pre_Production_FabricLength, Pre_Speed,
-            #     Pre_Efficiency, Shift,updated_at
-            # ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)"""
-            # now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            # loom_num = tab_key.split("_")[1]
-            # device_name= "HQF000"+loom_num[1]
-            # cursor.execute(query, (
-            #     device_name, loom_num,
-            #     0, 0, 0, 0, 0, 0,
-            #     0, 0, 0, 0,
-            #     0, 0, 0, 0,
-            #     '', now
-            # ))
-            # conn.commit()
             self.logger.error(f"Error storing temp data,{tab_key}: {e},Data to store: {data}, Tab Key: {tab_key}")
             return False
         finally:

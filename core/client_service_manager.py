@@ -98,7 +98,7 @@ class ClientServiceManager:
                 self.logger.info("CromeDrive offile-----------------")
             self.client_driver.maximize_window()
             self.client_driver.get(machine_url)
-            self.client_driver.save_screenshot("page_debug.png")
+           
             
             # Login process
             wait = WebDriverWait(self.client_driver, 30)
@@ -303,56 +303,14 @@ class ClientServiceManager:
             enter_button.click()
             time.sleep(1)
 
-    # def capture_all_tab_screenshots(self):
-    #     """Capture screenshots for all tabs and save directly to folder"""
-    #     try:
-    #         # Create screenshots directory if not exists
-    #         screenshots_folder = os.path.join(self.debug_folder, "initial_screenshots")
-    #         if not os.path.exists(screenshots_folder):
-    #             os.makedirs(screenshots_folder)
-       
-    #         for tab_key, tab_handle in self.system_tabs.items():
-    #             # print(tab_key,tab_handle,"----------")
-    #             try:
-    #                 # Switch to tab
-    #                 self.client_driver.switch_to.window(tab_handle)
-    #                 time.sleep(2)  # Wait for tab content to load
-                    
-    #                 # Take screenshot
-    #                 png_data = self.client_driver.get_screenshot_as_png()
-    #                 if png_data:
-    #                     # Save directly to file
-    #                     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    #                     filename = os.path.join(screenshots_folder, f"{tab_key}_{timestamp}.png")
-                        
-    #                     with open(filename, 'wb') as f:
-    #                         f.write(png_data)
-    #                     self.logger.info(f"Screenshot saved to file: {filename}")
-    #                 else:
-    #                     self.logger.error(f"Failed to capture screenshot for {tab_key}")
-                        
-    #             except Exception as tab_error:
-    #                 self.logger.error(f"Error capturing screenshot for {tab_key}: {str(tab_error)}")
-    #                 continue
-            
-    #         # Return to main tab
-    #         main_tab = self.system_tabs.get('main_tab')
-    #         if main_tab:
-    #             self.client_driver.switch_to.window(main_tab)
-                
-    #         self.logger.info(f"All screenshots saved in: {screenshots_folder}")
-    #         return True
-                
-    #     except Exception as e:
-    #         self.logger.error(f"Error in capture_all_tab_screenshots: {str(e)}")
-    #         return False
+   
 
     def start_screenshot_management(self):
         """Start all screenshot related threads"""
         self.start_screenshot_capture()
-        self.start_screenshot_upload()
+        # self.start_screenshot_upload()
         self.start_data_extraction()
-        self.start_temp_data_upload()
+        # self.start_temp_data_upload()
         self.start_machine_data_sync()
         
         
@@ -462,22 +420,7 @@ class ClientServiceManager:
                         if self.client_db.store_screenshot(tab_key, image_data,timestamp):
                             # self.local_db.mark_screenshot_uploaded(tab_key, timestamp)
                             
-                            # Verify by downloading and saving
-                            # verify_data = self.client_db.get_screenshot(tab_key)
-                            # if verify_data:
-                            #     verify_path = os.path.join(self.debug_folder, "verified_screenshots")
-                            #     if not os.path.exists(verify_path):
-                            #         os.makedirs(verify_path)
-                                    
-                            #     filename = os.path.join(verify_path, f"{tab_key}_verified.png")
-                                
-                            #     # Convert string data to bytes if needed
-                            #     if isinstance(verify_data, str):
-                            #         import base64
-                            #         verify_data = base64.b64decode(verify_data)
-                                
-                            #     with open(filename, 'wb') as f:
-                            #         f.write(verify_data)
+                           
                             self.logger.info(f"Screenshot verified for {tab_key}")
                         else:
                             self.logger.error(f"Failed to upload {tab_key}")
@@ -543,7 +486,8 @@ class ClientServiceManager:
                             # self.logger.info(f"{text}------------------")
                             if data:
                                 # Store in temp_data
-                                self.local_db.store_temp_data(data,tab_key)
+                                current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                                self.local_db.store_temp_data(data,tab_key,current_time)
                                 
                                 # Process machine data
                                 try:
