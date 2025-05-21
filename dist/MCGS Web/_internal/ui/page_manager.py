@@ -3,6 +3,7 @@ from .pages.dashboard_page import DashboardPage
 from .pages.reports_page import ReportsPage
 from .pages.live_page import LivePage
 from .pages.settings_page import SettingsPage
+from .pages.data_page import DataPage
 from .pages.help_page import HelpPage
 
 class PageManager:
@@ -23,9 +24,9 @@ class PageManager:
         """Create the analytics page"""
         return LivePage(self.main_page).create_page()
     
-    def create_settings_page(self):
+    def create_data_page(self):
         """Create the settings page"""
-        return SettingsPage(self.main_page).create_page()
+        return DataPage(self.main_page).create_page()
     
     def create_help_page(self):
         """Create the help page"""

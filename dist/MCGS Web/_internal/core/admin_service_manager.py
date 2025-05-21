@@ -50,7 +50,16 @@ class AdminServiceManager:
             backend_password = "4006007062"
             
             # Initialize driver
-            self.backend_driver = webdriver.Chrome(options=chrome_options)
+            # self.backend_driver = webdriver.Chrome(options=chrome_options)
+            
+
+            try:
+                service = Service(ChromeDriverManager().install())
+                self.backend_driver = webdriver.Chrome(service=service,options=chrome_options)
+            except: 
+                self.backend_driver = webdriver.Chrome(options=chrome_options)
+                self.logger.info("CromeDrive offile-----------------")
+                
             self.backend_driver.get(backend_url)
             
             # Login

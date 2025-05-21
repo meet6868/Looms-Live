@@ -50,7 +50,7 @@ class MachineCard(QFrame):
                 updated_time = datetime.strptime(updated_str, '%Y-%m-%d %H:%M:%S')
                 now = datetime.now()
                 
-                if now - updated_time < timedelta(minutes=335):
+                if now - updated_time < timedelta(minutes=1):
                     status.setText(f"🟢 Online ")
                     status.setStyleSheet("""
                         color: #27AE60;
@@ -169,7 +169,7 @@ class MachineCard(QFrame):
 
 # Add this new thread class at the top level
 class DataFetchThread(QThread):
-    data_fetched = pyqtSignal(list)
+    data_fetched = pyqtSignal(object)  # Changed to object type
     
     def __init__(self, local_db):
         super().__init__()
@@ -181,27 +181,19 @@ class DataFetchThread(QThread):
             try:
                 data = self.local_db.get_temp_data()
                 if data:
+                    # print("Fetched data:", len(data))
                     self.data_fetched.emit(data)
             except Exception as e:
-                print(f"Error fetching data: {e}")
-            time.sleep(3)  # Fetch every 3 seconds
-            
-    def stop(self):
-        self.running = False
+                self.local_db.logger.error(f"Error fetching data: {e}")
+            time.sleep(1)
 
-# Update DataPage class
 class DataPage:
     def __init__(self, main_window):
         self.main_window = main_window
         self.app_controller = main_window.app_controller
         self.fetch_thread = None
-        # Remove the aboutToQuit connection from here
-        # self.main_window.aboutToQuit.connect(self.cleanup)
 
     def create_page(self):
-        # Add cleanup connection to QApplication here
-        from PyQt5.QtWidgets import QApplication
-        QApplication.instance().aboutToQuit.connect(self.cleanup)
         self.main_window.logger.info("Creating DataPage")
         container = QWidget()
         layout = QVBoxLayout(container)
@@ -265,72 +257,50 @@ class DataPage:
 
         self.refresh_data()  # Load initial data
         # Start the data fetch thread
-        self.fetch_thread = DataFetchThread(self.main_window.local_db)
-        self.fetch_thread.data_fetched.connect(self.update_cards)
-        self.fetch_thread.start()
-        self.main_window.logger.info("DataPage created")
+        if self.fetch_thread is None:
+            self.fetch_thread = DataFetchThread(self.main_window.local_db)
+            self.fetch_thread.data_fetched.connect(lambda x: self.refresh_data(x), Qt.QueuedConnection)
+            self.fetch_thread.start()
+            self.main_window.logger.info("Data fetch thread started")
 
         return container
 
-    def refresh_data(self):
+    def refresh_data(self, data=None):
         try:
+            # print("Refreshing with data:", data is not None)  # Debug print
             # Clear existing cards
-            for i in reversed(range(self.cards_layout.count())): 
-                self.cards_layout.itemAt(i).widget().setParent(None)
+            while self.cards_layout.count():
+                item = self.cards_layout.takeAt(0)
+                if item.widget():
+                    item.widget().deleteLater()
             
-            data = self.main_window.local_db.get_temp_data()
+            # Get data from local_db if not provided by thread
+            if data is None:
+                data = self.main_window.local_db.get_temp_data()
+
             if data:
-                # Sort data by Loom Number
-                sorted_data = sorted(data, key=lambda x: x.get('Loom_Num', ''))
-                
-                # Calculate grid layout
-                cols = 3  # Number of cards per row
+                # print("Processing data items:", len(data))  # Debug print
+                sorted_data = sorted(data, key=lambda x: str(x.get('Loom_Num', '')))
+                cols = 3
                 for i, machine_data in enumerate(sorted_data):
                     row = i // cols
                     col = i % cols
                     card = MachineCard(machine_data)
                     self.cards_layout.addWidget(card, row, col)
+                self.cards_widget.update()  # Force update
                     
         except Exception as e:
             self.main_window.logger.error(f"Error refreshing data: {e}")
+            # print(f"Error in refresh_data: {e}")  # Debug print
 
-    def update_cards(self, data):
-        """Update cards with new data from thread"""
+    def stop_thread(self):
+        """Method to be called when page is actually being closed"""
         try:
-            # Clear existing cards
-            for i in reversed(range(self.cards_layout.count())): 
-                self.cards_layout.itemAt(i).widget().setParent(None)
-            
-            if data:
-                # Sort data by Loom Number
-                sorted_data = sorted(data, key=lambda x: x.get('Loom_Num', ''))
-                
-                # Calculate grid layout
-                cols = 3  # Number of cards per row
-                for i, machine_data in enumerate(sorted_data):
-                    row = i // cols
-                    col = i % cols
-                    card = MachineCard(machine_data)
-                    self.cards_layout.addWidget(card, row, col)
-                    
-        except Exception as e:
-            self.main_window.logger.error(f"Error updating cards: {e}")
-
-    def cleanup(self):
-        """Cleanup method for proper thread handling"""
-        try:
-            if hasattr(self, 'fetch_thread') and self.fetch_thread is not None:
+            if self.fetch_thread is not None:
                 self.fetch_thread.stop()
-                self.fetch_thread.quit()
-                self.fetch_thread.wait()
                 self.fetch_thread = None
-            self.main_window.logger.info("Data page threads stopped successfully")
+                self.main_window.logger.info("Data fetch thread stopped")
         except Exception as e:
-            self.main_window.logger.error(f"Error stopping data page threads: {e}")
+            self.main_window.logger.error(f"Error stopping data fetch thread: {e}")
 
-    def __del__(self):
-        """Destructor to ensure cleanup"""
-        try:
-            self.cleanup()
-        except:
-            pass
+    # Remove cleanup and __del__ methods as they're stopping the thread too early

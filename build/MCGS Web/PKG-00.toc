@@ -42,6 +42,10 @@
    'E:\\MCGS\\MCGS '
    'Web\\venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_inspect.py',
    'PYSOURCE'),
+  ('pyi_rth_cryptography_openssl',
+   'E:\\MCGS\\MCGS '
+   'Web\\venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\rthooks\\pyi_rth_cryptography_openssl.py',
+   'PYSOURCE'),
   ('pyi_rth_pkgres',
    'E:\\MCGS\\MCGS '
    'Web\\venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pkgres.py',
@@ -50,9 +54,9 @@
    'E:\\MCGS\\MCGS '
    'Web\\venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pyqt5.py',
    'PYSOURCE'),
-  ('pyi_rth_cryptography_openssl',
+  ('pyi_rth_setuptools',
    'E:\\MCGS\\MCGS '
-   'Web\\venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\rthooks\\pyi_rth_cryptography_openssl.py',
+   'Web\\venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_setuptools.py',
    'PYSOURCE'),
   ('main', 'E:\\MCGS\\MCGS Web\\main.py', 'PYSOURCE')],
  'python311.dll',

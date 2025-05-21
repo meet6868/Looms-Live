@@ -1,4 +1,3 @@
-import redis
 from upstash_redis import Redis
 import json
 import base64
@@ -17,7 +16,6 @@ class RedisManager:
     def __init__(self, local_db, port=6380):
         self.logger = logging.getLogger("LoomLive")
         self.local_db = local_db
-        self.redis_client = None
         self.upstash_redis = Redis(
             url="https://on-snapper-37126.upstash.io",
             token="AZEGAAIjcDEyNDFkMDA1ZGYxYWM0MDhlOThmZTYzYjllNjZkY2Q3ZHAxMA"
@@ -25,7 +23,7 @@ class RedisManager:
         self.upload_thread = None
         self.is_uploading = False
         self.port = port
-        self.connect()
+ 
 
         # AWS S3 Configuration
         self.s3 = boto3.client(
@@ -81,11 +79,6 @@ class RedisManager:
     def _temp_upload_loop(self):
         while self.is_temp_uploading:
             try:
-                if not self.redis_client:
-                    if not self.connect():
-                        time.sleep(5)
-                        continue
-
                 company_name = self.local_db.get_value('company_name')
                 client_email = self.local_db.get_value('client_email')
 
@@ -112,11 +105,6 @@ class RedisManager:
     def _view_upload_loop(self):
         while self.is_view_uploading:
             try:
-                if not self.redis_client:
-                    if not self.connect():
-                        time.sleep(5)
-                        continue
-
                 company_name = self.local_db.get_value('company_name')
                 client_email = self.local_db.get_value('client_email')
 
@@ -152,16 +140,7 @@ class RedisManager:
                 self.logger.error(f"Error in view data upload loop: {e}")
                 time.sleep(5)
 
-    def connect(self):
-        try:
-            self.redis_client = redis.Redis(host='localhost', port=self.port, db=0)
-            self.redis_client.ping()
-            self.logger.info(f"Successfully connected to Redis on port {self.port}")
-            return True
-        except Exception as e:
-            self.logger.error(f"Failed to connect to Redis: {e}")
-            return False
-
+   
   
 
     def compress_screenshot(self, image_base64: str) -> bytes:

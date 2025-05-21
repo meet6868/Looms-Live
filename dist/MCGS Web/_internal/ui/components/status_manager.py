@@ -56,6 +56,7 @@ class StatusManager:
             
             # Check VM status and start if needed
             # if client_connected and admin_connected:
+            self.check_and_start_redis()
             self.check_and_start_vm()
             
             # Update status indicator
@@ -552,4 +553,72 @@ class StatusManager:
                 'status': 'error'
             }
             
-       
+    def check_and_start_redis(self):
+        """Check Redis status and start if not running"""
+        try:
+            # Check if Redis is running on port 6380
+            import socket
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            result = sock.connect_ex(('127.0.0.1', 6380))
+            sock.close()
+            
+            if result != 0:  # Port is not in use, Redis is not running
+                self.logger.info("Redis not running on port 6380, starting Redis server...")
+                self.start_redis_background()
+            else:
+                self.logger.info("Redis already running on port 6380")
+                
+        except Exception as e:
+            self.logger.error(f"Error checking Redis status: {e}")
+    
+    def start_redis_background(self):
+        """Start Redis server in background thread"""
+        try:
+            redis_thread = threading.Thread(
+                target=self._start_redis_thread,
+                daemon=True
+            )
+            redis_thread.start()
+            self.logger.info("Started Redis background thread")
+        except Exception as e:
+            self.logger.error(f"Error starting Redis thread: {e}")
+    
+    def _start_redis_thread(self):
+        """Redis start thread function"""
+        try:
+            redis_path = r"C:\Program Files\Redis\redis-server.exe"
+            
+            # Check common installation paths if default doesn't exist
+            if not os.path.exists(redis_path):
+                common_paths = [
+                    r"C:\Program Files\Redis\redis-server.exe",
+                    r"C:\Redis\redis-server.exe",
+                    r"C:\Program Files (x86)\Redis\redis-server.exe"
+                ]
+                for path in common_paths:
+                    if os.path.exists(path):
+                        redis_path = path
+                        break
+            
+            if not os.path.exists(redis_path):
+                self.logger.error("Redis server executable not found")
+                return
+            
+            # Start Redis server with specific port
+            result = subprocess.run(
+                [redis_path, "--port", "6380"],
+                capture_output=True,
+                text=True,
+                encoding='utf-8',
+                errors='ignore',
+                startupinfo=startupinfo,
+                creationflags=subprocess.CREATE_NO_WINDOW
+            )
+            
+            if result.stderr:
+                self.logger.error(f"Redis start error: {result.stderr}")
+            else:
+                self.logger.info("Redis server started successfully")
+                
+        except Exception as e:
+            self.logger.error(f"Error in Redis start thread: {e}")   

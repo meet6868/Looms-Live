@@ -152,8 +152,8 @@ class DashboardPage:
         self.table.setColumnCount(16)  # Updated column count
         headers = [
             "Loom","Status",
-            "Production Qty", "Production Length", "Speed", "Efficiency",
-            "Pre-Production Qty", "Pre-Production Length", "Pre-Speed", "Pre-Efficiency",
+            "Pick", "Production Length", "Speed", "Efficiency",
+            "Pre-Pick", "Pre-Production Length", "Pre-Speed", "Pre-Efficiency",
             "Weaving Length", "Cut Length", "Weaving Forecast",
             "Warp Remain", "Warp Length", "Warp Forecast"
         ]
@@ -377,7 +377,7 @@ class DashboardPage:
         """
         
         # Add current production values with optimized spacing
-        current_headers = ["Production Qty", "Production Length", "Speed", "Efficiency"]
+        current_headers = ["Pick", "Production Length", "Speed", "Efficiency"]
         for i, header in enumerate(current_headers):
             label = QLabel(header)
             # label.setStyleSheet(header_style)
@@ -580,6 +580,9 @@ class DashboardPage:
                     status_flag=1
                     status_item.setText(" 🟢 ")
                     # status_item.setBackground(QBrush(QColor("#90EE90")))  # Light green
+                elif now - temp_updated < timedelta(minutes=1):
+                    status_flag=1
+                    status_item.setText(" 🟡 ")
                 else:
                     status_item.setText(" 🔴 ")
                     # status_item.setBackground(QBrush(QColor("#FFB6C1")))  # Light red
@@ -623,13 +626,13 @@ class DashboardPage:
             # Update summary labels
             if count > 0:
                 # Current Production
-                self.summary_labels["Production Qty"].setText(f"{sum_prod_qty:.0f}")
+                self.summary_labels["Pick"].setText(f"{sum_prod_qty:.0f}")
                 self.summary_labels["Production Length"].setText(f"{sum_prod_len:.2f}")
                 self.summary_labels["Speed"].setText(f"{sum_speed/count:.2f}")
                 self.summary_labels["Efficiency"].setText(f"{sum_eff/count:.2f}")
 
                 # Previous Production (Check keys used during creation)
-                self.summary_labels["Pre-Production Qty"].setText(f"{sum_pre_prod_qty:.0f}")
+                self.summary_labels["Pre-Pick"].setText(f"{sum_pre_prod_qty:.0f}")
                 self.summary_labels["Pre-Production Length"].setText(f"{sum_pre_prod_len:.2f}")
                 self.summary_labels["Pre-Speed"].setText(f"{sum_pre_speed/count:.2f}")
                 self.summary_labels["Pre-Efficiency"].setText(f"{sum_pre_eff/count:.2f}")

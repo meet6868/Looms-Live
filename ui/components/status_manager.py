@@ -56,7 +56,7 @@ class StatusManager:
             
             # Check VM status and start if needed
             # if client_connected and admin_connected:
-            self.check_and_start_redis()
+            # self.check_and_start_redis()
             self.check_and_start_vm()
             
             # Update status indicator

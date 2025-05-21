@@ -64,6 +64,10 @@
    'E:\\MCGS\\MCGS '
    'Web\\venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_inspect.py',
    'PYSOURCE'),
+  ('pyi_rth_cryptography_openssl',
+   'E:\\MCGS\\MCGS '
+   'Web\\venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\rthooks\\pyi_rth_cryptography_openssl.py',
+   'PYSOURCE'),
   ('pyi_rth_pkgres',
    'E:\\MCGS\\MCGS '
    'Web\\venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pkgres.py',
@@ -72,15 +76,15 @@
    'E:\\MCGS\\MCGS '
    'Web\\venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pyqt5.py',
    'PYSOURCE'),
-  ('pyi_rth_cryptography_openssl',
+  ('pyi_rth_setuptools',
    'E:\\MCGS\\MCGS '
-   'Web\\venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\rthooks\\pyi_rth_cryptography_openssl.py',
+   'Web\\venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_setuptools.py',
    'PYSOURCE'),
   ('main', 'E:\\MCGS\\MCGS Web\\main.py', 'PYSOURCE')],
  [],
  False,
  False,
- 1747033781,
+ 1747722464,
  [('runw_d.exe',
    'E:\\MCGS\\MCGS '
    'Web\\venv\\Lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\runw_d.exe',
