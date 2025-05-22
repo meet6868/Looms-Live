@@ -149,17 +149,52 @@ class DashboardPage:
     
     def create_machine_table(self):
         self.table = QTableWidget()
-        self.table.setColumnCount(16)  # Updated column count
+        self.table.setColumnCount(18)
         headers = [
-            "Loom","Status",
+            "Loom", "Status",
             "Pick", "Production Length", "Speed", "Efficiency",
-            "Pre-Pick", "Pre-Production Length", "Pre-Speed", "Pre-Efficiency",
+            "Previous Pick", "Previous Production Length", "Previous Speed", "Previous Efficiency",
             "Weaving Length", "Cut Length", "Weaving Forecast",
-            "Warp Remain", "Warp Length", "Warp Forecast"
+            "Warp Remain", "Warp Length", "Warp Forecast", "H1:H2:Wrap:Other:Total", "Previous H1:H2:Wrap:Other:Total"
         ]
         self.table.setHorizontalHeaderLabels(headers)
         self.table.setMinimumHeight(350)
         self.table.setMaximumHeight(600)
+        
+        # Set column widths based on content
+        column_widths = {
+            0: 60,   # Loom
+            1: 60,   # Status
+            2: 120,   # Pick
+            3: 180,  # Production Length
+            4: 80,   # Speed
+            5: 120,   # Efficiency
+            6: 150,  # Previous Pick
+            7: 240,  # Previous Production Length
+            8: 150,  # Previous Speed
+            9: 180,  # Previous Efficiency
+            10: 150, # Weaving Length
+            11: 120, # Cut Length
+            12: 160, # Weaving Forecast
+            13: 140, # Warp Remain
+            14: 120, # Warp Length
+            15: 140, # Warp Forecast
+            16: 220, # H1:H2:Wrap:Other:Total
+            17: 290  # Previous H1:H2:Wrap:Other:Total
+        }
+        
+        # Apply the column widths and resize mode
+        header = self.table.horizontalHeader()
+        for col, width in column_widths.items():
+            self.table.setColumnWidth(col, width)
+            header.setSectionResizeMode(col, QHeaderView.Interactive)
+        
+        # Enable horizontal scrolling
+        self.table.setHorizontalScrollMode(QTableWidget.ScrollPerPixel)
+        
+        # Store headers as instance variable
+        self.table_headers = headers
+        
         self.table.setStyleSheet("""
             QTableWidget {
                 background-color: white;
@@ -377,7 +412,7 @@ class DashboardPage:
         """
         
         # Add current production values with optimized spacing
-        current_headers = ["Pick", "Production Length", "Speed", "Efficiency"]
+        current_headers = ["Pick", "Production Length", "Speed", "Efficiency","H1:H2:Wrap:Other:Total"]
         for i, header in enumerate(current_headers):
             label = QLabel(header)
             # label.setStyleSheet(header_style)
@@ -408,7 +443,7 @@ class DashboardPage:
         
         # Add previous production values
         for i, header in enumerate(current_headers):
-            pre_header = f"Pre-{header}"
+            pre_header = f"Previous {header}"
             label = QLabel(header)
             value = QLabel("0")
             value.setStyleSheet("""
@@ -536,9 +571,20 @@ class DashboardPage:
             # Initialize summary values
             sum_prod_qty = sum_prod_len = sum_pre_prod_qty = sum_pre_prod_len = 0
             sum_speed = sum_eff = sum_pre_speed = sum_pre_eff = 0
+            sum_h1 = sum_h2 = sum_warp = sum_other = sum_total = 0
+            sum_pre_h1 = sum_pre_h2 = sum_pre_warp = sum_pre_other = sum_pre_total = 0
             count = 0
 
             for row, data in enumerate(temp_data):
+                # Safe conversion function for numeric values
+                def safe_convert(value, default=0):
+                    try:
+                        if value is None or value == '':
+                            return default
+                        return float(value)
+                    except (ValueError, TypeError):
+                        return default
+
                 loom_num = data.get('Loom_Num', '')
                 
                 # Check if data is within 1 minute
@@ -546,65 +592,40 @@ class DashboardPage:
                 tab_updated_str = tab_views_data.get(loom_num, '')
                 tab_updated = datetime.strptime(tab_updated_str, '%Y-%m-%d %H:%M:%S') if tab_updated_str else temp_updated
                 now = datetime.now()
-                
-                # Create items for the row
-                loom_item = QTableWidgetItem(loom_num)
-                
-                # # Set background color based on status
-                # if (now - temp_updated < timedelta(minutes=1) and 
-                #     now - tab_updated < timedelta(minutes=1)):
-                #     loom_item.setBackground(Qt.green)
-                # else:
-                #     loom_item.setBackground(Qt.red)
-                
-                # # Set table items
-                # self.table.setItem(row, 0, loom_item)
-                # self.table.setItem(row, 1, QTableWidgetItem(str(data.get('Production_Quantity', 0))))
-                # self.table.setItem(row, 2, QTableWidgetItem(str(data.get('Production_FabricLength', 0))))
-                # self.table.setItem(row, 3, QTableWidgetItem(str(data.get('Speed', 0))))
-                # self.table.setItem(row, 4, QTableWidgetItem(str(data.get('Efficiency', 0))))
-                # self.table.setItem(row, 5, QTableWidgetItem(str(data.get('Pre_Production_Quantity', 0))))
-                # self.table.setItem(row, 6, QTableWidgetItem(str(data.get('Pre_Production_FabricLength', 0))))
-                # self.table.setItem(row, 7, QTableWidgetItem(str(data.get('Pre_Speed', 0))))
-                # self.table.setItem(row, 8, QTableWidgetItem(str(data.get('Pre_Efficiency', 0))))
-                # self.table.setItem(row, 9, QTableWidgetItem(str(data.get('Weaving_Length', ''))))
-                # self.table.setItem(row, 10, QTableWidgetItem(str(data.get('Cut_Length', ''))))
-                # self.table.setItem(row, 11, QTableWidgetItem(str(data.get('Weaving_Forecast', ''))))
-                # self.table.setItem(row, 12, QTableWidgetItem(str(data.get('Warp_Remain', ''))))
-                # self.table.setItem(row, 13, QTableWidgetItem(str(data.get('Warp_Length', ''))))
-                # self.table.setItem(row, 14, QTableWidgetItem(str(data.get('Warp_Forecast', ''))))
-                status_flag=0
+
+                # Status check
+                status_flag = 0
                 status_item = QTableWidgetItem()
                 if (now - temp_updated < timedelta(minutes=1) or 
                     now - tab_updated < timedelta(minutes=1)):
-                    status_flag=1
+                    status_flag = 1
                     status_item.setText(" 🟢 ")
-                    # status_item.setBackground(QBrush(QColor("#90EE90")))  # Light green
                 elif now - temp_updated < timedelta(minutes=1):
-                    status_flag=1
+                    status_flag = 1
                     status_item.setText(" 🟡 ")
                 else:
                     status_item.setText(" 🔴 ")
-                    # status_item.setBackground(QBrush(QColor("#FFB6C1")))  # Light red
                 status_item.setTextAlignment(Qt.AlignCenter)
+
+                # Set table items with safe conversion
+                self.table.setItem(row, 0, QTableWidgetItem(loom_num))
                 self.table.setItem(row, 1, status_item)
-                
-                # Set table items
-                self.table.setItem(row, 0, loom_item)
-                self.table.setItem(row, 2, QTableWidgetItem(str(data.get('Production_Quantity', 0))))
-                self.table.setItem(row, 3, QTableWidgetItem(str(data.get('Production_FabricLength', 0))))
-                self.table.setItem(row, 4, QTableWidgetItem(str(data.get('Speed', 0))))
-                self.table.setItem(row, 5, QTableWidgetItem(str(data.get('Efficiency', 0))))
-                self.table.setItem(row, 6, QTableWidgetItem(str(data.get('Pre_Production_Quantity', 0))))
-                self.table.setItem(row, 7, QTableWidgetItem(str(data.get('Pre_Production_FabricLength', 0))))
-                self.table.setItem(row, 8, QTableWidgetItem(str(data.get('Pre_Speed', 0))))
-                self.table.setItem(row, 9, QTableWidgetItem(str(data.get('Pre_Efficiency', 0))))
-                self.table.setItem(row, 10, QTableWidgetItem(str(data.get('Weaving_Length', ''))))
-                self.table.setItem(row, 11, QTableWidgetItem(str(data.get('Cut_Length', ''))))
-                self.table.setItem(row, 12, QTableWidgetItem(str(data.get('Weaving_Forecast', ''))))
-                self.table.setItem(row, 13, QTableWidgetItem(str(data.get('Warp_Remain', ''))))
-                self.table.setItem(row, 14, QTableWidgetItem(str(data.get('Warp_Length', ''))))
-                self.table.setItem(row, 15, QTableWidgetItem(str(data.get('Warp_Forecast', ''))))
+                self.table.setItem(row, 2, QTableWidgetItem(str(safe_convert(data.get('Production_Quantity')))))
+                self.table.setItem(row, 3, QTableWidgetItem(str(safe_convert(data.get('Production_FabricLength')))))
+                self.table.setItem(row, 4, QTableWidgetItem(str(safe_convert(data.get('Speed')))))
+                self.table.setItem(row, 5, QTableWidgetItem(str(safe_convert(data.get('Efficiency')))))
+                self.table.setItem(row, 6, QTableWidgetItem(str(safe_convert(data.get('Pre_Production_Quantity')))))
+                self.table.setItem(row, 7, QTableWidgetItem(str(safe_convert(data.get('Pre_Production_FabricLength')))))
+                self.table.setItem(row, 8, QTableWidgetItem(str(safe_convert(data.get('Pre_Speed')))))
+                self.table.setItem(row, 9, QTableWidgetItem(str(safe_convert(data.get('Pre_Efficiency')))))
+                self.table.setItem(row, 10, QTableWidgetItem(str(data.get('Weaving_Length'))))
+                self.table.setItem(row, 11, QTableWidgetItem(str(data.get('Cut_Length'))))
+                self.table.setItem(row, 12, QTableWidgetItem(str(data.get('Weaving_Forecast'))))
+                self.table.setItem(row, 13, QTableWidgetItem(str(data.get('Warp_Remain'))))
+                self.table.setItem(row, 14, QTableWidgetItem(str(data.get('Warp_Length'))))
+                self.table.setItem(row, 15, QTableWidgetItem(str(data.get('Warp_Forecast'))))
+                self.table.setItem(row, 16, QTableWidgetItem(f"{str(data.get('H1Time', 0))}:{str(data.get('H2Time', 0))}:{str(data.get('WarpTime', 0))}:{str(data.get('OtherTime', 0))}:{str(data.get('TotalTime', 0))}"))
+                self.table.setItem(row, 17, QTableWidgetItem(f"{str(data.get('Pre_H1Time', 0))}:{str(data.get('Pre_H2Time', 0))}:{str(data.get('Pre_WarpTime', 0))}:{str(data.get('Pre_OtherTime', 0))}:{str(data.get('Pre_TotalTime', 0))}"))
 
 
                 # Update summary values
@@ -618,6 +639,16 @@ class DashboardPage:
                         sum_pre_prod_len += float(data.get('Pre_Production_FabricLength', 0))
                         sum_pre_speed += float(data.get('Pre_Speed', 0))
                         sum_pre_eff += float(data.get('Pre_Efficiency', 0))
+                        sum_h1 += float(data.get('H1Time', 0))
+                        sum_h2 += float(data.get('H2Time', 0))
+                        sum_warp += float(data.get('WarpTime', 0))
+                        sum_other += float(data.get('OtherTime', 0))
+                        sum_total += float(data.get('TotalTime', 0))
+                        sum_pre_h1 += float(data.get('Pre_H1Time', 0))
+                        sum_pre_h2 += float(data.get('Pre_H2Time', 0))
+                        sum_pre_warp += float(data.get('Pre_WarpTime', 0))
+                        sum_pre_other += float(data.get('Pre_OtherTime', 0))
+                        sum_pre_total += float(data.get('Pre_TotalTime', 0))
                         count += 1
                 except (ValueError, TypeError):
                     self.logger.warning(f"Invalid numeric data for row {row}")
@@ -630,12 +661,14 @@ class DashboardPage:
                 self.summary_labels["Production Length"].setText(f"{sum_prod_len:.2f}")
                 self.summary_labels["Speed"].setText(f"{sum_speed/count:.2f}")
                 self.summary_labels["Efficiency"].setText(f"{sum_eff/count:.2f}")
+                self.summary_labels["H1:H2:Wrap:Other:Total"].setText(f"{sum_h1/count:.0f}:{sum_h2/count:.0f}:{sum_warp/count:.0f}:{sum_other/count:.0f}:{sum_total/count:.0f}")
 
                 # Previous Production (Check keys used during creation)
-                self.summary_labels["Pre-Pick"].setText(f"{sum_pre_prod_qty:.0f}")
-                self.summary_labels["Pre-Production Length"].setText(f"{sum_pre_prod_len:.2f}")
-                self.summary_labels["Pre-Speed"].setText(f"{sum_pre_speed/count:.2f}")
-                self.summary_labels["Pre-Efficiency"].setText(f"{sum_pre_eff/count:.2f}")
+                self.summary_labels["Previous Pick"].setText(f"{sum_pre_prod_qty:.0f}")
+                self.summary_labels["Previous Production Length"].setText(f"{sum_pre_prod_len:.2f}")
+                self.summary_labels["Previous Speed"].setText(f"{sum_pre_speed/count:.2f}")
+                self.summary_labels["Previous Efficiency"].setText(f"{sum_pre_eff/count:.2f}")
+                self.summary_labels["Previous H1:H2:Wrap:Other:Total"].setText(f"{sum_pre_h1/count:.0f}:{sum_pre_h2/count:.0f}:{sum_pre_warp/count:.0f}:{sum_pre_other/count:.0f}:{sum_pre_total/count:.0f}")
 
 
                 # Update shift information

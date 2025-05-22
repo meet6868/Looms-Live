@@ -107,33 +107,48 @@ class RedisManager:
             try:
                 company_name = self.local_db.get_value('company_name')
                 client_email = self.local_db.get_value('client_email')
-
                 screenshots = self.local_db.get_pending_screenshots()
                 view_data = {}
-
                 view_key = f"view:{company_name}:{client_email}"
-                try:
-                    existing_data_json = self.upstash_redis.get(view_key)
-                    existing_data = json.loads(existing_data_json) if existing_data_json else {}
-                except Exception as e:
-                    self.logger.error(f"Failed to fetch existing view data: {e}")
-                    existing_data = {}
 
                 for tab_key, image_base64, timestamp in screenshots:
                     try:
-                        s3_url = self.upload_to_s3(image_base64, company_name, client_email, tab_key)
-                        if s3_url:
-                            view_data[tab_key] = {
-                                "url": s3_url,
-                                "updated_at": timestamp
-                            }
+                        if isinstance(image_base64, bytes):
+                            image_base64 = image_base64.decode("utf-8")
+                        if image_base64.startswith("data:image"):
+                            image_base64 = image_base64.split(",", 1)[1]
+                        
+                        # Convert base64 to image
+                        image_bytes = b64decode(image_base64.encode('utf-8'))
+                        nparr = np.frombuffer(image_bytes, np.uint8)
+                        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+                        
+                        # Resize image to reduce size (e.g., 800px width)
+                        # width = 1080
+                        # aspect = img.shape[1] / img.shape[0]
+                        # height = int(width / aspect)
+                        # img_resized = cv2.resize(img, (width, height))
+                        
+                        # Compress image
+                        encode_params = [int(cv2.IMWRITE_JPEG_QUALITY), 60]
+                        _, compressed_img = cv2.imencode('.jpg', img, encode_params)
+                        
+                        # Convert back to base64
+                        compressed_base64 = b64encode(compressed_img).decode('utf-8')
+                        
+                        view_data[tab_key] = {
+                            "image_data": compressed_base64,
+                            "updated_at": timestamp
+                        }
                     except Exception as e:
-                        self.logger.error(f"Error uploading tab screenshot for {tab_key}: {e}")
+                        self.logger.error(f"Error processing tab screenshot for {tab_key}: {e}")
 
                 if view_data:
-                    existing_data.update(view_data)
-                    self.upstash_redis.set(view_key, json.dumps(existing_data))
-                    self.logger.info(f"Uploaded view data to Redis key: {view_key}")
+                    try:
+                        self.upstash_redis.set(view_key, json.dumps(view_data))
+                        self.logger.info(f"Uploaded compressed view data to Redis key: {view_key}")
+                    except Exception as e:
+                        self.logger.error(f"Failed to upload to Redis: {e}")
 
                 time.sleep(1)
             except Exception as e:
@@ -159,32 +174,32 @@ class RedisManager:
             self.logger.error(f"Error compressing image: {e}")
             return b64decode(image_base64.encode('ascii'))
 
-    def upload_to_s3(self, image_base64: str, company: str, email: str, tab_key: str) -> str:
-        try:
-            if isinstance(image_base64, bytes):
-                image_base64 = image_base64.decode("utf-8")
-            if image_base64.startswith("data:image"):
-                image_base64 = image_base64.split(",", 1)[1]
+    # def upload_to_s3(self, image_base64: str, company: str, email: str, tab_key: str) -> str:
+    #     try:
+    #         if isinstance(image_base64, bytes):
+    #             image_base64 = image_base64.decode("utf-8")
+    #         if image_base64.startswith("data:image"):
+    #             image_base64 = image_base64.split(",", 1)[1]
             
-            image_bytes = b64decode(image_base64.encode('utf-8'))
+    #         image_bytes = b64decode(image_base64.encode('utf-8'))
 
-            filename = f"{tab_key}.jpg"  # No timestamp to overwrite same key
-            key = f"{company}/{email}/{filename}"
+    #         filename = f"{tab_key}.jpg"  # No timestamp to overwrite same key
+    #         key = f"{company}/{email}/{filename}"
 
-            self.s3.upload_fileobj(BytesIO(image_bytes), self.bucket_name, key)
-            presigned_url = self.s3.generate_presigned_url(
-                ClientMethod='get_object',
-                Params={
-                    'Bucket': self.bucket_name,
-                    'Key': key
-                },
-                ExpiresIn=3600  # seconds
-            )
+    #         self.s3.upload_fileobj(BytesIO(image_bytes), self.bucket_name, key)
+    #         presigned_url = self.s3.generate_presigned_url(
+    #             ClientMethod='get_object',
+    #             Params={
+    #                 'Bucket': self.bucket_name,
+    #                 'Key': key
+    #             },
+    #             ExpiresIn=3600  # seconds
+    #         )
 
-            return presigned_url
-        except Exception as e:
-            self.logger.error(f"Failed to upload image to S3: {e}")
-            return ""
+    #         return presigned_url
+    #     except Exception as e:
+    #         self.logger.error(f"Failed to upload image to S3: {e}")
+    #         return ""
 
 
  

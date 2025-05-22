@@ -561,6 +561,11 @@ class ClientDatabase:
                             "loom_num": f"eq.{loom_num}"
                         }
                     )
+                    if delete_response.status_code not in [200, 201, 204]:
+                        self.logger.error(f"Failed to delete machine data for loom {loom_num}: {delete_response.status_code}, {delete_response.text}")
+                        
+                        return False
+                
 
             # Insert new data
             response = requests.post(
@@ -575,6 +580,7 @@ class ClientDatabase:
             )
 
             if response.status_code in [200, 201, 204]:
+                self.logger.info("Successfully stored machine data")
                 return True
             else:
                 self.logger.error(f"Failed to store machine data: {response.status_code}, {response.text}")

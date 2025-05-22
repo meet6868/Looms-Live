@@ -102,12 +102,27 @@ class LocalDatabase:
                     B_OtherTime INTEGER,
                     Total_Production_FabricLength REAL,
                     Total_Production_Quantity INTEGER,
+                    Total_H1Time INTEGER,
+                    Total_H2Time INTEGER,
+                    Total_WarpTime INTEGER,
+                    Total_OtherTime INTEGER,
+                    Total_TotalTime INTEGER,
                     Avg_Speed REAL,
                     Avg_Efficiency REAL,
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     PRIMARY KEY (date, Device_Name, Loom_Num)
                 );
             ''')
+
+            # Step 2: Check existing columns
+            cursor.execute("PRAGMA table_info(machine_data);")
+            existing_columns = [column[1] for column in cursor.fetchall()]
+
+            # Step 3: Add any missing new columns
+            new_columns = ["H1Time", "H2Time", "WrapTime", "OtherTime", "TotalTime"]
+            for col in new_columns:
+                if col not in existing_columns:
+                    cursor.execute(f"ALTER TABLE machine_data ADD COLUMN Total_{col} INTEGER;")
 
             # Create temp data table
             cursor.execute('''
@@ -124,14 +139,37 @@ class LocalDatabase:
                     Production_FabricLength REAL,
                     Speed REAL,
                     Efficiency REAL,
+                    H1Time TEXT,
+                    H2Time TEXT,
+                    WrapTime TEXT,
+                    OtherTime TEXT,
+                    TotalTime TEXT,
                     Pre_Production_Quantity INTEGER,
                     Pre_Production_FabricLength REAL,
                     Pre_Speed REAL,
                     Pre_Efficiency REAL,
                     Shift TEXT,
+                    Pre_H1Time TEXT,
+                    Pre_H2Time TEXT,
+                    Pre_WrapTime TEXT,
+                    Pre_OtherTime TEXT,
+                    Pre_TotalTime TEXT,
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );
-            ''')   
+            ''')
+
+            # Step 2: Check existing columns
+            cursor.execute("PRAGMA table_info(temp_data);")
+            existing_columns = [column[1] for column in cursor.fetchall()]
+
+            # Step 3: Add any missing new columns
+            new_columns = ["H1Time", "H2Time", "WrapTime", "OtherTime", "TotalTime"]
+            for col in new_columns:
+                if col not in existing_columns:
+                    cursor.execute(f"ALTER TABLE temp_data ADD COLUMN {col} TEXT;")
+            for col in new_columns:
+                if col not in existing_columns:
+                    cursor.execute(f"ALTER TABLE temp_data ADD COLUMN Pre_{col} TEXT;")
             # Create tab_views table
             cursor.execute('''
                 CREATE TABLE IF NOT EXISTS tab_views (
@@ -830,6 +868,16 @@ class LocalDatabase:
                                  float(other_fabric_length), 2)
                     total_quantity = int(base_data[f'{shift_prefix}Production_Quantity']) + \
                                    int(existing_data[f'{other_prefix}Production_Quantity'])
+                    total_h1_time = round(float(base_data[f'{shift_prefix}H1Time']) + \
+                                   float(existing_data[f'{other_prefix}H1Time']))
+                    total_h2_time = round(float(base_data[f'{shift_prefix}H2Time']) + \
+                                   float(existing_data[f'{other_prefix}H2Time']))
+                    total_warp_time = round(float(base_data[f'{shift_prefix}WarpTime']) + \
+                                    float(existing_data[f'{other_prefix}WarpTime']))
+                    total_other_time = round(float(base_data[f'{shift_prefix}OtherTime']) + \
+                                    float(existing_data[f'{other_prefix}OtherTime']))
+                    total_total_time = round(float(base_data[f'{shift_prefix}TotalTime']) + \
+                                    float(existing_data[f'{other_prefix}TotalTime']))
                     avg_speed = round((float(base_data[f'{shift_prefix}Speed']) + \
                               float(existing_data[f'{other_prefix}Speed'])) / 2, 2)
                     avg_efficiency = round((float(base_data[f'{shift_prefix}Efficiency']) + \
@@ -839,9 +887,14 @@ class LocalDatabase:
                     query += """,
                         Total_Production_FabricLength = ?,
                         Total_Production_Quantity = ?,
+                        Total_H1Time =?,
+                        Total_H2Time =?,
+                        Total_WarpTime =?,
+                        Total_OtherTime =?,
+                        Total_TotalTime =?,
                         Avg_Speed = ?,
                         Avg_Efficiency = ?"""
-                    values.extend([total_fabric, total_quantity, avg_speed, avg_efficiency])
+                    values.extend([total_fabric, total_quantity,total_h1_time,total_h2_time,total_warp_time, total_other_time,total_total_time, avg_speed, avg_efficiency])
                 
                 # Add WHERE clause at the end
                 query += " WHERE date = ? AND Loom_Num = ?"
@@ -862,37 +915,64 @@ class LocalDatabase:
             self.logger.error(f"Error storing machine data: {str(e)}")
             return False
 
-    def store_temp_data(self, data,tab_key,timestamp):
+    def store_temp_data(self, data, tab_key, timestamp):
         """Store temporary machine data"""
         try:
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
 
-           
+            
+
             query = """INSERT OR REPLACE INTO temp_data (
                 Device_Name, Loom_Num, Weaving_Length, Cut_Length,
                 Weaving_Forecast, Warp_Remain, Warp_Length, Warp_Forecast,
                 Production_Quantity, Production_FabricLength, Speed, Efficiency,
                 Pre_Production_Quantity, Pre_Production_FabricLength, Pre_Speed,
-                Pre_Efficiency, Shift,updated_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)"""
-           
+                Pre_Efficiency, Shift, H1Time, H2Time, WrapTime, OtherTime, TotalTime,
+                Pre_H1Time, Pre_H2Time, Pre_WrapTime, Pre_OtherTime, Pre_TotalTime, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"""
+
+            def safe_get(data, key, index=0, default=0):
+                try:
+                    return data.get(key, [default] * (index + 1))[index]
+                except (IndexError, TypeError):
+                    return default
+
             cursor.execute(query, (
-                data['Device_Name'], data['Loom_Num'],
-                data['Weaving_Length'], data['Cut_Length'],
-                data['Weaving_Forecast'], data['Warp_Remain'],
-                data['Warp_Length'], data['Warp_Forecast'],
-                data['Production_Quantity'][0], data['Production_FabricLength'][0],
-                data['Speed'][0], data['Efficiency'][0],
-                data['Production_Quantity'][1], data['Production_FabricLength'][1],
-                data['Speed'][1], data['Efficiency'][1],
-                data['Shift'][0],timestamp
+                data.get('Device_Name', ''),
+                data.get('Loom_Num', ''),
+                data.get('Weaving_Length', ''),
+                data.get('Cut_Length', ''),
+                data.get('Weaving_Forecast', ''),
+                data.get('Warp_Remain', ''),
+                data.get('Warp_Length', ''),
+                data.get('Warp_Forecast', ''),
+                safe_get(data, 'Production_Quantity', 0),
+                safe_get(data, 'Production_FabricLength', 0),
+                safe_get(data, 'Speed', 0),
+                safe_get(data, 'Efficiency', 0),
+                safe_get(data, 'Production_Quantity', 1),
+                safe_get(data, 'Production_FabricLength', 1),
+                safe_get(data, 'Speed', 1),
+                safe_get(data, 'Efficiency', 1),
+                safe_get(data, 'Shift', 0, ''),
+                safe_get(data, 'H1Times', 0),
+                safe_get(data, 'H2Times', 0),
+                safe_get(data, 'WarpTimes', 0),
+                safe_get(data, 'OtherTimes', 0),
+                safe_get(data, 'TotalTimes', 0),
+                safe_get(data, 'H1Times', 1),
+                safe_get(data, 'H2Times', 1),
+                safe_get(data, 'WarpTimes', 1),
+                safe_get(data, 'OtherTimes', 1),
+                safe_get(data, 'TotalTimes', 1),
+                timestamp
             ))
+
             conn.commit()
             return True
             
         except Exception as e:
-            
             self.logger.error(f"Error storing temp data,{tab_key}: {e},Data to store: {data}, Tab Key: {tab_key}")
             return False
         finally:
@@ -969,7 +1049,7 @@ class LocalDatabase:
                                   'Avg_Speed', 'A_Efficiency', 'B_Efficiency', 'Avg_Efficiency']:
                             data[col] = 0.0
                         elif col in ['A_Production_Quantity', 'B_Production_Quantity',
-                                    'Total_Production_Quantity']:
+                                    'Total_Production_Quantity','A_H1Time', 'B_H1Time', 'A_H2Time', 'B_H2Time', 'A_TotalTime', 'B_TotalTime', 'A_WarpTime', 'B_WarpTime', 'A_OtherTime', 'B_OtherTime']:
                             data[col] = 0
                         else:
                             data[col] = ''

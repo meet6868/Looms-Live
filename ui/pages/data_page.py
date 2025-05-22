@@ -25,7 +25,7 @@ class MachineCard(QFrame):
             }
         """)
         self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
-        self.setFixedHeight(400)  # Reduced height
+        self.setFixedHeight(500)  # Reduced height
         
         layout = QVBoxLayout(self)
         layout.setContentsMargins(10, 10, 10, 10)
@@ -110,6 +110,7 @@ class MachineCard(QFrame):
         self.add_field(grid, 2, 1, "Production Length:", str(data.get('Production_FabricLength', '')))
         self.add_field(grid, 3, 0, "Production Qty:", str(data.get('Production_Quantity', '')))
         
+       
         # Efficiency
         try:
             efficiency = float(data.get('Efficiency', 0))
@@ -117,6 +118,49 @@ class MachineCard(QFrame):
             self.add_field(grid, 3, 1, "Efficiency:", f"{efficiency}%", efficiency_color)
         except (ValueError, TypeError):
             self.add_field(grid, 3, 1, "Efficiency:", "N/A", "#E74C3C")
+
+         # Row 4: merged info display
+        # Create the label part
+        # Add merged field in a clean separate row (e.g., row 6 to avoid overlap)
+        # Row 4: merged info display
+        merged_label = QLabel("H1 : H2 : Wrap : Other : Total")
+        merged_label.setStyleSheet("""
+            color: #576574;
+            font-size: 14px;
+            background: transparent;
+            padding: 1px;
+            margin-bottom: 1px;
+            font-weight: bold;
+        """)
+
+        # Safe conversion function for time values
+        def safe_time_get(key):
+            try:
+                value = data.get(key, 0)
+                return str(int(float(value))) if value else "0"
+            except (ValueError, TypeError):
+                return "0"
+
+        merged_value = QLabel(
+            f"{safe_time_get('H1Time')} : {safe_time_get('H2Time')} : "
+            f"{safe_time_get('WrapTime')} : {safe_time_get('OtherTime')} : {safe_time_get('TotalTime')}"
+        )
+        merged_value.setFont(QFont("Segoe UI", 12, QFont.Bold))
+        merged_value.setStyleSheet("""
+            color: #2C3E50;
+            background: transparent;
+            font-weight: bold;
+            padding: 1px;
+            margin-top: 1px;
+        """)
+
+        # Add merged field to grid - remove duplicate additions
+        row_index = 6
+        grid.addWidget(merged_label, row_index * 2, 0, 1, 2)      # span 2 columns
+        grid.addWidget(merged_value, row_index * 2 + 1, 0, 1, 2)  # span 2 columns
+
+        # Remove this duplicate line
+        # grid.addWidget(merged_label, 4, 0, 1, 2)  # This was causing the duplicate label
         
         layout.addLayout(grid)
 
@@ -134,7 +178,7 @@ class MachineCard(QFrame):
     def add_field(self, grid, row, col, label_text, value_text, value_color=None):
         label = QLabel(label_text)
         label.setStyleSheet("""
-            color: #576574;  /* Lighter label color */
+            color: #576574;
             font-size: 14px;
             background: transparent;
             padding: 1px;
@@ -142,16 +186,25 @@ class MachineCard(QFrame):
             font-weight: bold;
         """)
         
-        value = QLabel(str(value_text))
+        # Safe conversion of numeric values
+        try:
+            if isinstance(value_text, (int, float)):
+                value_text = str(round(float(value_text), 2))
+            else:
+                value_text = str(value_text)
+        except (ValueError, TypeError):
+            value_text = "N/A"
+        
+        value = QLabel(value_text)
         value.setFont(QFont("Segoe UI", 12, QFont.Bold))
         
         # Special color handling for efficiency values
         if label_text == "Efficiency:":
             try:
-                efficiency_value = float(value_text.replace('%', ''))
-                value_color = "#27AE60" if efficiency_value >= 80 else "#E74C3C"  # Green if ≥80%, Red if <80%
+                efficiency_value = float(str(value_text).replace('%', ''))
+                value_color = "#27AE60" if efficiency_value >= 80 else "#E74C3C"
             except (ValueError, TypeError):
-                value_color = "#E74C3C"  # Red for invalid values
+                value_color = "#E74C3C"
         
         style = f"""
             color: {value_color if value_color else '#2C3E50'};
@@ -181,7 +234,7 @@ class DataFetchThread(QThread):
             try:
                 data = self.local_db.get_temp_data()
                 if data:
-                    # print("Fetched data:", len(data))
+                    # print("Fetched data:", data)
                     self.data_fetched.emit(data)
             except Exception as e:
                 self.local_db.logger.error(f"Error fetching data: {e}")
@@ -192,6 +245,114 @@ class DataPage:
         self.main_window = main_window
         self.app_controller = main_window.app_controller
         self.fetch_thread = None
+        self.machine_cards = {}  # Dictionary to store cards by Loom_Num
+
+    def refresh_data(self, data=None):
+        try:
+            if data is None:
+                data = self.main_window.local_db.get_temp_data()
+
+            if data:
+                # Clear removed machines
+                current_looms = {machine.get('Loom_Num', '') for machine in data}
+                for loom_num in list(self.machine_cards.keys()):
+                    if loom_num not in current_looms:
+                        card = self.machine_cards.pop(loom_num)
+                        card.deleteLater()
+
+                # Update or create cards
+                sorted_data = sorted(data, key=lambda x: str(x.get('Loom_Num', '')))
+                cols = 3
+                
+                # Remove all widgets from layout but don't delete them
+                while self.cards_layout.count():
+                    self.cards_layout.takeAt(0)
+
+                # Add/Update cards in layout
+                for i, machine_data in enumerate(sorted_data):
+                    loom_num = machine_data.get('Loom_Num', '')
+                    
+                    # Get existing card or create new one
+                    if loom_num not in self.machine_cards:
+                        self.machine_cards[loom_num] = MachineCard(machine_data)
+                    else:
+                        # Update existing card with new data
+                        card = self.machine_cards[loom_num]
+                        self._update_card_data(card, machine_data)
+
+                    # Add to layout
+                    row = i // cols
+                    col = i % cols
+                    self.cards_layout.addWidget(self.machine_cards[loom_num], row, col)
+
+                self.cards_widget.update()
+
+        except Exception as e:
+            self.main_window.logger.error(f"Error refreshing data: {e}")
+
+    def _update_card_data(self, card, data):
+        """Update existing card with new data"""
+        try:
+            # Update header and status
+            header = card.findChild(QLabel, "header")
+            if header:
+                header.setText(f"{data.get('Loom_Num', '')}")
+
+            # Update all fields in the grid
+            grid = card.findChild(QGridLayout)
+            if grid:
+                self._update_field(grid, 0, 0, "Device Name:", data.get('Device_Name', ''))
+                self._update_field(grid, 0, 1, "Weaving Length:", data.get('Weaving_Length', ''))
+                self._update_field(grid, 1, 0, "Warp Remain:", data.get('Warp_Remain', ''))
+                self._update_field(grid, 1, 1, "Warp Length:", data.get('Warp_Length', ''))
+                self._update_field(grid, 2, 0, "Speed:", str(data.get('Speed', '')))
+                self._update_field(grid, 2, 1, "Production Length:", str(data.get('Production_FabricLength', '')))
+                self._update_field(grid, 3, 0, "Production Qty:", str(data.get('Production_Quantity', '')))
+                
+                # Update efficiency
+                try:
+                    efficiency = float(data.get('Efficiency', 0))
+                    efficiency_color = "#27AE60" if efficiency >= 80 else "#E74C3C"
+                    self._update_field(grid, 3, 1, "Efficiency:", f"{efficiency}%", efficiency_color)
+                except (ValueError, TypeError):
+                    self._update_field(grid, 3, 1, "Efficiency:", "N/A", "#E74C3C")
+
+                # Update time values
+                def safe_time_get(key):
+                    try:
+                        value = data.get(key, 0)
+                        return str(int(float(value))) if value else "0"
+                    except (ValueError, TypeError):
+                        return "0"
+
+                # Update both label and value for time display
+                row_index = 6
+                merged_label = grid.itemAtPosition(row_index * 2, 0).widget()
+                merged_value = grid.itemAtPosition(row_index * 2 + 1, 0).widget()
+                
+                if merged_label and merged_value:
+                    merged_label.setText("H1 : H2 : Wrap : Other : Total")
+                    time_text = (f"{safe_time_get('H1Time')} : {safe_time_get('H2Time')} : "
+                               f"{safe_time_get('WrapTime')} : {safe_time_get('OtherTime')} : "
+                               f"{safe_time_get('TotalTime')}")
+                    merged_value.setText(time_text)
+
+        except Exception as e:
+            self.main_window.logger.error(f"Error updating card: {e}")
+
+    def _update_field(self, grid, row, col, label_text, value_text, value_color=None):
+        """Update existing field in grid"""
+        value_widget = grid.itemAtPosition(row * 2 + 1, col).widget()
+        if value_widget:
+            value_widget.setText(str(value_text))
+            if value_color:
+                value_widget.setStyleSheet(f"color: {value_color}; font-weight: bold;")
+
+    def _update_merged_field(self, grid, time_text):
+        """Update merged time field"""
+        merged_value = grid.itemAtPosition(12, 0).widget()  # Adjust position as needed
+        if merged_value:
+            merged_value.setText(time_text)
 
     def create_page(self):
         self.main_window.logger.info("Creating DataPage")
@@ -264,34 +425,6 @@ class DataPage:
             self.main_window.logger.info("Data fetch thread started")
 
         return container
-
-    def refresh_data(self, data=None):
-        try:
-            # print("Refreshing with data:", data is not None)  # Debug print
-            # Clear existing cards
-            while self.cards_layout.count():
-                item = self.cards_layout.takeAt(0)
-                if item.widget():
-                    item.widget().deleteLater()
-            
-            # Get data from local_db if not provided by thread
-            if data is None:
-                data = self.main_window.local_db.get_temp_data()
-
-            if data:
-                # print("Processing data items:", len(data))  # Debug print
-                sorted_data = sorted(data, key=lambda x: str(x.get('Loom_Num', '')))
-                cols = 3
-                for i, machine_data in enumerate(sorted_data):
-                    row = i // cols
-                    col = i % cols
-                    card = MachineCard(machine_data)
-                    self.cards_layout.addWidget(card, row, col)
-                self.cards_widget.update()  # Force update
-                    
-        except Exception as e:
-            self.main_window.logger.error(f"Error refreshing data: {e}")
-            # print(f"Error in refresh_data: {e}")  # Debug print
 
     def stop_thread(self):
         """Method to be called when page is actually being closed"""

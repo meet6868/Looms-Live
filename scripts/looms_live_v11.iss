@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Looms Live"
-#define MyAppVersion "1.2"
+#define MyAppVersion "1.3"
 #define MyAppPublisher "MaiTech"
 #define MyAppURL "https://www.example.com/"
 #define MyAppExeName "MCGS Web.exe"
@@ -34,7 +34,7 @@ ChangesAssociations=yes
 DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
-OutputBaseFilename=Looms_Live_V12
+OutputBaseFilename=Looms_Live_V13
 SetupIconFile=E:\MCGS\MCGS Web\assets\icons\logo.ico
 Password=Meet@5568
 Encryption=yes

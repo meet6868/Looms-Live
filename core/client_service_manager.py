@@ -484,7 +484,7 @@ class ClientServiceManager:
                             data,text = extractor.extract_from_image(image)
                             # self.logger.info(f"{data}------------------")
                             # self.logger.info(f"{text}------------------")
-                            if data:
+                            if data and data.get('Loom_Num')!='':
                                 # Store in temp_data
                                 current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                                 self.local_db.store_temp_data(data,tab_key,current_time)
@@ -701,6 +701,7 @@ class ClientServiceManager:
         """Continuous machine data synchronization loop"""
         while self.is_syncing:
             try:
+                
                 # Get last sync date from client DB
                 last_sync = self.client_db.get_value('last_machine_data')
                 current_date = datetime.now().strftime('%Y-%m-%d')
@@ -709,6 +710,7 @@ class ClientServiceManager:
                     # First time sync - get client config dates
                     config = self.local_db.get_client_config()
                     start_date = config.get('start_date', current_date)
+                    # self.client_db.set_value('last_machine_data', current_date)
                     data_list = self.local_db.get_machine_data_by_date_range(start_date, current_date)
                 else:
                     # Not first time - check if last sync is current date

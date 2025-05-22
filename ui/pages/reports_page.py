@@ -270,36 +270,17 @@ class ReportsPage:
 
     def setup_table(self):
         columns = ["Date", "Device Name", "Loom Num", 
-                  "A_Production_FabricLength", "A_Production_Quantity", "A_Speed", "A_Efficiency",
-                  "B_Production_FabricLength", "B_Production_Quantity", "B_Speed", "B_Efficiency",
-                  "Total_Production_FabricLength", "Total_Production_Quantity", "Avg_Speed", "Avg_Efficiency"]
+                  "A_Production_FabricLength", "A_Production_Quantity", "A_Speed", "A_Efficiency","A_TotalTime", "A_H1Time", "A_H2Time", "A_WarpTime", "A_OtherTime",
+                  "B_Production_FabricLength", "B_Production_Quantity", "B_Speed", "B_Efficiency","B_TotalTime", "B_H1Time", "B_H2Time", "B_WarpTime", "B_OtherTime",
+                  "Total_Production_FabricLength", "Total_Production_Quantity", "Avg_Speed", "Avg_Efficiency","Total_H1Time", "Total_H2Time", "Total_WarpTime", "Total_OtherTime", "Total_TotalTime"]
         
         self.table.setColumnCount(len(columns))
         self.table.setHorizontalHeaderLabels(columns)
         header = self.table.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.ResizeToContents)
-        
-        # Make the last row (summary) stick to the bottom
         self.table.verticalHeader().setStretchLastSection(True)
 
-    def refresh_data(self):
-        try:
-            filters = {
-                'date_range': self.date_checkbox.isChecked(),
-                'start_date': self.start_date.date().toPyDate(),
-                'end_date': self.end_date.date().toPyDate() if self.date_checkbox.isChecked() else None,
-                'machine': self.machine_combo.currentText() if self.machine_combo.currentText() != "All Machines" else None
-            }
-            
-            self.filtered_data = self.main_page.local_db.get_machine_data(filters)
-            self.total_pages = max(1, (len(self.filtered_data) + self.rows_per_page - 1) // self.rows_per_page)
-            self.current_page = min(self.current_page, self.total_pages)
-            
-            self.update_table_data()
-            self.update_pagination()
-            
-        except Exception as e:
-            self.logger.error(f"Error refreshing report data: {str(e)}")
+   
 
     def update_table_data(self):
         start_idx = (self.current_page - 1) * self.rows_per_page
@@ -317,9 +298,9 @@ class ReportsPage:
 
     def fill_table_row(self, row, data):
         columns = ["date", "Device_Name", "Loom_Num", 
-                  "A_Production_FabricLength", "A_Production_Quantity", "A_Speed", "A_Efficiency",
-                  "B_Production_FabricLength", "B_Production_Quantity", "B_Speed", "B_Efficiency",
-                  "Total_Production_FabricLength", "Total_Production_Quantity", "Avg_Speed", "Avg_Efficiency"]
+                  "A_Production_FabricLength", "A_Production_Quantity", "A_Speed", "A_Efficiency","A_TotalTime", "A_H1Time", "A_H2Time", "A_WarpTime", "A_OtherTime",
+                  "B_Production_FabricLength", "B_Production_Quantity", "B_Speed", "B_Efficiency","B_TotalTime", "B_H1Time", "B_H2Time", "B_WarpTime", "B_OtherTime",
+                  "Total_Production_FabricLength", "Total_Production_Quantity", "Avg_Speed", "Avg_Efficiency","Total_H1Time", "Total_H2Time", "Total_WarpTime", "Total_OtherTime", "Total_TotalTime"]
         
         for col, key in enumerate(columns):
             item = QTableWidgetItem(str(data.get(key, '')))
@@ -327,13 +308,21 @@ class ReportsPage:
             self.table.setItem(row, col, item)
 
     def update_summary_row(self, last_row):
-        sum_columns = ["A_Production_FabricLength", "A_Production_Quantity",
-                      "B_Production_FabricLength", "B_Production_Quantity",
-                      "Total_Production_FabricLength", "Total_Production_Quantity"]
+        # Define all columns that need summation
+        sum_columns = [
+            "A_Production_FabricLength", "A_Production_Quantity",
+            "A_TotalTime", "A_H1Time", "A_H2Time", "A_WarpTime", "A_OtherTime",
+            "B_Production_FabricLength", "B_Production_Quantity",
+            "B_TotalTime", "B_H1Time", "B_H2Time", "B_WarpTime", "B_OtherTime",
+            "Total_Production_FabricLength", "Total_Production_Quantity",
+            "Total_H1Time", "Total_H2Time", "Total_WarpTime", "Total_OtherTime", "Total_TotalTime"
+        ]
         
+        # Define columns that need averaging
         avg_columns = ["A_Speed", "A_Efficiency", "B_Speed", "B_Efficiency",
                       "Avg_Speed", "Avg_Efficiency"]
         
+        # Calculate summaries
         summary = {}
         for col in sum_columns:
             summary[col] = sum(float(d.get(col, 0) or 0) for d in self.filtered_data)
@@ -346,17 +335,26 @@ class ReportsPage:
         self.table.setItem(last_row, 0, QTableWidgetItem("Summary"))
         self.table.item(last_row, 0).setFont(QFont("Segoe UI", weight=QFont.Bold))
         
-        for col, key in enumerate(["A_Production_FabricLength", "A_Production_Quantity",
-                                 "A_Speed", "A_Efficiency",
-                                 "B_Production_FabricLength", "B_Production_Quantity",
-                                 "B_Speed", "B_Efficiency",
-                                 "Total_Production_FabricLength", "Total_Production_Quantity",
-                                 "Avg_Speed", "Avg_Efficiency"]):
+        # Column order matching the table headers
+        summary_columns = [
+            "A_Production_FabricLength", "A_Production_Quantity", 
+            "A_Speed", "A_Efficiency", "A_TotalTime", "A_H1Time", 
+            "A_H2Time", "A_WarpTime", "A_OtherTime",
+            "B_Production_FabricLength", "B_Production_Quantity", 
+            "B_Speed", "B_Efficiency", "B_TotalTime", "B_H1Time", 
+            "B_H2Time", "B_WarpTime", "B_OtherTime",
+            "Total_Production_FabricLength", "Total_Production_Quantity",
+            "Avg_Speed", "Avg_Efficiency",
+            "Total_H1Time", "Total_H2Time", "Total_WarpTime", "Total_OtherTime", "Total_TotalTime"
+        ]
+        
+        # Fill summary values in correct order
+        for col, key in enumerate(summary_columns):
             if key in summary:
                 item = QTableWidgetItem(f"{summary[key]:.2f}")
                 item.setFont(QFont("Segoe UI", weight=QFont.Bold))
                 item.setTextAlignment(Qt.AlignCenter)
-                self.table.setItem(last_row, col + 3, item)
+                self.table.setItem(last_row, col + 3, item)  # +3 for Date, Device Name, Loom Num
 
     def change_rows_per_page(self, value):
         self.rows_per_page = int(value)
@@ -383,12 +381,13 @@ class ReportsPage:
     def export_to_excel(self):
         try:
             from PyQt5.QtWidgets import QFileDialog, QMessageBox
+            import numpy as np
             
             if not self.filtered_data:
                 QMessageBox.warning(None, "No Data", "No data available to export.")
                 return
             
-            # Set default save location to user's Documents folder
+            # File dialog setup
             documents_path = os.path.join(os.path.expanduser('~'), 'Documents')
             default_name = f"machine_data_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
             default_path = os.path.join(documents_path, default_name)
@@ -403,94 +402,92 @@ class ReportsPage:
                 
             if not filename.endswith('.xlsx'):
                 filename += '.xlsx'
-            
-            # Create DataFrame with filtered data
+
+            # Prepare data for Excel
             excel_data = []
             for data in self.filtered_data:
-                row_data = {
-                    'Date': data.get('date', ''),
-                    'Device Name': data.get('Device_Name', ''),
-                    'Loom Num': data.get('Loom_Num', ''),
-                    'A_Production_FabricLength': float(data.get('A_Production_FabricLength', 0) or 0),
-                    'A_Production_Quantity': float(data.get('A_Production_Quantity', 0) or 0),
-                    'A_Speed': float(data.get('A_Speed', 0) or 0),
-                    'A_Efficiency': float(data.get('A_Efficiency', 0) or 0),
-                    'B_Production_FabricLength': float(data.get('B_Production_FabricLength', 0) or 0),
-                    'B_Production_Quantity': float(data.get('B_Production_Quantity', 0) or 0),
-                    'B_Speed': float(data.get('B_Speed', 0) or 0),
-                    'B_Efficiency': float(data.get('B_Efficiency', 0) or 0),
-                    'Total_Production_FabricLength': float(data.get('Total_Production_FabricLength', 0) or 0),
-                    'Total_Production_Quantity': float(data.get('Total_Production_Quantity', 0) or 0),
-                    'Avg_Speed': float(data.get('Avg_Speed', 0) or 0),
-                    'Avg_Efficiency': float(data.get('Avg_Efficiency', 0) or 0)
-                }
+                row_data = {}
+                for key in data:
+                    try:
+                        if key in ['date', 'Device_Name', 'Loom_Num']:
+                            row_data[key] = str(data.get(key, ''))
+                        else:
+                            row_data[key] = float(data.get(key, 0) or 0)
+                    except:
+                        row_data[key] = 0
                 excel_data.append(row_data)
-            
+
             df = pd.DataFrame(excel_data)
             
             # Calculate summary row
             summary = {
-                'Date': 'Summary',
-                'Device Name': '',
-                'Loom Num': '',
-                'A_Production_FabricLength': df['A_Production_FabricLength'].sum(),
-                'A_Production_Quantity': df['A_Production_Quantity'].sum(),
-                'A_Speed': df['A_Speed'].mean(),
-                'A_Efficiency': df['A_Efficiency'].mean(),
-                'B_Production_FabricLength': df['B_Production_FabricLength'].sum(),
-                'B_Production_Quantity': df['B_Production_Quantity'].sum(),
-                'B_Speed': df['B_Speed'].mean(),
-                'B_Efficiency': df['B_Efficiency'].mean(),
-                'Total_Production_FabricLength': df['Total_Production_FabricLength'].sum(),
-                'Total_Production_Quantity': df['Total_Production_Quantity'].sum(),
-                'Avg_Speed': df['Avg_Speed'].mean(),
-                'Avg_Efficiency': df['Avg_Efficiency'].mean()
+                'date': 'Summary',
+                'Device_Name': '',
+                'Loom_Num': ''
             }
             
-            # Add summary row to DataFrame
+            for col in df.columns:
+                if col not in ['date', 'Device_Name', 'Loom_Num']:
+                    if col in ['A_Speed', 'A_Efficiency', 'B_Speed', 'B_Efficiency', 'Avg_Speed', 'Avg_Efficiency']:
+                        non_zero = df[df[col] > 0][col]
+                        summary[col] = non_zero.mean() if len(non_zero) > 0 else 0
+                    else:
+                        summary[col] = df[col].sum()
+
+            # Add summary to DataFrame
             df = pd.concat([df, pd.DataFrame([summary])], ignore_index=True)
+
+            # Export to Excel
+            writer = pd.ExcelWriter(filename, engine='xlsxwriter')
+            df.to_excel(writer, index=False, sheet_name='Report')
             
-            # Export to Excel with proper formatting
-            with pd.ExcelWriter(filename, engine='xlsxwriter') as writer:
-                df.to_excel(writer, index=False, sheet_name='Report')
-                
-                workbook = writer.book
-                worksheet = writer.sheets['Report']
-                
-                # Formats
-                header_format = workbook.add_format({
-                    'bold': True,
-                    'bg_color': '#D3D3D3',
-                    'border': 1,
-                    'align': 'center'
-                })
-                
-                cell_format = workbook.add_format({
-                    'border': 1,
-                    'align': 'center'
-                })
-                
-                summary_format = workbook.add_format({
-                    'bold': True,
-                    'bg_color': '#F0F0F0',
-                    'border': 1,
-                    'align': 'center'
-                })
-                
-                # Apply formats
-                for col_num, value in enumerate(df.columns.values):
-                    worksheet.write(0, col_num, value, header_format)
-                    worksheet.set_column(col_num, col_num, 15)
-                
-                # Write data rows
-                for row_num, row_data in enumerate(df.values[:-1], start=1):  # All rows except last
-                    for col_num, value in enumerate(row_data):
-                        worksheet.write(row_num, col_num, value, cell_format)
-                
-                # Write summary row separately
-                last_row = len(df)
-                for col_num, value in enumerate(df.values[-1]):  # Last row (summary)
-                    worksheet.write(last_row - 1, col_num, value, summary_format)
+            workbook = writer.book
+            worksheet = writer.sheets['Report']
+            
+            # Define formats
+            header_format = workbook.add_format({
+                'bold': True,
+                'bg_color': '#D3D3D3',
+                'border': 1,
+                'align': 'center'
+            })
+            
+            cell_format = workbook.add_format({
+                'border': 1,
+                'align': 'center',
+                'num_format': '0.00'
+            })
+            
+            summary_format = workbook.add_format({
+                'bold': True,
+                'bg_color': '#F0F0F0',
+                'border': 1,
+                'align': 'center',
+                'num_format': '0.00'
+            })
+
+            # Apply formats
+            for col_num, value in enumerate(df.columns.values):
+                worksheet.write(0, col_num, value, header_format)
+                worksheet.set_column(col_num, col_num, 15)
+
+            # Write data rows
+            for row_num in range(len(df) - 1):  # Changed to exclude the last row (summary)
+                for col_num, value in enumerate(df.iloc[row_num]):
+                    if isinstance(value, (int, float)):
+                        worksheet.write_number(row_num + 1, col_num, value, cell_format)
+                    else:
+                        worksheet.write_string(row_num + 1, col_num, str(value), cell_format)
+
+            # Write summary row (only once)
+            last_row = len(df) - 1  # Corrected last row index
+            for col_num, value in enumerate(df.iloc[-1]):
+                if isinstance(value, (int, float)):
+                    worksheet.write_number(last_row + 1, col_num, value, summary_format)
+                else:
+                    worksheet.write_string(last_row + 1, col_num, str(value), summary_format)
+
+            writer.close()
             
             QMessageBox.information(None, "Export Successful", 
                                   f"Report has been exported to:\n{filename}")
