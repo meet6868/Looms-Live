@@ -11,6 +11,7 @@ from database.local_db import LocalDatabase
 from base64 import b64decode, b64encode
 from datetime import datetime
 from io import BytesIO
+import sys
 
 class RedisManager:
     def __init__(self, local_db, port=6380):
@@ -102,14 +103,36 @@ class RedisManager:
                 self.logger.error(f"Error in temp data upload loop: {e}")
                 time.sleep(5)
 
+   
+
     def _view_upload_loop(self):
+        MAX_REDIS_SIZE = 10 * 1024 * 1024  # 10 MB
         while self.is_view_uploading:
             try:
                 company_name = self.local_db.get_value('company_name')
                 client_email = self.local_db.get_value('client_email')
                 screenshots = self.local_db.get_pending_screenshots()
-                view_data = {}
-                view_key = f"view:{company_name}:{client_email}"
+                base_key = f"view:{company_name}:{client_email}"
+                groups = []
+                group_data = {}
+                current_group_size = 0
+                group_index = 1
+
+                def flush_group():
+                    nonlocal group_index, group_data, current_group_size
+                    if not group_data:
+                        return
+                    group_key = f"{base_key}:group{group_index}"
+                    try:
+                        json_data = json.dumps(group_data)
+                        self.upstash_redis.set(group_key, json_data)
+                        self.logger.info(f"Uploaded group {group_index} to Redis: {group_key}")
+                        groups.append(f"group{group_index}")  # Store only 'group1', 'group2', etc.
+                    except Exception as e:
+                        self.logger.error(f"Failed to upload group to Redis: {e}")
+                    group_index += 1
+                    group_data = {}
+                    current_group_size = 0
 
                 for tab_key, image_base64, timestamp in screenshots:
                     try:
@@ -118,43 +141,48 @@ class RedisManager:
                         if image_base64.startswith("data:image"):
                             image_base64 = image_base64.split(",", 1)[1]
                         
-                        # Convert base64 to image
                         image_bytes = b64decode(image_base64.encode('utf-8'))
                         nparr = np.frombuffer(image_bytes, np.uint8)
                         img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
                         
-                        # Resize image to reduce size (e.g., 800px width)
-                        # width = 1080
-                        # aspect = img.shape[1] / img.shape[0]
-                        # height = int(width / aspect)
-                        # img_resized = cv2.resize(img, (width, height))
-                        
-                        # Compress image
                         encode_params = [int(cv2.IMWRITE_JPEG_QUALITY), 60]
                         _, compressed_img = cv2.imencode('.jpg', img, encode_params)
-                        
-                        # Convert back to base64
                         compressed_base64 = b64encode(compressed_img).decode('utf-8')
-                        
-                        view_data[tab_key] = {
+
+                        entry = {
                             "image_data": compressed_base64,
                             "updated_at": timestamp
                         }
+
+                        test_group = dict(group_data)
+                        test_group[tab_key] = entry
+                        test_json = json.dumps(test_group)
+
+                        if sys.getsizeof(test_json) > MAX_REDIS_SIZE:
+                            flush_group()
+
+                        group_data[tab_key] = entry
+                        current_group_size = sys.getsizeof(json.dumps(group_data))
+
                     except Exception as e:
                         self.logger.error(f"Error processing tab screenshot for {tab_key}: {e}")
 
-                if view_data:
+                # Flush any remaining group
+                flush_group()
+
+                # Upload the index (group list)
+                if groups:
                     try:
-                        self.upstash_redis.set(view_key, json.dumps(view_data))
-                        self.logger.info(f"Uploaded compressed view data to Redis key: {view_key}")
+                        self.upstash_redis.set(base_key, json.dumps({"groups": groups}))
+                        self.logger.info(f"Uploaded view group index to Redis: {base_key}")
                     except Exception as e:
-                        self.logger.error(f"Failed to upload to Redis: {e}")
+                        self.logger.error(f"Failed to upload view group index to Redis: {e}")
 
                 time.sleep(1)
+
             except Exception as e:
                 self.logger.error(f"Error in view data upload loop: {e}")
                 time.sleep(5)
-
    
   
 
