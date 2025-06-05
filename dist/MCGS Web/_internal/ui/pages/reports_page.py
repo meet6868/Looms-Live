@@ -26,13 +26,32 @@ class ReportsPage:
         
         # Reports title
         title = QLabel("Machine Data Reports")
-        title.setFont(QFont("Segoe UI", 24, QFont.Bold))
-        title.setStyleSheet("color: #2c3e50;")
+        title.setStyleSheet("color: #2c3e50; font-size: 2vw; font-weight: bold;")
         layout.addWidget(title)
         
         # Filter section
         filter_frame = QFrame()
-        filter_frame.setStyleSheet("QFrame { background-color: white; border-radius: 10px; border: 1px solid #e0e0e0; }")
+        filter_frame.setStyleSheet("""
+            QFrame { 
+                background-color: white; 
+                border-radius: 10px; 
+                border: 1px solid #e0e0e0; 
+            }
+            QLabel { 
+                font-size: 1.1vw; 
+            }
+            QComboBox {
+                font-size: 1.1vw;
+                padding: 4px;
+            }
+            QCheckBox {
+                font-size: 1.1vw;
+            }
+            QDateEdit {
+                font-size: 1.1vw;
+                padding: 4px;
+            }
+        """)
         filter_layout = QVBoxLayout(filter_frame)
         
         # Date filter with range control
@@ -113,11 +132,13 @@ class ReportsPage:
                 color: white;
                 padding: 8px 15px;
                 border-radius: 5px;
+                font-size: 1.1vw;
             }
             QPushButton:hover {
                 background-color: #2ecc71;
             }
         """)
+        
         page_layout.addStretch()
         page_layout.addWidget(self.export_btn)
         filter_layout.addLayout(page_layout)
@@ -133,8 +154,15 @@ class ReportsPage:
         self.table.setStyleSheet("""
             QTableWidget { 
                 border: 1px solid #e0e0e0;
+                font-size: 1.1vw;
             }
             QTableWidget::item {
+                padding: 5px;
+            }
+            QHeaderView::section {
+                background-color: #f8f9fa;
+                font-size: 1.1vw;
+                font-weight: bold;
                 padding: 5px;
             }
         """)
@@ -164,6 +192,15 @@ class ReportsPage:
         self.page_label = QLabel("Page 1 of 1")
         self.prev_btn.clicked.connect(self.previous_page)
         self.next_btn.clicked.connect(self.next_page)
+        pagination_style = """
+            QPushButton {
+                font-size: 1.1vw;
+                padding: 5px 10px;
+            }
+        """
+        self.prev_btn.setStyleSheet(pagination_style)
+        self.next_btn.setStyleSheet(pagination_style)
+        self.page_label.setStyleSheet("font-size: 1.1vw;")
         
         pagination_layout.addStretch()
         pagination_layout.addWidget(self.prev_btn)

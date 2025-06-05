@@ -12,6 +12,13 @@ from datetime import datetime,timedelta
 import threading
 import re
 import cv2
+import threading
+status_lock = threading.Lock()
+
+def safe_set_status(db, key, value):
+    with status_lock:
+        db.set_core_value(key, value)
+
 
 
 class ClientServiceManager:
@@ -37,22 +44,26 @@ class ClientServiceManager:
         #     if not os.path.exists(folder):
         #         os.makedirs(folder)
 
+    
+    
+
     def initialize_client(self):
         try:
             # Check initialization status
             init_status = self.local_db.get_core_value("client_init_status")
-            if init_status == "in_progress":
+            if init_status == "Completed":
                 self.logger.info("Client initialization already in progress, skipping...")
                 return False
 
             # Clear previous error status if exists
             if init_status == "error":
-                self.local_db.set_core_value("client_init_status", None)
+                safe_set_status(self.local_db,"client_init_status", None)
                 time.sleep(1)
 
+            safe_set_status(self.local_db,"client_init_time", str(time.time()))
             # Set initialization status
-            self.local_db.set_core_value("client_init_status", "in_progress")
-            self.local_db.set_core_value("client_login_status", "starting")
+            safe_set_status(self.local_db,"client_init_status", "in_progress")
+            safe_set_status(self.local_db,"client_login_status", "Starting")
 
             # Cleanup existing instance if any
             if self.client_driver:
@@ -61,13 +72,25 @@ class ClientServiceManager:
 
             # Set Chrome options
             chrome_options = Options()
-            chrome_options.add_argument("--headless")
+            chrome_options.add_argument("--headless=new")
             chrome_options.add_argument("--disable-gpu")
+            chrome_options.add_argument("--disable-cache")
+            chrome_options.add_argument("--disable-application-cache")
             chrome_options.add_argument("--no-sandbox")
             chrome_options.add_argument("--disable-dev-shm-usage")
+            
             chrome_options.add_argument("--force-device-scale-factor=1.5")
             chrome_options.add_argument("--window-size=1920,1080")
-            # Add these options to suppress warnings
+            chrome_options.add_argument("--disable-extensions")
+            chrome_options.add_argument("--disable-plugins")
+            chrome_options.add_argument("--disable-infobars")
+            chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+            chrome_options.add_argument("--disable-popup-blocking")
+            chrome_options.add_argument("--disable-notifications")
+            chrome_options.add_argument("--disable-background-networking")
+            chrome_options.add_argument("--disable-default-apps")
+            chrome_options.add_argument("--disable-extensions")
+            chrome_options.add_argument("--disable-sync")
             chrome_options.add_argument("--log-level=3")  # Fatal only
             chrome_options.add_argument("--silent")
             chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
@@ -94,12 +117,19 @@ class ClientServiceManager:
                 service = Service(ChromeDriverManager().install())
                 self.client_driver = webdriver.Chrome(service=service,options=chrome_options)
             except: 
-                self.client_driver = webdriver.Chrome(options=chrome_options)
-                self.logger.info("CromeDrive offile-----------------")
-            self.client_driver.maximize_window()
+                try:
+                    self.client_driver = webdriver.Chrome(options=chrome_options)
+                    self.logger.info("CromeDrive offile-----------------")
+                except:
+                    self.logger.error("CromeDrive install failed-----------------")
+                    safe_set_status(self.local_db,"client_init_status", "error")
+                    safe_set_status(self.local_db,"client_login_status", "Error")
+                    return False           
+            # self.client_driver.maximize_window()
             self.client_driver.get(machine_url)
            
-            
+            time.sleep(2)
+            self.client_driver.refresh() 
             # Login process
             wait = WebDriverWait(self.client_driver, 30)
             inputs = wait.until(lambda d: d.find_elements(By.CLASS_NAME, "el-input__inner"))
@@ -111,33 +141,56 @@ class ClientServiceManager:
                 (By.CLASS_NAME, "el-button.login-button.el-button--primary")))
             time.sleep(1)
             login_btn.click()
+
+            
             
             # Check login status
+            
+                
             try:
                 login_status = self.client_driver.find_element(
                     By.CSS_SELECTOR, "span.login-error-info")
                 login_status_text = login_status.text.strip()
+
                 
                 if login_status_text == "服务器异常, 请联系管理员!":  # Original: 服务器异常, 请联系管理员!
                     self.logger.error("Client login failed: Server error")
                     self.update_client_status("Error")
+                    safe_set_status(self.local_db,"client_init_status", "error")
+                    safe_set_status(self.local_db,"client_login_status", "Error")
                     return False
                     
             except Exception:
                 # Login successful, initialize all tabs
-                if self.setup_all_tabs():
-                    self.logger.info("Client tabs initialized successfully")
-                    self.local_db.set_core_value("client_init_status", "completed")
-                    self.local_db.set_core_value("client_login_status", "Running")
-                # self.update_client_status("Running")
+                try:
+                   
+                
+                    if self.setup_all_tabs():
+                        self.logger.info("Client tabs initialized successfully")
+                        safe_set_status(self.local_db,"client_init_status", "Completed")
+                        safe_set_status(self.local_db,"client_login_status", "Running")
+                        
+                    # self.update_client_status("Running")
+                    else:
+                        safe_set_status(self.local_db,"client_init_status", "error")
+                        safe_set_status(self.local_db,"client_login_status", "Error")
+                        raise Exception("Tab setup failed")
+                except Exception as e:
+                    self.logger.error(f"Error initializing client: {str(e)}")
+                    self.update_client_status("Error")
+                    safe_set_status(self.local_db,"client_init_status", "error")
+                    safe_set_status(self.local_db,"client_login_status", "Error")
+                    return False
                 return True
                 
         except Exception as e:
             self.logger.error(f"Error initializing client: {str(e)}")
             self.update_client_status("Error")
-            self.local_db.set_core_value("client_init_status", "error")
-            self.local_db.set_core_value("client_login_status", "Error")
+            safe_set_status(self.local_db,"client_init_status", "error")
+            safe_set_status(self.local_db,"client_login_status", "Error")
             return False
+
+    
 
 
     def setup_all_tabs(self):
@@ -345,14 +398,23 @@ class ClientServiceManager:
         """Periodic reinitialization loop"""
         while self.is_reinit_running:
             try:
+                                # Detect stuck state
+                
+                
+
                 admin_status = self.local_db.get_core_value("admin_service_status")
                 init_status = self.local_db.get_core_value("client_init_status")
+                if init_status == "in_progress":
+                    last_init_time = self.local_db.get_core_value("client_init_time")  # Add timestamp in initialize
+                    if last_init_time and time.time() - float(last_init_time) > 120:
+                        self.logger.warning("Init status stuck, resetting...")
+                        safe_set_status(self.local_db,"client_init_status", "error")
                 
                 if admin_status == "Running" and init_status != "in_progress":
                     self.logger.info("Starting scheduled reinitialization...")
                     
                     # Set initialization status before starting
-                    self.local_db.set_core_value("client_init_status", "in_progress")
+                    safe_set_status(self.local_db,"client_init_status", "in_progress")
                     
                     # Stop screenshot capture
                     self.stop_screenshot_capture()
@@ -374,11 +436,12 @@ class ClientServiceManager:
                     self._skip_reinit = True
                     if self.initialize_client():
                         self.logger.info("Scheduled reinitialization completed successfully")
-                        self.local_db.set_core_value("client_init_status", "completed")
+                        safe_set_status(self.local_db,"client_init_status", "Completed")
                     else:
                         self.logger.error("Failed to reinitialize client service")
-                        self.local_db.set_core_value("client_init_status", "error")
-                        time.sleep(30)
+                        safe_set_status(self.local_db,"client_init_status", "error")
+                        time.sleep(10)
+
                     self._skip_reinit = False
                 
                 # Sleep for interval
@@ -386,7 +449,8 @@ class ClientServiceManager:
                 
             except Exception as e:
                 self.logger.error(f"Error in reinit loop: {str(e)}")
-                self.local_db.set_core_value("client_init_status", "error")
+                safe_set_status(self.local_db,"client_init_status", "error")
+                self._skip_reinit = False
                 time.sleep(30)
 
     def start_screenshot_upload(self):
@@ -486,6 +550,7 @@ class ClientServiceManager:
                             # self.logger.info(f"{text}------------------")
                             if data and data.get('Loom_Num')!='':
                                 # Store in temp_data
+
                                 current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                                 self.local_db.store_temp_data(data,tab_key,current_time)
                                 

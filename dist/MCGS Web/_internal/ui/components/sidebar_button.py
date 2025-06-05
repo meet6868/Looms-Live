@@ -29,8 +29,9 @@ class SidebarButton(QPushButton):
                 padding: 10px;
                 text-align: left;
                 color: black;
-                font-size: 14px;
+                font-size: 1.2vw;  /* Changed to viewport-relative units */
                 margin: 2px 5px;
+                font-weight: bold;
             }
         """
         
@@ -39,8 +40,6 @@ class SidebarButton(QPushButton):
                 QPushButton {
                     background-color: white;
                     padding: 10px;
-                    
-
                 }
             """)
         else:

@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel, QFrame,
                            QComboBox, QRadioButton, QPushButton, QScrollArea,
-                           QGridLayout, QButtonGroup)
+                           QGridLayout, QButtonGroup,QApplication)
 from PyQt5.QtCore import Qt, QTimer, QDateTime
 from PyQt5.QtGui import QFont, QPixmap, QImage
 import sqlite3
@@ -68,14 +68,13 @@ class LivePage:
         
         # Left side with title
         title = QLabel("Live View")
-        title.setFont(QFont("Segoe UI", 24, QFont.Bold))
-        title.setStyleSheet("color: #2c3e50;")
+        title.setStyleSheet("color: #2c3e50; font-size: 2vw;")
         
         # Machine status info
         self.machine_info = QLabel()  # Create the label
         self.machine_info.setStyleSheet("""
             color: #666;
-            font-size: 14px;
+            font-size: 1.2vw;
             margin-left: 20px;
             padding: 8px 15px;
             background: #f5f5f5;
@@ -184,6 +183,7 @@ class LivePage:
                 border: 1px solid #e0e0e0;
                 border-radius: 4px;
                 background: white;
+                font-size: 1.1vw;
             }
             QPushButton:checked {
                 background: #e8f0fe;
@@ -243,12 +243,14 @@ class LivePage:
             if view_data:
                 # Create main container with fixed minimum size
                 image_widget = QFrame()
+                screen = QApplication.desktop().screenGeometry()
                 if self.current_view == 'single':
-                    image_widget.setMinimumSize(1200, 800)  # Larger fixed size for single view
-                    image_widget.setMaximumSize(1920, 1080)  # Maximum size limit
+                    
+                    image_widget.setMinimumSize(int(screen.width() * 0.8), int(screen.height() * 0.8))
+                    image_widget.setMaximumSize(int(screen.width() * 0.95), int(screen.height() * 0.95))
                 else:
-                    image_widget.setMinimumSize(400, 300)
-                    image_widget.setMaximumSize(800, 600)
+                    image_widget.setMinimumSize(int(screen.width() * 0.4), int(screen.height() * 0.4))
+                    image_widget.setMaximumSize(int(screen.width() * 0.45), int(screen.height() * 0.45))
                 
                 image_layout = QVBoxLayout(image_widget)
                 image_layout.setContentsMargins(5, 5, 5, 5)
@@ -263,7 +265,7 @@ class LivePage:
                 header_layout.setContentsMargins(5, 0, 5, 0)
                 
                 key_label = QLabel(machine_key.replace('machine_', 'Machine '))
-                key_label.setStyleSheet("color: #2c3e50; font-weight: bold; font-size: 12px;")
+                key_label.setStyleSheet("color: #2c3e50; font-weight: bold; font-size: 1.1vw;")
                 
                 updated_time = datetime.strptime(updated_at, '%Y-%m-%d %H:%M:%S')
                 is_online = datetime.now() - updated_time < timedelta(minutes=1)
@@ -273,7 +275,7 @@ class LivePage:
                     color: white;
                     padding: 4px 12px;
                     border-radius: 15px;
-                    font-size: 14px;
+                    font-size: 1.1vw;
                     font-weight: bold;
                     margin: 2px;
                 """)
@@ -315,15 +317,15 @@ class LivePage:
                         # Fixed scaling sizes based on view mode
                         if self.current_view == 'single':
                             scaled = cropped.scaled(
-                                1200,  # Fixed width for single view
-                                800,   # Fixed height for single view
+                                int(screen.width() * 0.8),  # Fixed width for single view
+                                int(screen.height() * 0.8), # Fixed height for single view
                                 Qt.KeepAspectRatio,
                                 Qt.SmoothTransformation
                             )
                         else:
                             scaled = cropped.scaled(
-                                750,
-                                550,
+                                int(screen.width() * 0.4),
+                                int(screen.height() * 0.4),
                                 Qt.KeepAspectRatio,
                                 Qt.SmoothTransformation
                             )
@@ -382,7 +384,7 @@ class LivePage:
             no_selection.setStyleSheet("""
                 QLabel {
                     color: #666;
-                    font-size: 16px;
+                    font-size: 1.4vw;
                     padding: 20px;
                 }
             """)
@@ -427,7 +429,7 @@ class LivePage:
             no_data_label.setStyleSheet("""
                 QLabel {
                     color: #666;
-                    font-size: 16px;
+                    font-size: 1.3vw;
                     padding: 20px;
                 }
             """)

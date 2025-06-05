@@ -242,10 +242,15 @@ class StatusCheckerThread(QThread):
                 except Exception as client_e:
                     self.logger.error(f"Client DB connection error: {client_e}")
 
+
+                admin_serevice=self.local_db.get_value("admin_service_status")
+                client_service=self.local_db.get_value("client_service_status")
                 # Prepare status data
                 status_data = {
                     'admin_connected': admin_connected,
                     'client_connected': client_connected,
+                    'admin_service_status': admin_serevice,
+                    'client_service_status': client_service,
                     'system_status': 'online' if (admin_connected and client_connected) else 'offline',
                     'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 }

@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, 
     QFrame, QScrollArea, QGridLayout, QProgressBar, QTableWidget, QTableWidgetItem,
-    QHeaderView, QSizePolicy # Add QSizePolicy
+    QHeaderView, QSizePolicy, QApplication  # Added QApplication here
 )
 from PyQt5.QtCore import Qt, QTimer, QThread, pyqtSignal
 from PyQt5.QtGui import QFont, QIcon, QCursor, QPixmap
@@ -148,6 +148,10 @@ class DashboardPage:
 
     
     def create_machine_table(self):
+        screen = QApplication.desktop().screenGeometry()
+        screen_height = screen.height()
+        screen_width = screen.width()
+        
         self.table = QTableWidget()
         self.table.setColumnCount(18)
         headers = [
@@ -158,37 +162,61 @@ class DashboardPage:
             "Warp Remain", "Warp Length", "Warp Forecast", "H1:H2:Wrap:Other:Total", "Previous H1:H2:Wrap:Other:Total"
         ]
         self.table.setHorizontalHeaderLabels(headers)
-        self.table.setMinimumHeight(350)
-        self.table.setMaximumHeight(600)
         
-        # Set column widths based on content
+        # Set relative minimum height
+        self.table.setMinimumHeight(int(screen_height * 0.45))
+        
+        # Set column widths based on screen width
         column_widths = {
-            0: 60,   # Loom
-            1: 60,   # Status
-            2: 120,   # Pick
-            3: 180,  # Production Length
-            4: 80,   # Speed
-            5: 120,   # Efficiency
-            6: 150,  # Previous Pick
-            7: 240,  # Previous Production Length
-            8: 150,  # Previous Speed
-            9: 180,  # Previous Efficiency
-            10: 150, # Weaving Length
-            11: 120, # Cut Length
-            12: 160, # Weaving Forecast
-            13: 140, # Warp Remain
-            14: 120, # Warp Length
-            15: 140, # Warp Forecast
-            16: 220, # H1:H2:Wrap:Other:Total
-            17: 290  # Previous H1:H2:Wrap:Other:Total
+            0: int(screen_width * 0.03),   # Loom
+            1: int(screen_width * 0.03),   # Status
+            2: int(screen_width * 0.06),   # Pick
+            3: int(screen_width * 0.09),   # Production Length
+            4: int(screen_width * 0.04),   # Speed
+            5: int(screen_width * 0.06),   # Efficiency
+            6: int(screen_width * 0.075),  # Previous Pick
+            7: int(screen_width * 0.12),   # Previous Production Length
+            8: int(screen_width * 0.075),  # Previous Speed
+            9: int(screen_width * 0.09),   # Previous Efficiency
+            10: int(screen_width * 0.075), # Weaving Length
+            11: int(screen_width * 0.06),  # Cut Length
+            12: int(screen_width * 0.08),  # Weaving Forecast
+            13: int(screen_width * 0.07),  # Warp Remain
+            14: int(screen_width * 0.06),  # Warp Length
+            15: int(screen_width * 0.07),  # Warp Forecast
+            16: int(screen_width * 0.11),  # H1:H2:Wrap:Other:Total
+            17: int(screen_width * 0.145)  # Previous H1:H2:Wrap:Other:Total
         }
+
+        # Update table style with relative font sizes
+        self.table.setStyleSheet("""
+            QTableWidget {
+                background-color: white;
+                border: 1px solid #e0e0e0;
+                border-radius: 5px;
+                margin: 10px;
+                font-size: 1vw;
+            }
+            QHeaderView::section {
+                background-color: #f5f6fa;
+                padding: 8px;
+                border: 1px solid #e0e0e0;
+                font-weight: bold;
+                font-size: 1vw;
+            }
+            QTableWidget::item {
+                padding: 5px;
+                border-bottom: 1px solid #f0f0f0;
+                font-size: 1vw;
+            }
+        """)
         
         # Apply the column widths and resize mode
         header = self.table.horizontalHeader()
         for col, width in column_widths.items():
             self.table.setColumnWidth(col, width)
             header.setSectionResizeMode(col, QHeaderView.Interactive)
-        
+
         # Enable horizontal scrolling
         self.table.setHorizontalScrollMode(QTableWidget.ScrollPerPixel)
         
@@ -232,10 +260,9 @@ class DashboardPage:
         layout.setContentsMargins(20, 20, 20, 20)
         layout.setSpacing(20)
         
-        # Dashboard title
+        # Dashboard title with relative font size
         title = QLabel("Dashboard")
-        title.setFont(QFont("Segoe UI", 24, QFont.Bold))
-        title.setStyleSheet("color: #2c3e50;")
+        title.setStyleSheet("color: #2c3e50; font-size: 2vw; font-weight: bold;")
         layout.addWidget(title)
         
         # Single scroll area for all content
@@ -251,7 +278,11 @@ class DashboardPage:
         # Add live view card
         live_view_card = QFrame()
         live_view_card.setObjectName("liveViewCard")
-        live_view_card.setMinimumHeight(400)
+        screen = QApplication.primaryScreen().availableGeometry()
+        screen_height = screen.height()
+
+        live_view_card.setMinimumHeight(int(screen_height * 0.38))
+        # live_view_card.setMinimumHeight(400)
         live_view_card.setStyleSheet("""
             #liveViewCard {
                 background-color: white;
@@ -297,8 +328,7 @@ class DashboardPage:
         data_layout = QVBoxLayout(data_card)
         
         data_title = QLabel("System Information")
-        data_title.setFont(QFont("Segoe UI", 14, QFont.Bold))
-        data_title.setStyleSheet("color: #2c3e50;")
+        data_title.setStyleSheet("color: #2c3e50; font-size: 1.4vw; font-weight: bold;")
         data_layout.addWidget(data_title)
         
         # Create status labels with proper layout
@@ -318,8 +348,8 @@ class DashboardPage:
         status_style = """
             QLabel {
                 color: #2c3e50;
-                font-size: 15px;
-                padding: 5px;
+                font-size: 1.1vw;
+                padding: 8px;
                 background-color: #f8f9fa;
                 border-radius: 4px;
                 margin: 2px;
@@ -353,8 +383,7 @@ class DashboardPage:
         
         # Machine Data Section
         machine_data_title = QLabel("Machine Data Monitor")
-        machine_data_title.setFont(QFont("Segoe UI", 14, QFont.Bold))
-        machine_data_title.setStyleSheet("color: #2c3e50;")
+        machine_data_title.setStyleSheet("color: #2c3e50; font-size: 1.4vw; font-weight: bold;")
         machine_layout.addWidget(machine_data_title)
         
         # Add shift information at the top
@@ -396,7 +425,7 @@ class DashboardPage:
         # Value label style
         value_style = """
             color: #2c3e50;
-            font-size: 14px;
+            font-size: 1.1vw;
             font-weight: bold;
             padding: 3px;
             background-color: white;
@@ -407,7 +436,7 @@ class DashboardPage:
         # Header label style
         header_style = """
             color: #2c3e50;
-            font-size: 11px;
+            font-size: 1vw;
             padding: 2px;
         """
         
@@ -526,38 +555,40 @@ class DashboardPage:
     def update_status_labels(self):
         try:
             # Get all status values at once
-            # In update_status_labels method, update the dictionary key
             status_values = {
                 'admin_status': self.main_page.local_db.get_core_value("admin_service_status"),
-                'client_status': self.main_page.local_db.get_core_value("client_service_status"),
+                'client_status': self.main_page.local_db.get_core_value("client_init_status"),
                 'client_login': self.main_page.local_db.get_core_value("client_login_status"),
                 'admin_connected': "Connected" if self.main_page.local_db.get_value("admin_connected") == "1" else "Disconnected",
                 'client_connected': "Connected" if self.main_page.local_db.get_value("client_connected") == "1" else "Disconnected",
-                'vm_status': "Running" if self.main_page.local_db.get_value("vm_running") == "1" else "Stopped",  # Changed from vm_running to vm_status
+                'vm_status': "Running" if self.main_page.local_db.get_value("vm_running") == "1" else "Stopped",
             }
+
             
-            # Update labels and their styles in one pass
+            
+
+            # Update labels with larger font size
             for status_name, value in status_values.items():
                 label = getattr(self, f"{status_name}_label")
                 label_text = f"{label.text().split(':')[0]}: {value or '--'}"
-                label.setText(label_text)
+                label.setText(label_text.replace("_"," "))
                 
-                # Set color based on status
-                if value in ['Connected', 'Running', 'true','starting','Processing...','Starting']:
-                    color = "#27ae60"  # green
+                if value in ['Connected', 'Running', 'true','starting','Processing...','Starting','Completed',"in_progress"]:
+                    color = "#27ae60"
                 elif value in ['Disconnected', 'Stopped', 'false',"Error"]:
-                    color = "#c0392b"  # red
+                    color = "#c0392b"
                 else:
-                    color = "#7f8c8d"  # gray
+                    color = "#7f8c8d"
                 
                 label.setStyleSheet(f"""
                     QLabel {{
                         color: {color};
-                        font-size: 13px;
-                        padding: 5px;
+                        font-size: 1.2vw;
+                        padding: 10px;
                         background-color: #f8f9fa;
-                        border-radius: 4px;
-                        margin: 2px;
+                        border-radius: 6px;
+                        margin: 4px;
+                        font-weight: bold;
                     }}
                 """)
 
@@ -714,7 +745,7 @@ class DashboardPage:
                     # Crop the image
                     original_height = pixmap.height()
                     top_crop = int(original_height * 0.065)
-                    bottom_crop = int(original_height * 0.40)
+                    bottom_crop = int(original_height * 0.50)
                     
                     try:
                         cropped_pixmap = pixmap.copy(
@@ -774,7 +805,7 @@ class DashboardPage:
             if self.live_view_status_label:
                 self.live_view_status_label.setText(status_text)
                 self.live_view_status_label.setStyleSheet(f"""
-                    font-size: 14px;
+                    font-size: 1.2vw;
                     font-weight: bold;
                     color: white;
                     background-color: {status_color};
@@ -794,7 +825,6 @@ class DashboardPage:
                 self.live_view_status_label.setStyleSheet("font-size: 10px; color: #c0392b; margin-right: 5px;")
 
 
-    # Remove the old update_live_view method if it exists
 
 
     

@@ -114,15 +114,15 @@ class LocalDatabase:
                 );
             ''')
 
-            # Step 2: Check existing columns
-            cursor.execute("PRAGMA table_info(machine_data);")
-            existing_columns = [column[1] for column in cursor.fetchall()]
+            # # Step 2: Check existing columns
+            # cursor.execute("PRAGMA table_info(machine_data);")
+            # existing_columns = [column[1] for column in cursor.fetchall()]
 
-            # Step 3: Add any missing new columns
-            new_columns = ["H1Time", "H2Time", "WrapTime", "OtherTime", "TotalTime"]
-            for col in new_columns:
-                if col not in existing_columns:
-                    cursor.execute(f"ALTER TABLE machine_data ADD COLUMN Total_{col} INTEGER;")
+            # # Step 3: Add any missing new columns
+            # new_columns = ["H1Time", "H2Time", "WrapTime", "OtherTime", "TotalTime"]
+            # for col in new_columns:
+            #     if col not in existing_columns:
+            #         cursor.execute(f"ALTER TABLE machine_data ADD COLUMN Total_{col} INTEGER;")
 
             # Create temp data table
             cursor.execute('''
@@ -158,18 +158,18 @@ class LocalDatabase:
                 );
             ''')
 
-            # Step 2: Check existing columns
-            cursor.execute("PRAGMA table_info(temp_data);")
-            existing_columns = [column[1] for column in cursor.fetchall()]
+            # # Step 2: Check existing columns
+            # cursor.execute("PRAGMA table_info(temp_data);")
+            # existing_columns = [column[1] for column in cursor.fetchall()]
 
-            # Step 3: Add any missing new columns
-            new_columns = ["H1Time", "H2Time", "WrapTime", "OtherTime", "TotalTime"]
-            for col in new_columns:
-                if col not in existing_columns:
-                    cursor.execute(f"ALTER TABLE temp_data ADD COLUMN {col} TEXT;")
-            for col in new_columns:
-                if col not in existing_columns:
-                    cursor.execute(f"ALTER TABLE temp_data ADD COLUMN Pre_{col} TEXT;")
+            # # Step 3: Add any missing new columns
+            # new_columns = ["H1Time", "H2Time", "WrapTime", "OtherTime", "TotalTime"]
+            # for col in new_columns:
+            #     if col not in existing_columns:
+            #         cursor.execute(f"ALTER TABLE temp_data ADD COLUMN {col} TEXT;")
+            # for col in new_columns:
+            #     if col not in existing_columns:
+            #         cursor.execute(f"ALTER TABLE temp_data ADD COLUMN Pre_{col} TEXT;")
             # Create tab_views table
             cursor.execute('''
                 CREATE TABLE IF NOT EXISTS tab_views (
@@ -819,7 +819,7 @@ class LocalDatabase:
             shift_prefix = f"{current_shift}_"
             base_data = {
                 'date': current_date,
-                'Device_Name': data.get('Device_Name', ''),
+                'Device_Name': data.get('Device_Name', '').replace('O', '').replace('o', ''),
                 'Loom_Num': loom_num,
                 f'{shift_prefix}start': data.get('Start', [[],['']])[1],
                 f'{shift_prefix}End': data.get('End', [[],['']])[1],
@@ -833,7 +833,7 @@ class LocalDatabase:
                 f'{shift_prefix}WarpTime': data.get('WarpTimes', [[],['0']])[1],
                 f'{shift_prefix}OtherTime': data.get('OtherTimes', [[],['0']])[1]
             }
-    
+            
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
             
@@ -849,7 +849,6 @@ class LocalDatabase:
             if existing_row:
                 # Convert tuple to dictionary using column names
                 existing_data = dict(zip(columns, existing_row))
-                print(existing_data,"*"*10,data,"*"*100)  
                 # Update existing record
                 set_clauses = [f"{k} = ?" for k in base_data.keys()]
                 query = f"""
@@ -884,6 +883,7 @@ class LocalDatabase:
                                    float(existing_data[f'{other_prefix}Efficiency'])) / 2, 2)
                     
                     # Add computed values with correct SQL syntax
+                    
                     query += """,
                         Total_Production_FabricLength = ?,
                         Total_Production_Quantity = ?,
@@ -939,7 +939,7 @@ class LocalDatabase:
                     return default
 
             cursor.execute(query, (
-                data.get('Device_Name', ''),
+                data.get('Device_Name', '').replace('O', '').replace('o', ''),
                 data.get('Loom_Num', ''),
                 data.get('Weaving_Length', ''),
                 data.get('Cut_Length', ''),

@@ -14,12 +14,12 @@ from io import BytesIO
 import sys
 
 class RedisManager:
-    def __init__(self, local_db, port=6380):
+    def __init__(self, local_db, port=6379):
         self.logger = logging.getLogger("LoomLive")
         self.local_db = local_db
         self.upstash_redis = Redis(
-            url="https://on-snapper-37126.upstash.io",
-            token="AZEGAAIjcDEyNDFkMDA1ZGYxYWM0MDhlOThmZTYzYjllNjZkY2Q3ZHAxMA"
+            url="https://national-ostrich-10904.upstash.io",
+            token="ASqYAAIjcDEzMjRiOTk5MmVkNTg0NDkyYWU4MjE4NjM1MGMyMzMwYnAxMA"
         )
         self.upload_thread = None
         self.is_uploading = False
@@ -39,9 +39,13 @@ class RedisManager:
         self.view_upload_thread = None
         self.is_temp_uploading = False
         self.is_view_uploading = False
+        self.is_internet = False
+        self.internet_check_thread = None
+        self.is_checking_internet = False
 
     def start_upload(self):
         """Start both upload threads"""
+        self.start_internet_check()
         self.start_temp_upload()
         self.start_view_upload()
         self.logger.info("Both Redis upload threads started")
@@ -77,28 +81,71 @@ class RedisManager:
         
         self.logger.info("All upload threads stopped")
 
-    def _temp_upload_loop(self):
-        while self.is_temp_uploading:
+    def start_internet_check(self):
+        """Start the internet connectivity check thread"""
+        if not self.internet_check_thread:
+            self.is_checking_internet = True
+            self.internet_check_thread = threading.Thread(target=self._check_internet_loop, daemon=True)
+            self.internet_check_thread.start()
+            self.logger.info("Internet check thread started")
+
+    def _check_internet_loop(self):
+        import socket
+        while self.is_checking_internet:
             try:
-                company_name = self.local_db.get_value('company_name')
-                client_email = self.local_db.get_value('client_email')
+                socket.create_connection(("8.8.8.8", 53), timeout=3)
+                self.is_internet = True
+                # self.logger.info("Internet connection available")
+            except OSError:
+                self.is_internet = False
+                self.logger.warning("No internet connection")
+            time.sleep(120)  # Check every 2 minutes
 
-                temp_data = self.local_db.get_temp_data()
-                if temp_data:
-                    try:
-                        enriched_temp_data = {
-                            "company_name": company_name,
-                            "client_email": client_email,
-                            "data": temp_data,
-                            "timestamp": time.time()
-                        }
-                        temp_key = f"temp_data:{company_name}:{client_email}"
-                        self.upstash_redis.set(temp_key, json.dumps(enriched_temp_data))
-                        self.logger.info(f"Uploaded temp data for {company_name}/{client_email}")
-                    except Exception as e:
-                        self.logger.error(f"Error uploading temp data: {e}")
+    def stop_upload(self):
+        """Stop all upload threads"""
+        self.is_temp_uploading = False
+        self.is_view_uploading = False
+        self.is_checking_internet = False
+        
+        if self.temp_upload_thread:
+            self.temp_upload_thread.join(timeout=5)
+            self.temp_upload_thread = None
+        
+        if self.view_upload_thread:
+            self.view_upload_thread.join(timeout=5)
+            self.view_upload_thread = None
 
-                time.sleep(1)
+        if self.internet_check_thread:
+            self.internet_check_thread.join(timeout=5)
+            self.internet_check_thread = None
+        
+        self.logger.info("All upload threads stopped")
+
+    def _temp_upload_loop(self):
+        while self.is_temp_uploading :
+            
+            try:
+                if self.is_internet:
+                    # self.logger.info("Internet connection available")
+                    company_name = self.local_db.get_value('company_name')
+                    client_email = self.local_db.get_value('client_email')
+
+                    temp_data = self.local_db.get_temp_data()
+                    if temp_data:
+                        try:
+                            enriched_temp_data = {
+                                "company_name": company_name,
+                                "client_email": client_email,
+                                "data": temp_data,
+                                "timestamp": time.time()
+                            }
+                            temp_key = f"temp_data:{company_name}:{client_email}"
+                            self.upstash_redis.set(temp_key, json.dumps(enriched_temp_data))
+                            # self.logger.info(f"Uploaded temp data for {company_name}/{client_email}")
+                        except Exception as e:
+                            self.logger.error(f"Error uploading temp data: {e}")
+
+                    time.sleep(1)
             except Exception as e:
                 self.logger.error(f"Error in temp data upload loop: {e}")
                 time.sleep(5)
@@ -107,78 +154,79 @@ class RedisManager:
 
     def _view_upload_loop(self):
         MAX_REDIS_SIZE = 10 * 1024 * 1024  # 10 MB
-        while self.is_view_uploading:
+        while self.is_view_uploading :
             try:
-                company_name = self.local_db.get_value('company_name')
-                client_email = self.local_db.get_value('client_email')
-                screenshots = self.local_db.get_pending_screenshots()
-                base_key = f"view:{company_name}:{client_email}"
-                groups = []
-                group_data = {}
-                current_group_size = 0
-                group_index = 1
-
-                def flush_group():
-                    nonlocal group_index, group_data, current_group_size
-                    if not group_data:
-                        return
-                    group_key = f"{base_key}:group{group_index}"
-                    try:
-                        json_data = json.dumps(group_data)
-                        self.upstash_redis.set(group_key, json_data)
-                        self.logger.info(f"Uploaded group {group_index} to Redis: {group_key}")
-                        groups.append(f"group{group_index}")  # Store only 'group1', 'group2', etc.
-                    except Exception as e:
-                        self.logger.error(f"Failed to upload group to Redis: {e}")
-                    group_index += 1
+                if self.is_internet:
+                    company_name = self.local_db.get_value('company_name')
+                    client_email = self.local_db.get_value('client_email')
+                    screenshots = self.local_db.get_pending_screenshots()
+                    base_key = f"view:{company_name}:{client_email}"
+                    groups = []
                     group_data = {}
                     current_group_size = 0
+                    group_index = 1
 
-                for tab_key, image_base64, timestamp in screenshots:
-                    try:
-                        if isinstance(image_base64, bytes):
-                            image_base64 = image_base64.decode("utf-8")
-                        if image_base64.startswith("data:image"):
-                            image_base64 = image_base64.split(",", 1)[1]
-                        
-                        image_bytes = b64decode(image_base64.encode('utf-8'))
-                        nparr = np.frombuffer(image_bytes, np.uint8)
-                        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-                        
-                        encode_params = [int(cv2.IMWRITE_JPEG_QUALITY), 60]
-                        _, compressed_img = cv2.imencode('.jpg', img, encode_params)
-                        compressed_base64 = b64encode(compressed_img).decode('utf-8')
+                    def flush_group():
+                        nonlocal group_index, group_data, current_group_size
+                        if not group_data:
+                            return
+                        group_key = f"{base_key}:group{group_index}"
+                        try:
+                            json_data = json.dumps(group_data)
+                            self.upstash_redis.set(group_key, json_data)
+                            # self.logger.info(f"Uploaded group {group_index} to Redis: {group_key}")
+                            groups.append(f"group{group_index}")  # Store only 'group1', 'group2', etc.
+                        except Exception as e:
+                            self.logger.error(f"Failed to upload group to Redis: {e}")
+                        group_index += 1
+                        group_data = {}
+                        current_group_size = 0
 
-                        entry = {
-                            "image_data": compressed_base64,
-                            "updated_at": timestamp
-                        }
+                    for tab_key, image_base64, timestamp in screenshots:
+                        try:
+                            if isinstance(image_base64, bytes):
+                                image_base64 = image_base64.decode("utf-8")
+                            if image_base64.startswith("data:image"):
+                                image_base64 = image_base64.split(",", 1)[1]
+                            
+                            image_bytes = b64decode(image_base64.encode('utf-8'))
+                            nparr = np.frombuffer(image_bytes, np.uint8)
+                            img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+                            
+                            encode_params = [int(cv2.IMWRITE_JPEG_QUALITY), 60]
+                            _, compressed_img = cv2.imencode('.jpg', img, encode_params)
+                            compressed_base64 = b64encode(compressed_img).decode('utf-8')
 
-                        test_group = dict(group_data)
-                        test_group[tab_key] = entry
-                        test_json = json.dumps(test_group)
+                            entry = {
+                                "image_data": compressed_base64,
+                                "updated_at": timestamp
+                            }
 
-                        if sys.getsizeof(test_json) > MAX_REDIS_SIZE:
-                            flush_group()
+                            test_group = dict(group_data)
+                            test_group[tab_key] = entry
+                            test_json = json.dumps(test_group)
 
-                        group_data[tab_key] = entry
-                        current_group_size = sys.getsizeof(json.dumps(group_data))
+                            if sys.getsizeof(test_json) > MAX_REDIS_SIZE:
+                                flush_group()
 
-                    except Exception as e:
-                        self.logger.error(f"Error processing tab screenshot for {tab_key}: {e}")
+                            group_data[tab_key] = entry
+                            current_group_size = sys.getsizeof(json.dumps(group_data))
 
-                # Flush any remaining group
-                flush_group()
+                        except Exception as e:
+                            self.logger.error(f"Error processing tab screenshot for {tab_key}: {e}")
 
-                # Upload the index (group list)
-                if groups:
-                    try:
-                        self.upstash_redis.set(base_key, json.dumps({"groups": groups}))
-                        self.logger.info(f"Uploaded view group index to Redis: {base_key}")
-                    except Exception as e:
-                        self.logger.error(f"Failed to upload view group index to Redis: {e}")
+                    # Flush any remaining group
+                    flush_group()
 
-                time.sleep(1)
+                    # Upload the index (group list)
+                    if groups:
+                        try:
+                            self.upstash_redis.set(base_key, json.dumps({"groups": groups}))
+                            # self.logger.info(f"Uploaded view group index to Redis: {base_key}")
+                        except Exception as e:
+                            self.logger.error(f"Failed to upload view group index to Redis: {e}")
+
+                    time.sleep(1)
 
             except Exception as e:
                 self.logger.error(f"Error in view data upload loop: {e}")

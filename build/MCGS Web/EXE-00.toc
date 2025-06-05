@@ -84,7 +84,7 @@
  [],
  False,
  False,
- 1747981787,
+ 1749113764,
  [('runw_d.exe',
    'E:\\MCGS\\MCGS '
    'Web\\venv\\Lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\runw_d.exe',

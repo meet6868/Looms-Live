@@ -4,6 +4,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import threading
+import subprocess
+import platform
+status_lock = threading.Lock()
+def safe_set_status(db, key, value):
+    with status_lock:
+        db.set_core_value(key, value)
 
 # 添加翻译字典
 TRANSLATIONS = {
@@ -22,9 +29,26 @@ class AdminServiceManager:
         self.backend_driver = None
         self.backend_status = 'Unknown'
         self.start_flag = False
+
+    def kill_chrome_and_driver(self):
+        if platform.system() == "Windows":
+            try:
+                subprocess.call('taskkill /f /im chromedriver.exe', shell=True)
+                # subprocess.call('taskkill /f /im chrome.exe', shell=True)
+                self.logger.info("Killed existing ChromeDriver and Chrome processes.")
+            except Exception as e:
+                self.logger.error(f"Error killing processes: {e}")
+        else:
+            try:
+                subprocess.call("pkill -f chromedriver", shell=True)
+                subprocess.call("pkill -f chrome", shell=True)
+                self.logger.info("Killed existing ChromeDriver and Chrome processes.")
+            except Exception as e:
+                self.logger.error(f"Error killing processes: {e}")
         
     def initialize_service(self):
         try:
+            self.kill_chrome_and_driver()
             # Set Chrome options
             chrome_options = Options()
             chrome_options.add_argument("--headless")
@@ -34,13 +58,19 @@ class AdminServiceManager:
             chrome_options.add_argument("--no-sandbox")
             chrome_options.add_argument("--disable-dev-shm-usage")
             
+            chrome_options.add_argument("--force-device-scale-factor=1.5")
+            chrome_options.add_argument("--window-size=1920,1080")
+            chrome_options.add_argument("--disable-extensions")
+            chrome_options.add_argument("--disable-plugins")
+            chrome_options.add_argument("--disable-infobars")
+            
             # Get VM IP from local database
             vm_ip = self.local_db.get_value("vm_ip")
             if not vm_ip:
                 self.logger.error("VM IP not found in local database")
                 return False
 
-            self.local_db.set_core_value("admin_service_status", "Processing...")
+            safe_set_status(self.local_db,"admin_service_status", "Processing...")
             self.client_db.set_core_value("admin_service_status", "Processing...")
                 
             # Set backend credentials
@@ -62,6 +92,8 @@ class AdminServiceManager:
                 
             self.backend_driver.get(backend_url)
             
+
+            
             # Login
             wait = WebDriverWait(self.backend_driver, 20)
             inputs = wait.until(lambda d: d.find_elements(By.CLASS_NAME, "el-input__inner"))
@@ -71,6 +103,9 @@ class AdminServiceManager:
             login_btn = wait.until(EC.element_to_be_clickable(
                 (By.CLASS_NAME, "el-button.login-button.el-button--primary")))
             login_btn.click()
+
+            
+
             
             wait.until(EC.invisibility_of_element(
                 (By.CLASS_NAME, "el-button.login-button.el-button--primary"))) 
@@ -79,7 +114,7 @@ class AdminServiceManager:
         except Exception as e:
             self.logger.error(f"Error initializing admin service: {str(e)}")
             self.backend_driver.quit()
-            self.local_db.set_core_value("admin_service_status", "Error")
+            safe_set_status(self.local_db,"admin_service_status", "Error")
             self.client_db.set_core_value("admin_service_status", "Error")
             return False
             return False
@@ -93,6 +128,7 @@ class AdminServiceManager:
             self.backend_driver.refresh()
             
             # Wait for status cell to be present after refresh
+           
             wait = WebDriverWait(self.backend_driver, 10)
             status_cell = wait.until(EC.presence_of_element_located(
                 (By.CSS_SELECTOR, "td.el-table_1_column_5.is-center")))

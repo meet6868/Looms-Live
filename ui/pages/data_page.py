@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel, 
                            QPushButton, QScrollArea, QFrame, QGridLayout,
-                           QSizePolicy)
+                           QSizePolicy,QApplication)
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QColor  # Added QFont import
 from datetime import datetime, timedelta  # Add this import at the top
@@ -10,6 +10,8 @@ import time
 class MachineCard(QFrame):
     def __init__(self, data):
         super().__init__()
+        screen = QApplication.desktop().screenGeometry()
+        screen_height = screen.height()
         self.setStyleSheet("""
             QFrame {
                 background-color: white;
@@ -25,7 +27,7 @@ class MachineCard(QFrame):
             }
         """)
         self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
-        self.setFixedHeight(500)  # Reduced height
+        self.setFixedHeight(int(screen_height * 0.40))  # Reduced height
         
         layout = QVBoxLayout(self)
         layout.setContentsMargins(10, 10, 10, 10)
@@ -39,8 +41,8 @@ class MachineCard(QFrame):
         
         # Machine header
         header = QLabel(f"{data.get('Loom_Num', '')}")
-        header.setFont(QFont("Segoe UI", 16, QFont.Bold))
-        header.setStyleSheet("color: #2980B9; padding: 3px; background: transparent;")
+        header.setStyleSheet("color: #2980B9; padding: 3px; background: transparent; font-size: 1.8vw; font-weight: bold;")
+
         
         # Status indicator
         status = QLabel()
@@ -54,7 +56,7 @@ class MachineCard(QFrame):
                     status.setText(f"🟢 Online ")
                     status.setStyleSheet("""
                         color: #27AE60;
-                        font-size: 12px;
+                        font-size: 1.1vw;
                         padding: 2px 8px;
                         font-weight: bold;
                         background: #E8F5E9;
@@ -64,7 +66,7 @@ class MachineCard(QFrame):
                     status.setText(f"🔴 Offline ")
                     status.setStyleSheet("""
                         color: #E74C3C;
-                        font-size: 12px;
+                        font-size: 1.1vw;
                         padding: 2px 8px;
                         font-weight: bold;
                         background: #FFEBEE;
@@ -74,7 +76,7 @@ class MachineCard(QFrame):
                 status.setText("🔴 Offline Time Not Available")
                 status.setStyleSheet("""
                     color: #E74C3C;
-                    font-size: 12px;
+                    font-size: 1.1vw;
                     padding: 2px 8px;
                     font-weight: bold;
                     background: #FFEBEE;
@@ -84,7 +86,7 @@ class MachineCard(QFrame):
             status.setText("🔴 Offline Error")
             status.setStyleSheet("""
                 color: #E74C3C;
-                font-size: 12px;
+                font-size: 1.1vw;
                 padding: 2px 8px;
                 font-weight: bold;
                 background: #FFEBEE;
@@ -126,7 +128,7 @@ class MachineCard(QFrame):
         merged_label = QLabel("H1 : H2 : Wrap : Other : Total")
         merged_label.setStyleSheet("""
             color: #576574;
-            font-size: 14px;
+            font-size: 1.2vw;
             background: transparent;
             padding: 1px;
             margin-bottom: 1px;
@@ -152,6 +154,8 @@ class MachineCard(QFrame):
             font-weight: bold;
             padding: 1px;
             margin-top: 1px;
+            font-size: 1.2vw;
+
         """)
 
         # Add merged field to grid - remove duplicate additions
@@ -179,7 +183,7 @@ class MachineCard(QFrame):
         label = QLabel(label_text)
         label.setStyleSheet("""
             color: #576574;
-            font-size: 14px;
+            font-size: 1.1vw;
             background: transparent;
             padding: 1px;
             margin-bottom: 1px;
@@ -212,6 +216,7 @@ class MachineCard(QFrame):
             font-weight: bold;
             padding: 1px;
             margin-top: 1px;
+            font-size: 1.1vw;
         """
         value.setStyleSheet(style)
         
@@ -363,8 +368,7 @@ class DataPage:
 
         # Header
         header = QLabel("Machine Status")
-        header.setFont(QFont("Segoe UI", 24, QFont.Bold))
-        header.setStyleSheet("color: #2C3E50;")
+        header.setStyleSheet("color: #2C3E50; font-size: 2vw; font-weight: bold;")
         layout.addWidget(header)
 
         # Scroll area for cards
@@ -404,6 +408,7 @@ class DataPage:
                 padding: 10px 20px;
                 border-radius: 5px;
                 font-weight: bold;
+                font-size: 1.1vw;
             }
             QPushButton:hover {
                 background-color: #2980B9;

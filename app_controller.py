@@ -15,6 +15,7 @@ class AppController:
         
         # Initialize local database
         self.local_db = LocalDatabase()
+        self.local_db.initialize()
         
         # Initialize admin and client databases (will be configured later)
         self.admin_db = AdminDatabase()

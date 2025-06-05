@@ -4,6 +4,7 @@ import subprocess  # Add this import
 import os
 from utils.vm_manager import VMManager  # Add this import
 import threading
+import time
 
 startupinfo = subprocess.STARTUPINFO()
 startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW

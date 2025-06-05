@@ -93,8 +93,20 @@ class MainPage(QMainWindow):
         self.loading_overlay = LoadingOverlay(self)
         
         # Sidebar properties
-        self.sidebar_width = 250
-        self.sidebar_collapsed_width = 85
+       
+        
+        # Create UI element attributes
+        self.status_indicator = None
+        self.dashboard_status_label = None
+        self.license_progress = None
+        self.license_label = None
+        self.vm_status_label = None
+        self.machine_name_label = None
+        
+        # Update sidebar properties to be relative to screen width
+        screen = QApplication.desktop().screenGeometry()
+        self.sidebar_width = int(screen.width() * 0.12)  # 15% of screen width
+        self.sidebar_collapsed_width = int(screen.width() * 0.05)  # 5% of screen width
         self.sidebar_expanded = True
         self.sidebar_buttons = []
         
@@ -107,6 +119,8 @@ class MainPage(QMainWindow):
         self.machine_name_label = None
         
         # Initialize UI
+        self.showFullScreen()
+
         self.init_ui()
         
         # Initialize managers
@@ -192,7 +206,7 @@ class MainPage(QMainWindow):
             #sidebar {
                 background-color: #c3dadb;
                 min-width: 70px;
-                max-width: 250px;
+                max-width: 15vw;
             }
         """)
         self.sidebar.setMinimumWidth(self.sidebar_width)
@@ -412,9 +426,10 @@ class MainPage(QMainWindow):
             self.stacked_widget.addWidget(placeholder)
         
         content_layout.addWidget(self.stacked_widget)
-        
         main_layout.addWidget(content_container)
-    
+        toggle_btn.click()
+        toggle_btn.click()
+
     def create_sidebar_button(self, text, icon_path, page_index, layout):
         """Create a sidebar button and add it to the layout"""
         button = SidebarButton(icon_path, text)
@@ -436,6 +451,18 @@ class MainPage(QMainWindow):
                 button.set_active(i == index)        
         # Switch page
         self.stacked_widget.setCurrentIndex(index)
+    
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+
+        width = QApplication.desktop().screenGeometry().width()
+
+        # Example: collapse sidebar if window is too narrow
+        if width < 800 and self.sidebar_expanded:
+            self.toggle_sidebar()  # collapse
+        elif width >= 800 and not self.sidebar_expanded:
+            self.toggle_sidebar()  # expand
+
     
     def toggle_sidebar(self):
         """Toggle sidebar between expanded and collapsed states"""
@@ -647,8 +674,21 @@ class MainPage(QMainWindow):
             # Update system status indicator
             admin_connected = status_data.get('admin_connected', False)
             client_connected = status_data.get('client_connected', False)
+            admin_service_status = self.local_db.get_core_value("admin_service_status")
+            client_service_status = self.local_db.get_core_value("client_init_status")
+            vm_status = "Running" if self.local_db.get_value("vm_running") == "1" else "Stopped"
+           
             
-            if admin_connected and client_connected:
+            print("admin_connected",admin_connected)
+            print("client_connected",client_connected)
+            print("admin_service_status",admin_service_status)
+            print("client_service_status",client_service_status)
+            print("vm_status",vm_status)
+            print("*"*10)
+            
+            if admin_connected and client_connected and admin_service_status == 'Running' and client_service_status == 'Completed' and vm_status == 'Running':
+                # Log success message
+                self.logger.info("All services are running")
                 self.status_indicator.setText("System Online")
                 self.status_indicator.setStyleSheet("""
                     QLabel {
@@ -659,7 +699,7 @@ class MainPage(QMainWindow):
                         font-weight: bold;
                     }
                 """)
-            elif admin_connected or client_connected:
+            elif admin_connected or client_connected or admin_service_status == 'Running' or client_service_status == 'Completed' or vm_status == 'Running':
                 self.status_indicator.setText("Partial Connection")
                 self.status_indicator.setStyleSheet("""
                     QLabel {
